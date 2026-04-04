@@ -13,11 +13,11 @@
 }
 
 :root {
-    --bg: #111827;
-    --surface: #1f2937;
-    --border: #374151;
-    --text: #f3f4f6;
-    --text-muted: #9ca3af;
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --border: #1e1e1e;
+    --text: #f0f0f0;
+    --text-muted: #9a9a9a;
     --accent: #e81a6b;
     --accent-hover: #ff2d7f;
     --success: #10b981;
@@ -37,7 +37,7 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.5;
@@ -55,24 +55,58 @@ a:hover {
 }
 
 /* --------------------------------------------------
-   Login Screen
+   Login Screen — Matches main site design
 -------------------------------------------------- */
 .login-screen {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: var(--bg);
+    background: #0a0a0a;
     padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+.login-screen::before {
+    content: '';
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: #e81a6b;
+    opacity: 0.07;
+    top: -80px;
+    right: -120px;
+    animation: loginFloat 8s ease-in-out infinite;
+}
+.login-screen::after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e81a6b 0%, #6b0f38 60%, transparent 100%);
+    opacity: 0.09;
+    bottom: -60px;
+    left: -100px;
+    animation: loginFloat 10s ease-in-out infinite reverse;
+}
+@keyframes loginFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
 }
 
 .login-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 2.5rem;
+    background: #141414;
+    border: 1px solid rgba(232, 26, 107, 0.12);
+    border-radius: 16px;
+    padding: 3rem;
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5),
+                0 0 60px rgba(232, 26, 107, 0.05);
 }
 
 .login-logo {
@@ -88,7 +122,49 @@ a:hover {
 
 .login-logo p {
     color: var(--text-muted);
-    font-size: 0.875rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.login-card .form-group label {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+}
+
+.login-card input {
+    background: #0a0a0a;
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    width: 100%;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+.login-card input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232, 26, 107, 0.1);
+}
+.login-card input::placeholder {
+    color: #5a5a5a;
+}
+
+.login-card .btn-primary {
+    background: var(--accent);
+    border-radius: 999px;
+    padding: 0.85rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+.login-card .btn-primary:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 0 20px rgba(232, 26, 107, 0.3);
 }
 
 .login-error {
