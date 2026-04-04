@@ -137,7 +137,52 @@
     "sectionTag": "Our Work",
     "sectionTitle": "Featured Projects",
     "sectionDescription": "A showcase of the brands we have helped stand out.",
-    "items": []
+    "items": [
+      {
+        "title": "Pictures By Paige Olivia",
+        "slug": "pictures-by-paige-olivia",
+        "category": "Web Design",
+        "description": "A premium photography portfolio site with custom cursor effects, smooth animations, and a full CMS admin panel.",
+        "image": "images/project-paige.png",
+        "client": "Paige Olivia",
+        "date": "2026",
+        "link": "https://eddsbase.github.io/PicturesByPaigeOlivia/",
+        "visible": true
+      },
+      {
+        "title": "Missouri Mow",
+        "slug": "missouri-mow",
+        "category": "Web Design",
+        "description": "A professional lawn care service website with service booking, pricing pages, and responsive design built for Missouri Mow.",
+        "image": "images/project-momow.png",
+        "client": "Missouri Mow",
+        "date": "2026",
+        "link": "https://eddsbase.github.io/MissouriMow/",
+        "visible": true
+      },
+      {
+        "title": "FatSmith",
+        "slug": "fatsmith",
+        "category": "Web Design",
+        "description": "Custom-built website for FatSmith with modern design, engaging user experience, and full content management.",
+        "image": "images/project-fatsmith.png",
+        "client": "FatSmith",
+        "date": "2026",
+        "link": "https://fatsmith.com",
+        "visible": true
+      },
+      {
+        "title": "Dark Forest Chandlery",
+        "slug": "dark-forest-chandlery",
+        "category": "Branding & Web Design",
+        "description": "A dark, atmospheric e-commerce site for artisan candles with immersive branding and product showcase.",
+        "image": "images/project-darkforest.png",
+        "client": "Dark Forest Chandlery",
+        "date": "2026",
+        "link": "https://darkforestchandlery.com",
+        "visible": true
+      }
+    ]
   },
   "about": {
     "visible": true,

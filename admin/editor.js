@@ -188,6 +188,23 @@
         </div>`;
     }
 
+    function fieldWebsitePreview(label, value, key) {
+        const id = uid();
+        const preview = value
+            ? `<div class="site-preview-wrap"><iframe src="${escHtml(value)}" class="site-preview-iframe" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe><div class="site-preview-overlay"></div></div>`
+            : '<div class="img-placeholder">Enter a URL to preview</div>';
+        return `
+        <div class="form-group">
+            <label>${escHtml(label)}</label>
+            <div class="image-field" data-key="${key}">
+                <div class="img-preview-wrap">${preview}</div>
+                <div class="image-field-actions">
+                    <input type="url" class="form-control img-url-input site-url-input" value="${escHtml(value || '')}" placeholder="https://example.com" data-key="${key}">
+                </div>
+            </div>
+        </div>`;
+    }
+
     function fieldSelect(label, value, key, options) {
         const id = uid();
         const optionsHtml = options.map(o => {
@@ -435,11 +452,12 @@
             ${fieldText('Subtitle', sec.subtitle, 'projects.subtitle')}
             ${repeaterSection('Project', items, 'projects.items', (item, idx) => `
                 ${fieldText('Title', item.title, `projects.items.${idx}.title`)}
+                ${fieldText('Slug', item.slug, `projects.items.${idx}.slug`)}
                 ${fieldTextarea('Description', item.description, `projects.items.${idx}.description`)}
-                ${fieldImage('Image', item.image, `projects.items.${idx}.image`)}
+                ${fieldWebsitePreview('Live Site URL', item.link, `projects.items.${idx}.link`)}
+                ${fieldImage('Screenshot Image', item.image, `projects.items.${idx}.image`)}
                 ${fieldText('Category', item.category, `projects.items.${idx}.category`)}
                 ${fieldText('Client', item.client, `projects.items.${idx}.client`)}
-                ${fieldText('Link', item.link, `projects.items.${idx}.link`)}
                 ${fieldText('Date', item.date, `projects.items.${idx}.date`)}
             `)}
         `, 'projects');
@@ -957,10 +975,20 @@
             input.addEventListener('change', function () {
                 const wrap = this.closest('.image-field');
                 const previewWrap = wrap.querySelector('.img-preview-wrap');
-                if (this.value) {
-                    previewWrap.innerHTML = `<img src="${escHtml(this.value)}" class="img-preview" alt="preview">`;
+                if (this.classList.contains('site-url-input')) {
+                    // Website URL preview — update iframe
+                    if (this.value) {
+                        previewWrap.innerHTML = `<div class="site-preview-wrap"><iframe src="${escHtml(this.value)}" class="site-preview-iframe" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe><div class="site-preview-overlay"></div></div>`;
+                    } else {
+                        previewWrap.innerHTML = '<div class="img-placeholder">Enter a URL to preview</div>';
+                    }
                 } else {
-                    previewWrap.innerHTML = '<div class="img-placeholder">No image</div>';
+                    // Image URL preview
+                    if (this.value) {
+                        previewWrap.innerHTML = `<img src="${escHtml(this.value)}" class="img-preview" alt="preview">`;
+                    } else {
+                        previewWrap.innerHTML = '<div class="img-placeholder">No image</div>';
+                    }
                 }
             });
         });
