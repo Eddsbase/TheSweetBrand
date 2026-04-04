@@ -59,6 +59,7 @@
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
   letter-spacing: var(--ls-tight);
+  margin-top: var(--space-3xl);
   margin-bottom: var(--space-xl);
 }
 .hero__title-line { display: block; }
