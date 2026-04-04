@@ -16,25 +16,15 @@
     const cursorDot = document.getElementById('cursorDot');
     if (!cursor || !cursorDot) return;
 
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-    let hasMoved = false;
+    let mouseX = -100, mouseY = -100;
+    let ringX = -100, ringY = -100;
 
-    // Hide until first mouse move
-    cursor.style.opacity = '0';
-    cursorDot.style.opacity = '0';
+    // Hide system cursor immediately
+    document.body.classList.add('cursor-active');
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      if (!hasMoved) {
-        hasMoved = true;
-        ringX = mouseX;
-        ringY = mouseY;
-        cursor.style.opacity = '1';
-        cursorDot.style.opacity = '1';
-        document.body.classList.add('cursor-active');
-      }
     }, { passive: true });
 
     // Hover detection
