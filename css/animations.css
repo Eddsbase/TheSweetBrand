@@ -2,50 +2,42 @@
    ANIMATIONS — Scroll Reveal, Parallax, Cursor
    ============================================ */
 
-/* ---- Custom Cursor — White Dot + Pink Ring + Glow ---- */
+/* ---- Custom Cursor ---- */
 .cursor {
   position: fixed;
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  border: 2px solid #e81a6b;
+  border: 1.5px solid #e81a6b;
   pointer-events: none;
   z-index: var(--z-cursor);
   transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease-out),
-              height 0.25s var(--ease-out),
-              border-color 0.25s,
-              background 0.25s,
-              box-shadow 0.25s,
-              opacity 0.25s;
-  box-shadow: 0 0 10px rgba(232, 26, 107, 0.35),
-              0 0 20px rgba(232, 26, 107, 0.15);
+  mix-blend-mode: difference;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s,
+              background 0.3s;
 }
 .cursor--hover {
-  width: 52px;
-  height: 52px;
-  background: rgba(232, 26, 107, 0.08);
+  width: 56px;
+  height: 56px;
+  background: rgba(232, 26, 107, 0.1);
   border-color: #ff2d7f;
-  box-shadow: 0 0 16px rgba(232, 26, 107, 0.5),
-              0 0 32px rgba(232, 26, 107, 0.2);
 }
 .cursor-dot {
   position: fixed;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #ffffff;
   pointer-events: none;
-  z-index: calc(var(--z-cursor) + 1);
+  z-index: var(--z-cursor);
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8),
-              0 0 8px rgba(232, 26, 107, 0.4);
 }
 
 /* Hide custom cursor on touch devices */
-@media (hover: none) and (pointer: coarse) {
+@media (hover: none) {
   .cursor, .cursor-dot { display: none; }
-  body, a, button { cursor: auto !important; }
 }
 
 /* ---- Scroll Reveal System ---- */
