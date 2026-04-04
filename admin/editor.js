@@ -167,6 +167,27 @@
         </div>`;
     }
 
+    function fieldVideo(label, value, key) {
+        const id = uid();
+        const preview = value
+            ? `<video src="${escHtml(value)}" class="video-preview" controls muted style="width:100%;max-height:200px;border-radius:8px;background:#000;"></video>`
+            : '<div class="img-placeholder">No video</div>';
+        return `
+        <div class="form-group">
+            <label>${escHtml(label)}</label>
+            <div class="image-field" data-key="${key}">
+                <div class="img-preview-wrap">${preview}</div>
+                <div class="image-field-actions">
+                    <input type="text" class="form-control img-url-input" value="${escHtml(value || '')}" placeholder="Video URL or path" data-key="${key}">
+                    <label class="btn btn-sm btn-outline upload-btn">
+                        Upload
+                        <input type="file" accept="video/*" class="file-input" style="display:none;" data-key="${key}">
+                    </label>
+                </div>
+            </div>
+        </div>`;
+    }
+
     function fieldSelect(label, value, key, options) {
         const id = uid();
         const optionsHtml = options.map(o => {
@@ -365,9 +386,25 @@
             ${fieldText('Secondary Button Link', h.secondaryButtonLink, 'hero.secondaryButtonLink')}
             ${fieldImage('Background Image', h.backgroundImage, 'hero.backgroundImage')}
             ${fieldImage('Hero Image', h.image, 'hero.image')}
+            ${fieldVideo('Hero Video', h.video, 'hero.video')}
             ${fieldSelect('Layout', h.layout, 'hero.layout', ['centered', 'left-aligned', 'split', 'fullscreen'])}
             ${fieldToggle('Show overlay', h.overlay, 'hero.overlay')}
         `, 'hero');
+    };
+
+    // Growth / Video Section
+    panelRenderers.growth = function () {
+        const g = ensureObj(contentData, 'growth', {});
+        return sectionCard('Growth Section', `
+            ${fieldText('Tag', g.tag, 'growth.tag')}
+            ${fieldText('Title', g.title, 'growth.title')}
+            ${fieldTextarea('Description', g.description, 'growth.description')}
+            ${fieldText('CTA Text', g.ctaText, 'growth.ctaText')}
+            ${fieldText('CTA Link', g.ctaLink, 'growth.ctaLink')}
+            ${fieldVideo('Section Video', g.video, 'growth.video')}
+            ${fieldImage('Video Poster', g.videoPoster, 'growth.videoPoster')}
+            ${fieldToggle('Show Section', g.visible !== false, 'growth.visible')}
+        `, 'growth');
     };
 
     // Services
@@ -379,8 +416,11 @@
             ${fieldText('Subtitle', sec.subtitle, 'services.subtitle')}
             ${repeaterSection('Service', items, 'services.items', (item, idx) => `
                 ${fieldText('Title', item.title, `services.items.${idx}.title`)}
+                ${fieldText('Slug', item.slug, `services.items.${idx}.slug`)}
                 ${fieldTextarea('Description', item.description, `services.items.${idx}.description`)}
                 ${fieldImage('Icon / Image', item.icon, `services.items.${idx}.icon`)}
+                ${fieldImage('Detail Image', item.image, `services.items.${idx}.image`)}
+                ${fieldRichText('Detail Body', item.body, `services.items.${idx}.body`)}
                 ${fieldText('Link', item.link, `services.items.${idx}.link`)}
             `)}
         `, 'services');
