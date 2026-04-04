@@ -12,15 +12,16 @@
   mix-blend-mode: difference;
 }
 .cursor__dot {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: #e81a6b;
+  background: #ff2d7f;
   position: absolute;
-  top: -2.5px;
-  left: -2.5px;
-  box-shadow: 0 0 10px #e81a6b, 0 0 20px rgba(232, 26, 107, 0.5);
-  transition: transform 0.08s linear, opacity 0.15s;
+  top: -2px;
+  left: -2px;
+  box-shadow: 0 0 6px #e81a6b, 0 0 12px rgba(232, 26, 107, 0.6);
+  transition: transform 0.05s linear, opacity 0.15s;
+  z-index: 2;
 }
 .cursor__circle {
   width: 20px;
@@ -38,8 +39,8 @@
 
 /* Cursor hover states */
 .cursor--hover .cursor__dot {
-  transform: scale(0.5);
-  opacity: 0.5;
+  transform: scale(0.8);
+  opacity: 1;
 }
 .cursor--hover .cursor__circle {
   width: 34px;
