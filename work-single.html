@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="meta-title">Project — The Sweet Brand</title>
+  <meta name="description" class="meta-description" content="">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="css/tokens.css"><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/pages.css"><link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="loader" id="loader"><img src="images/sweet-brand-logo.png" alt="Loading" class="loader__logo"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="cursor" id="cursor"><div class="cursor__dot"></div><div class="cursor__circle"></div></div>
+
+  <nav class="nav" id="nav"><div class="nav__inner">
+    <a href="index.html"><img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="nav__logo site-logo"></a>
+    <div class="nav__links"><a href="index.html" class="nav__link">Home</a><a href="about.html" class="nav__link">About</a><a href="services.html" class="nav__link">Services</a><a href="work.html" class="nav__link nav__link--active">Work</a><a href="blog.html" class="nav__link">Blog</a><a href="contact.html" class="nav__link">Contact</a></div>
+    <a href="contact.html" class="nav__cta magnetic">Book a Call</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div></nav>
+  <div class="nav__mobile" id="navMobile"><a href="index.html" class="nav__link">Home</a><a href="about.html" class="nav__link">About</a><a href="services.html" class="nav__link">Services</a><a href="work.html" class="nav__link">Work</a><a href="blog.html" class="nav__link">Blog</a><a href="contact.html" class="nav__link">Contact</a><a href="contact.html" class="btn btn--primary">Book a Call</a></div>
+
+  <section class="page-hero section--dark">
+    <div class="page-hero__bg-glow" data-parallax="-0.2"></div>
+    <div class="container" data-reveal="fade-up">
+      <a href="work.html" class="btn btn--ghost" style="margin-bottom: var(--space-xl);">← Back to Work</a>
+      <span class="page-hero__tag" id="projectCategory"></span>
+      <h1 class="page-hero__title" id="projectTitle">Loading...</h1>
+      <p class="page-hero__description" id="projectDescription"></p>
+    </div>
+  </section>
+
+  <section class="section section--surface" id="projectDetail">
+    <div class="container container--narrow">
+      <img id="projectImage" src="" alt="" class="blog-single__image" loading="lazy" data-reveal="fade-up">
+      <div class="split" data-reveal="fade-up" style="margin-top: var(--space-3xl);">
+        <div>
+          <h3 style="margin-bottom: var(--space-md); color: var(--color-accent);">Project Details</h3>
+          <p><strong>Client:</strong> <span id="projectClient"></span></p>
+          <p><strong>Date:</strong> <span id="projectDate"></span></p>
+          <p><strong>Category:</strong> <span id="projectCategoryDetail"></span></p>
+        </div>
+        <div id="projectBody" class="blog-single__body"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark"><div class="container"><div class="cta-section" data-reveal="scale"><div class="cta-section__glow"></div><h2 class="cta-section__title">Want results like these?</h2><div class="cta-section__buttons"><a href="contact.html" class="btn btn--primary btn--lg magnetic">Book a Call</a></div></div></div></section>
+
+  <footer class="footer" id="footer"><div class="container"><div class="footer__inner"><div class="footer__brand"><img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="nav__logo" style="margin-bottom:var(--space-md);"><p class="footer__brand-description footer-description">We deliver no-fluff marketing services based on your goals, not vanity metrics.</p></div><div class="footer__links-group"><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div><div class="footer__links-group"><h4>Contact</h4><a href="mailto:info@thesweetbrand.co">info@thesweetbrand.co</a></div></div><div class="footer__bottom"><p class="footer__copyright">&copy; <span id="currentYear"></span> The Sweet Brand. All rights reserved.</p><div class="footer__legal"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html" style="margin-left:var(--space-lg);">Terms</a></div></div></div></footer>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+  <script src="js/content-loader.js"></script><script src="js/app.js"></script><script src="js/components.js"></script><script src="js/animations.js"></script>
+</body>
+</html>

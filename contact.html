@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="meta-title">Contact — The Sweet Brand</title>
+  <meta name="description" class="meta-description" content="Wanna start to collaborate? Let's chat about your sweet brand.">
+  <meta property="og:title" class="og-title" content="Contact — The Sweet Brand">
+  <meta property="og:description" class="og-description" content="Let's chat about your sweet brand.">
+  <meta property="og:image" class="og-image" content="">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="css/tokens.css"><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/pages.css"><link rel="stylesheet" href="css/animations.css">
+  <meta name="head-custom-code">
+</head>
+<body>
+  <div class="loader" id="loader"><img src="images/sweet-brand-logo.png" alt="Loading" class="loader__logo"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="cursor" id="cursor"><div class="cursor__dot"></div><div class="cursor__circle"></div></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo-link"><img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="nav__logo site-logo"></a>
+      <div class="nav__links">
+        <a href="index.html" class="nav__link nav-link">Home</a><a href="about.html" class="nav__link nav-link">About</a>
+        <a href="services.html" class="nav__link nav-link">Services</a><a href="work.html" class="nav__link nav-link">Work</a>
+        <a href="blog.html" class="nav__link nav-link">Blog</a><a href="contact.html" class="nav__link nav__link--active nav-link">Contact</a>
+      </div>
+      <a href="contact.html" class="nav__cta magnetic nav-cta-link"><span class="nav-cta-text">Book a Call</span></a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav__mobile" id="navMobile">
+    <a href="index.html" class="nav__link">Home</a><a href="about.html" class="nav__link">About</a>
+    <a href="services.html" class="nav__link">Services</a><a href="work.html" class="nav__link">Work</a>
+    <a href="blog.html" class="nav__link">Blog</a><a href="contact.html" class="nav__link">Contact</a>
+    <a href="contact.html" class="btn btn--primary">Book a Call</a>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero section--dark">
+    <div class="page-hero__bg-glow" data-parallax="-0.2"></div>
+    <div class="container" data-reveal="fade-up">
+      <span class="page-hero__tag contact-hero-tag">Contact</span>
+      <h1 class="page-hero__title contact-hero-title">Wanna to start to collaborate?</h1>
+      <p class="page-hero__description contact-hero-description">At the heart of our design process is a commitment to actively listen & understand your unique challenges & needs.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section section--surface" id="contactSection" data-section-visibility="contact">
+    <div class="container">
+      <div class="contact-grid" data-reveal="fade-up">
+        <!-- Info Side -->
+        <div>
+          <span class="section__tag">Get in Touch</span>
+          <h2 class="section__title" style="margin-bottom: var(--space-xl);">Book an introduction call</h2>
+          <p class="section__description" style="margin-bottom: var(--space-3xl);">During this call we do a quick intro and discuss your project and its specific needs.</p>
+          <div class="contact-info__item">
+            <div class="contact-info__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="contact-info__label">Email</div><a href="mailto:info@thesweetbrand.co" class="contact-info__value contact-email">info@thesweetbrand.co</a></div>
+          </div>
+        </div>
+        <!-- Form Side -->
+        <div>
+          <form class="form" id="contactForm" action="" method="POST">
+            <div class="form__group">
+              <label class="form__label" for="name">Name</label>
+              <input class="form__input" type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="email">Email</label>
+              <input class="form__input" type="email" id="email" name="email" placeholder="Your email" required>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="phone">Phone</label>
+              <input class="form__input" type="tel" id="phone" name="phone" placeholder="Your phone number">
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="company">Company Name</label>
+              <input class="form__input" type="text" id="company" name="company" placeholder="Your company">
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="message">Is there any other information you'd like to share with us?</label>
+              <textarea class="form__textarea" id="message" name="message" placeholder="Tell us about your project..."></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg magnetic">Get Started Today</button>
+          </form>
+          <div class="form__success" id="formSuccess">Thank you! Your submission has been received!</div>
+          <div class="form__error" id="formError">Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--dark" id="cta" data-section-visibility="cta">
+    <div class="container">
+      <div class="cta-section" data-reveal="scale">
+        <div class="cta-section__glow" data-parallax="-0.1"></div>
+        <h2 class="cta-section__title cta-title">Just one more step to make your perfect choice.</h2>
+        <div class="cta-section__buttons">
+          <a href="contact.html" class="btn btn--primary btn--lg magnetic cta-btn1-link"><span class="cta-btn1-text">Book a Call</span></a>
+          <a href="contact.html" class="btn btn--outline btn--lg magnetic cta-btn2-link"><span class="cta-btn2-text">Get Started Today</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand"><img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="nav__logo site-logo" style="margin-bottom:var(--space-md);"><p class="footer__brand-description footer-description">We deliver no-fluff marketing services based on your goals, not vanity metrics.</p></div>
+        <div class="footer__links-group"><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
+        <div class="footer__links-group"><h4>Contact</h4><a href="mailto:info@thesweetbrand.co" class="footer-email">info@thesweetbrand.co</a></div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; <span id="currentYear"></span> <span class="footer-copyright-text">The Sweet Brand. All rights reserved.</span></p>
+        <div class="footer__legal"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html" style="margin-left:var(--space-lg);">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+  <script src="js/content-loader.js"></script><script src="js/app.js"></script><script src="js/components.js"></script><script src="js/animations.js"></script>
+  <meta name="body-custom-code">
+</body>
+</html>

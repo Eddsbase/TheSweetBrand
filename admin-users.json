@@ -1,0 +1,13 @@
+{
+  "apiToken": "",
+  "users": [
+    {
+      "email": "info@thesweetbrand.co",
+      "hash": "8322da1fe575e7c63ce445540214833d6ed01043c4bd439cfe817cfa8925bb4f",
+      "role": "superAdmin",
+      "name": "Eddie",
+      "createdAt": "2026-04-04T00:00:00Z",
+      "lastLogin": null
+    }
+  ]
+}

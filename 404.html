@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="css/tokens.css"><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css"><link rel="stylesheet" href="css/pages.css"><link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="cursor" id="cursor"><div class="cursor__dot"></div><div class="cursor__circle"></div></div>
+  <nav class="nav nav--scrolled" id="nav"><div class="nav__inner">
+    <a href="index.html"><img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="nav__logo site-logo"></a>
+    <div class="nav__links"><a href="index.html" class="nav__link">Home</a><a href="about.html" class="nav__link">About</a><a href="services.html" class="nav__link">Services</a><a href="work.html" class="nav__link">Work</a><a href="blog.html" class="nav__link">Blog</a><a href="contact.html" class="nav__link">Contact</a></div>
+    <a href="contact.html" class="nav__cta magnetic">Book a Call</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div></nav>
+  <div class="nav__mobile" id="navMobile"><a href="index.html" class="nav__link">Home</a><a href="about.html" class="nav__link">About</a><a href="services.html" class="nav__link">Services</a><a href="work.html" class="nav__link">Work</a><a href="blog.html" class="nav__link">Blog</a><a href="contact.html" class="nav__link">Contact</a></div>
+
+  <section class="hero section--dark" style="min-height: 100vh; display:flex; align-items:center; justify-content:center;">
+    <div class="container" style="text-align:center;">
+      <h1 style="font-size: var(--fs-display); color: var(--color-accent); font-weight: var(--fw-bold);">404</h1>
+      <p style="font-size: var(--fs-xl); margin: var(--space-lg) 0 var(--space-2xl); color: var(--color-text-secondary);">Page not found</p>
+      <p style="color: var(--color-text-muted); margin-bottom: var(--space-3xl);">The page you're looking for doesn't exist or has been moved.</p>
+      <a href="index.html" class="btn btn--primary btn--lg magnetic">Back to Home</a>
+    </div>
+    <div class="deco-shape deco-shape--coral deco-shape--1" data-parallax="0.3"></div>
+    <div class="deco-shape deco-shape--gradient deco-shape--2" data-parallax="-0.15"></div>
+  </section>
+
+  <script src="js/app.js"></script><script src="js/animations.js"></script>
+</body>
+</html>

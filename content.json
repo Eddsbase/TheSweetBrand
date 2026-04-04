@@ -1,0 +1,500 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "lastEdited": "2026-04-04",
+    "siteType": "webflow",
+    "templateName": "the-sweet-brand",
+    "description": "The Sweet Brand - Digital Marketing Agency"
+  },
+  "site": {
+    "visible": true,
+    "title": "Sweet Brand — Digital Marketing That Helps Sweet Brands Stand Out",
+    "description": "We deliver no-fluff marketing services based on your goals, not vanity metrics.",
+    "logo": "images/sweet-brand-logo.png",
+    "logoAlt": "The Sweet Brand Logo",
+    "favicon": "images/favicon.png",
+    "language": "en",
+    "url": "",
+    "nav": [
+      { "label": "Home", "link": "index.html" },
+      { "label": "About", "link": "about.html" },
+      { "label": "Services", "link": "services.html" },
+      { "label": "Work", "link": "work.html" },
+      { "label": "Blog", "link": "blog.html" },
+      { "label": "Contact", "link": "contact.html" }
+    ],
+    "navCtaText": "Book a Call",
+    "navCtaLink": "contact.html"
+  },
+  "hero": {
+    "visible": true,
+    "tag": "Digital Marketing",
+    "titleLine1": "DIGITAL",
+    "titleLine2": "MARKETING",
+    "subtitle": "that helps sweet brands stand out.",
+    "description": "We deliver no-fluff marketing services based on your goals, not vanity metrics.",
+    "cta1Text": "Book a Call",
+    "cta1Link": "contact.html",
+    "cta2Text": "Our Services",
+    "cta2Link": "services.html",
+    "backgroundImage": "images/Hero-Background.webp",
+    "heroImage": "images/Hero-Image.webp"
+  },
+  "stats": {
+    "visible": false,
+    "items": [
+      { "value": "8+", "label": "Years Experience" },
+      { "value": "500+", "label": "Projects Completed" },
+      { "value": "100+", "label": "Happy Clients" },
+      { "value": "24/7", "label": "Support" }
+    ]
+  },
+  "services": {
+    "visible": true,
+    "sectionTag": "What We Do",
+    "sectionTitle": "Our Services",
+    "sectionDescription": "Comprehensive digital marketing solutions tailored to help sweet brands stand out.",
+    "items": [
+      {
+        "title": "SEO",
+        "slug": "seo",
+        "description": "Rise through the ranks on Google so you can turn searches into sales.",
+        "icon": "",
+        "image": "images/Service-SEO.webp",
+        "link": "services/seo.html",
+        "features": []
+      },
+      {
+        "title": "Advertising",
+        "slug": "advertising",
+        "description": "Convert more cold prospects into paying customers with top-to-bottom advertising campaigns.",
+        "icon": "",
+        "image": "images/Service-Advertising.webp",
+        "link": "services/advertising.html",
+        "features": []
+      },
+      {
+        "title": "Marketing Consulting",
+        "slug": "marketing-consulting",
+        "description": "Receive a clear, action-oriented marketing plan that aligns with what actually drives growth.",
+        "icon": "",
+        "image": "images/Service-Consulting.webp",
+        "link": "services/marketing-consulting.html",
+        "features": []
+      },
+      {
+        "title": "Web Design",
+        "slug": "web-design",
+        "description": "Make your brand unforgettable with a custom-built website optimized for visibility, engagement, and conversions.",
+        "icon": "",
+        "image": "images/Service-WebDesign.webp",
+        "link": "services/web-design.html",
+        "features": []
+      },
+      {
+        "title": "Branding",
+        "slug": "branding",
+        "description": "Develop a sweet branding strategy that will attract the right customers and make them stick.",
+        "icon": "",
+        "image": "images/Service-Branding.webp",
+        "link": "services/branding.html",
+        "features": []
+      }
+    ]
+  },
+  "projects": {
+    "visible": true,
+    "sectionTag": "Our Work",
+    "sectionTitle": "Featured Projects",
+    "sectionDescription": "A showcase of the brands we have helped stand out.",
+    "items": []
+  },
+  "about": {
+    "visible": true,
+    "sectionTag": "About Us",
+    "sectionTitle": "About The Sweet Brand",
+    "image": "images/About-Image.webp",
+    "imageAlt": "The Sweet Brand team",
+    "whatwedo": {
+      "title": "Our services help you create digital products and solve your problems objectively.",
+      "description": "From digital marketing to traditional media and everything in between, we provide the expertise and solutions needed to elevate your brand in today's competitive landscape."
+    },
+    "vision": "Creating a design studio with a comfortable ecosystem for both designers and clients, fostering a sustainable business framework.",
+    "mission": {
+      "title": "We harness the transformative power of creativity to drive growth and success for businesses.",
+      "description": "Through our unlimited design solutions, we inspire, engage, and deliver tangible results that help brands thrive in an ever-evolving digital world."
+    },
+    "values": [
+      { "title": "Transparency", "description": "No hidden agendas, no vanity metrics — just honest marketing." },
+      { "title": "Results-Driven", "description": "Everything we do is tied to real business outcomes." },
+      { "title": "Creativity", "description": "Bold ideas that make sweet brands stand out from the crowd." }
+    ]
+  },
+  "testimonials": {
+    "visible": false,
+    "sectionTag": "Testimonials",
+    "sectionTitle": "What Our Clients Say",
+    "sectionDescription": "",
+    "items": [
+      {
+        "quote": "The Sweet Brand transformed our online presence completely.",
+        "author": "Client Name",
+        "role": "CEO",
+        "company": "Company Name",
+        "avatar": "images/testimonials/avatar-1.webp",
+        "rating": 5
+      }
+    ]
+  },
+  "blog": {
+    "visible": true,
+    "sectionTag": "Our Blog",
+    "sectionTitle": "Latest Insights",
+    "sectionDescription": "Stay up to date with the latest in digital marketing, branding, and SEO.",
+    "postsPerPage": 6,
+    "posts": [
+      {
+        "title": "5 SEO Strategies That Actually Drive Revenue in 2026",
+        "slug": "seo-strategies-drive-revenue-2026",
+        "excerpt": "Forget vanity metrics. Here are five SEO strategies that connect directly to your bottom line and help sweet brands climb the ranks.",
+        "content": "",
+        "author": "The Sweet Brand",
+        "date": "2026-03-15",
+        "category": "SEO",
+        "tags": ["SEO", "Strategy", "Revenue"],
+        "image": "images/blog/blog-post-1.webp",
+        "imageAlt": "SEO strategies for 2026",
+        "featured": true
+      },
+      {
+        "title": "Why Your Brand Needs a Clear Marketing Plan Before Spending a Dollar on Ads",
+        "slug": "brand-needs-marketing-plan-before-ads",
+        "excerpt": "Throwing money at ads without a strategy is the fastest way to burn your budget. Here is how to build a plan that actually works.",
+        "content": "",
+        "author": "The Sweet Brand",
+        "date": "2026-03-01",
+        "category": "Marketing",
+        "tags": ["Marketing", "Advertising", "Strategy"],
+        "image": "images/blog/blog-post-2.webp",
+        "imageAlt": "Marketing plan before advertising",
+        "featured": false
+      }
+    ]
+  },
+  "products": {
+    "visible": false,
+    "sectionTag": "Products",
+    "sectionTitle": "Our Products",
+    "sectionDescription": "",
+    "currency": "USD",
+    "items": []
+  },
+  "cta": {
+    "visible": true,
+    "title": "Just one more step to make your perfect choice.",
+    "description": "",
+    "btn1Text": "Book a Call",
+    "btn1Link": "contact.html",
+    "btn2Text": "Get Started Today",
+    "btn2Link": "contact.html",
+    "backgroundImage": "images/CTA-Background.webp"
+  },
+  "newsletter": {
+    "visible": false,
+    "sectionTag": "Newsletter",
+    "sectionTitle": "Stay in the Loop",
+    "sectionDescription": "Subscribe to get the latest marketing tips and insights delivered to your inbox.",
+    "placeholder": "Enter your email",
+    "buttonText": "Subscribe",
+    "formAction": ""
+  },
+  "gallery": {
+    "visible": false,
+    "sectionTag": "Gallery",
+    "sectionTitle": "Our Gallery",
+    "sectionDescription": "",
+    "items": []
+  },
+  "faq": {
+    "visible": true,
+    "sectionTag": "FAQ",
+    "sectionTitle": "Frequently Asked Questions",
+    "sectionDescription": "",
+    "items": [
+      {
+        "question": "How do you determine the right marketing strategy for my business?",
+        "answer": "We handle everything from content creation, social media management, SEO, paid advertising, email marketing, and analytics to ensure a comprehensive digital strategy tailored specifically to your business goals and target audience."
+      },
+      {
+        "question": "What does your marketing agency do?",
+        "answer": "Not all marketing needs are the same, so we take a tailored approach to every project. We begin with a discovery phase to understand your brand, your goals, your competitors, and your audience. From there, we build a custom strategy designed to achieve measurable results."
+      },
+      {
+        "question": "What industries do you specialize in?",
+        "answer": "With eight years of work across thousands of accounts, we have deep experience in e-commerce, food and beverage, health and wellness, professional services, and lifestyle brands. That said, great marketing principles are universal — we adapt our expertise to any industry."
+      },
+      {
+        "question": "How long before I see results?",
+        "answer": "Results will vary because the marketing and advertising industry is always evolving. For paid advertising, you can often see initial traction within the first few weeks. SEO and organic strategies typically take three to six months to show meaningful growth. We set realistic expectations upfront and keep you updated every step of the way."
+      }
+    ]
+  },
+  "benefits": {
+    "visible": true,
+    "sectionTag": "Why Choose Us",
+    "sectionTitle": "Benefits of Working With Us",
+    "sectionDescription": "",
+    "items": [
+      {
+        "title": "Fixed Monthly Price",
+        "description": "Predictable costs with no surprise invoices. Know exactly what you are paying each month.",
+        "icon": ""
+      },
+      {
+        "title": "Unlimited Tasks",
+        "description": "Submit as many requests as you need. We will work through them one by one.",
+        "icon": ""
+      },
+      {
+        "title": "Quick Turnaround",
+        "description": "Most tasks are completed within a few business days so you can keep moving fast.",
+        "icon": ""
+      },
+      {
+        "title": "Expert Designers",
+        "description": "Work with seasoned professionals who know how to make brands stand out.",
+        "icon": ""
+      },
+      {
+        "title": "Seamless Communication",
+        "description": "Stay in the loop with clear updates and fast responses at every stage.",
+        "icon": ""
+      }
+    ]
+  },
+  "pricing": {
+    "visible": false,
+    "sectionTag": "Pricing",
+    "sectionTitle": "Our Plans",
+    "sectionDescription": "",
+    "currency": "USD",
+    "plans": []
+  },
+  "team": {
+    "visible": false,
+    "sectionTag": "Our Team",
+    "sectionTitle": "Meet the Team",
+    "sectionDescription": "",
+    "members": []
+  },
+  "process": {
+    "visible": false,
+    "sectionTag": "Our Process",
+    "sectionTitle": "How We Work",
+    "sectionDescription": "",
+    "steps": []
+  },
+  "partners": {
+    "visible": false,
+    "sectionTag": "Partners",
+    "sectionTitle": "Trusted By",
+    "sectionDescription": "",
+    "items": []
+  },
+  "instagram": {
+    "visible": false,
+    "sectionTag": "Instagram",
+    "sectionTitle": "Follow Us",
+    "handle": "",
+    "items": []
+  },
+  "showreel": {
+    "visible": false,
+    "sectionTag": "Showreel",
+    "sectionTitle": "",
+    "videoUrl": "",
+    "posterImage": ""
+  },
+  "marquee": {
+    "visible": true,
+    "items": ["Branding", "Marketing", "SEO", "AEO", "PPC"]
+  },
+  "contact": {
+    "visible": true,
+    "sectionTag": "Get in Touch",
+    "sectionTitle": "Contact Us",
+    "sectionDescription": "Ready to make your brand stand out? Reach out and let us talk about your goals.",
+    "email": "info@thesweetbrand.co",
+    "phone": "",
+    "address": "",
+    "mapEmbed": "",
+    "formAction": "",
+    "formFields": [
+      { "name": "name", "label": "Full Name", "type": "text", "required": true },
+      { "name": "email", "label": "Email Address", "type": "email", "required": true },
+      { "name": "phone", "label": "Phone Number", "type": "tel", "required": false },
+      { "name": "company", "label": "Company Name", "type": "text", "required": false },
+      { "name": "service", "label": "Service Interested In", "type": "select", "required": false, "options": ["SEO", "Advertising", "Marketing Consulting", "Web Design", "Branding", "Other"] },
+      { "name": "message", "label": "Message", "type": "textarea", "required": true }
+    ],
+    "submitText": "Send Message",
+    "social": {
+      "facebook": "",
+      "instagram": "",
+      "twitter": "",
+      "linkedin": "",
+      "youtube": "",
+      "tiktok": ""
+    }
+  },
+  "footer": {
+    "visible": true,
+    "logo": "images/sweet-brand-logo.png",
+    "logoAlt": "The Sweet Brand Logo",
+    "description": "We deliver no-fluff marketing services based on your goals, not vanity metrics.",
+    "copyright": "The Sweet Brand. All rights reserved.",
+    "columns": [
+      {
+        "title": "Pages",
+        "links": [
+          { "label": "Home", "link": "index.html" },
+          { "label": "About", "link": "about.html" },
+          { "label": "Services", "link": "services.html" },
+          { "label": "Work", "link": "work.html" },
+          { "label": "Blog", "link": "blog.html" },
+          { "label": "Contact", "link": "contact.html" }
+        ]
+      },
+      {
+        "title": "Services",
+        "links": [
+          { "label": "SEO", "link": "services/seo.html" },
+          { "label": "Advertising", "link": "services/advertising.html" },
+          { "label": "Marketing Consulting", "link": "services/marketing-consulting.html" },
+          { "label": "Web Design", "link": "services/web-design.html" },
+          { "label": "Branding", "link": "services/branding.html" }
+        ]
+      },
+      {
+        "title": "Legal",
+        "links": [
+          { "label": "Privacy Policy", "link": "privacy.html" },
+          { "label": "Terms of Service", "link": "terms.html" }
+        ]
+      }
+    ]
+  },
+  "pages": {
+    "about": {
+      "hero": {
+        "tag": "About Us",
+        "title": "About The Sweet Brand",
+        "subtitle": "Learn more about who we are and what drives us.",
+        "backgroundImage": "images/About-Hero.webp"
+      }
+    },
+    "services": {
+      "hero": {
+        "tag": "Our Services",
+        "title": "Services",
+        "subtitle": "Comprehensive digital marketing solutions for sweet brands.",
+        "backgroundImage": "images/Services-Hero.webp"
+      }
+    },
+    "work": {
+      "hero": {
+        "tag": "Our Work",
+        "title": "Featured Projects",
+        "subtitle": "A showcase of the brands we have helped stand out.",
+        "backgroundImage": "images/Work-Hero.webp"
+      }
+    },
+    "blog": {
+      "hero": {
+        "tag": "Our Blog",
+        "title": "Blog",
+        "subtitle": "Insights, tips, and strategies from our marketing experts.",
+        "backgroundImage": "images/Blog-Hero.webp"
+      }
+    },
+    "contact": {
+      "hero": {
+        "tag": "Get in Touch",
+        "title": "Contact Us",
+        "subtitle": "Ready to grow your brand? Let us start the conversation.",
+        "backgroundImage": "images/Contact-Hero.webp"
+      }
+    }
+  },
+  "seo": {
+    "global": {
+      "titleSuffix": " | The Sweet Brand",
+      "defaultImage": "images/og-image.webp",
+      "defaultDescription": "We deliver no-fluff marketing services based on your goals, not vanity metrics."
+    },
+    "pages": {
+      "index": {
+        "title": "Sweet Brand — Digital Marketing That Helps Sweet Brands Stand Out",
+        "description": "We deliver no-fluff marketing services based on your goals, not vanity metrics. SEO, advertising, branding, web design, and consulting.",
+        "keywords": "digital marketing, SEO, advertising, branding, web design, marketing consulting",
+        "ogTitle": "Sweet Brand — Digital Marketing That Helps Sweet Brands Stand Out",
+        "ogDescription": "We deliver no-fluff marketing services based on your goals, not vanity metrics.",
+        "ogImage": "images/og-image.webp"
+      },
+      "about": {
+        "title": "About Us | The Sweet Brand",
+        "description": "Learn about The Sweet Brand — a digital marketing agency that harnesses creativity to drive growth and success for businesses.",
+        "keywords": "about, digital marketing agency, creative agency, marketing team",
+        "ogTitle": "About Us | The Sweet Brand",
+        "ogDescription": "We harness the transformative power of creativity to drive growth and success for businesses.",
+        "ogImage": "images/og-image.webp"
+      },
+      "services": {
+        "title": "Services | The Sweet Brand",
+        "description": "SEO, advertising, marketing consulting, web design, and branding services to help sweet brands stand out.",
+        "keywords": "SEO, advertising, marketing consulting, web design, branding, digital marketing services",
+        "ogTitle": "Services | The Sweet Brand",
+        "ogDescription": "Comprehensive digital marketing solutions tailored to help sweet brands stand out.",
+        "ogImage": "images/og-image.webp"
+      },
+      "work": {
+        "title": "Our Work | The Sweet Brand",
+        "description": "Browse our portfolio of digital marketing projects, branding work, and web design showcases.",
+        "keywords": "portfolio, case studies, marketing projects, branding work, web design showcase",
+        "ogTitle": "Our Work | The Sweet Brand",
+        "ogDescription": "A showcase of the brands we have helped stand out.",
+        "ogImage": "images/og-image.webp"
+      },
+      "blog": {
+        "title": "Blog | The Sweet Brand",
+        "description": "Stay up to date with the latest in digital marketing, branding, SEO tips, and advertising insights.",
+        "keywords": "marketing blog, SEO tips, advertising insights, branding advice, digital marketing",
+        "ogTitle": "Blog | The Sweet Brand",
+        "ogDescription": "Insights, tips, and strategies from our marketing experts.",
+        "ogImage": "images/og-image.webp"
+      },
+      "contact": {
+        "title": "Contact Us | The Sweet Brand",
+        "description": "Get in touch with The Sweet Brand to discuss your digital marketing goals. Book a call or send us a message.",
+        "keywords": "contact, get in touch, book a call, digital marketing consultation",
+        "ogTitle": "Contact Us | The Sweet Brand",
+        "ogDescription": "Ready to grow your brand? Let us start the conversation.",
+        "ogImage": "images/og-image.webp"
+      }
+    }
+  },
+  "customCode": {
+    "head": "",
+    "bodyEnd": ""
+  },
+  "integrations": {
+    "ga4": "",
+    "gtm": "",
+    "fbPixel": "",
+    "hotjar": "",
+    "snipcart": "",
+    "stripe": "",
+    "formspree": "",
+    "mailchimp": ""
+  }
+}

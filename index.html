@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title class="meta-title">Sweet Brand — Digital Marketing That Helps Sweet Brands Stand Out</title>
+  <meta name="description" class="meta-description" content="We deliver no-fluff marketing services based on your goals, not vanity metrics.">
+  <meta property="og:title" class="og-title" content="Sweet Brand — Digital Marketing">
+  <meta property="og:description" class="og-description" content="We deliver no-fluff marketing services based on your goals, not vanity metrics.">
+  <meta property="og:image" class="og-image" content="">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <meta name="head-custom-code">
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <img src="images/sweet-brand-logo.png" alt="Loading" class="loader__logo">
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor">
+    <div class="cursor__dot"></div>
+    <div class="cursor__circle"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo-link">
+        <img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="nav__logo site-logo">
+      </a>
+      <div class="nav__links">
+        <a href="index.html" class="nav__link nav__link--active nav-link" data-nav="home">Home</a>
+        <a href="about.html" class="nav__link nav-link" data-nav="about">About</a>
+        <a href="services.html" class="nav__link nav-link" data-nav="services">Services</a>
+        <a href="work.html" class="nav__link nav-link" data-nav="work">Work</a>
+        <a href="blog.html" class="nav__link nav-link" data-nav="blog">Blog</a>
+        <a href="contact.html" class="nav__link nav-link" data-nav="contact">Contact</a>
+      </div>
+      <a href="contact.html" class="nav__cta magnetic nav-cta-link">
+        <span class="nav-cta-text">Book a Call</span>
+      </a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav__mobile" id="navMobile">
+    <a href="index.html" class="nav__link nav-link">Home</a>
+    <a href="about.html" class="nav__link nav-link">About</a>
+    <a href="services.html" class="nav__link nav-link">Services</a>
+    <a href="work.html" class="nav__link nav-link">Work</a>
+    <a href="blog.html" class="nav__link nav-link">Blog</a>
+    <a href="contact.html" class="nav__link nav-link">Contact</a>
+    <a href="contact.html" class="btn btn--primary nav-cta-link"><span class="nav-cta-text">Book a Call</span></a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero section--dark" id="hero">
+    <div class="hero__bg">
+      <div class="hero__bg-glow" data-parallax="-0.2"></div>
+    </div>
+    <div class="container hero__content" data-reveal="fade-up">
+      <span class="hero__tag hero-tag">Digital Marketing</span>
+      <h1 class="hero__title">
+        <span class="hero__title-line hero__title-accent hero-title-line1">DIGITAL</span>
+        <span class="hero__title-line hero__title-accent hero-title-line2">MARKETING</span>
+      </h1>
+      <p class="hero__subtitle hero-subtitle" style="font-size:var(--fs-xl); margin-bottom: var(--space-lg);">that helps sweet brands stand out.</p>
+      <p class="hero__description hero-description">We deliver no-fluff marketing services based on your goals, not vanity metrics.</p>
+      <div class="hero__ctas">
+        <a href="contact.html" class="btn btn--primary btn--lg magnetic hero-cta1-link"><span class="hero-cta1-text">Book a Call</span></a>
+        <a href="services.html" class="btn btn--outline btn--lg magnetic hero-cta2-link"><span class="hero-cta2-text">Our Services</span></a>
+      </div>
+    </div>
+    <div class="hero__scroll-indicator">
+      <span>Scroll</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="deco-shape deco-shape--coral deco-shape--1" data-parallax="0.3"></div>
+    <div class="deco-shape deco-shape--gradient deco-shape--2" data-parallax="-0.15"></div>
+  </section>
+
+  <!-- ===== PILLARS ===== -->
+  <section class="section section--surface" id="pillars" data-reveal="fade-up">
+    <div class="container">
+      <div class="grid grid--3" data-reveal-stagger>
+        <div class="card card--glass" data-cursor="pointer">
+          <div class="card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h3 class="card__title pillar-1-title">Get Discovered</h3>
+          <p class="card__description pillar-1-description">Increase your brand's visibility across search engines and social platforms.</p>
+        </div>
+        <div class="card card--glass" data-cursor="pointer">
+          <div class="card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="card__title pillar-2-title">Build Trust</h3>
+          <p class="card__description pillar-2-description">Establish credibility and authority in your market.</p>
+        </div>
+        <div class="card card--glass" data-cursor="pointer">
+          <div class="card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3 class="card__title pillar-3-title">Grow the Right Way</h3>
+          <p class="card__description pillar-3-description">Sustainable growth through full-funnel marketing strategies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <section class="marquee" id="marquee">
+    <div class="marquee__track">
+      <span class="marquee__item marquee-item">Branding</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee__item--outline marquee-item">Marketing</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee-item">SEO</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee__item--outline marquee-item">AEO</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee-item">PPC</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee-item">Branding</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee__item--outline marquee-item">Marketing</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee-item">SEO</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee__item--outline marquee-item">AEO</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item marquee-item">PPC</span>
+      <span class="marquee__dot"></span>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO / GROWTH SECTION ===== -->
+  <section class="section section--dark" id="growth">
+    <div class="container">
+      <div class="split" data-reveal="fade-up">
+        <div class="split__content">
+          <span class="section__tag growth-tag">Digital Marketing Arkansas</span>
+          <h2 class="section__title growth-title">Has your business growth stalled out?</h2>
+          <p class="section__description growth-description">It's not your product. It's not your people. It's not even your pricing. It's your visibility. Get noticed by your next customers through full-funnel marketing services that increase brand awareness, engagement, and conversions.</p>
+          <a href="contact.html" class="btn btn--primary magnetic growth-cta-link" style="margin-top: var(--space-2xl);"><span class="growth-cta-text">Book a Call</span></a>
+        </div>
+        <div class="split__image image-reveal" data-parallax="0.1">
+          <div class="video-section">
+            <video autoplay muted loop playsinline poster="videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-poster-00001.jpg" class="growth-video">
+              <source src="videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-transcode.webm" type="video/webm">
+              <source src="videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-transcode.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deco-shape deco-shape--coral deco-shape--3" data-parallax="0.2"></div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="section section--surface" id="services" data-section-visibility="services">
+    <div class="container">
+      <div class="section__header" data-reveal="fade-up">
+        <span class="section__tag">What We Offer</span>
+        <h2 class="section__title services-section-title">Our Digital Marketing Solutions</h2>
+      </div>
+      <div class="services-grid" id="servicesGrid" data-reveal-stagger>
+        <!-- Populated by content-loader.js -->
+        <div class="card service-card" data-cursor="pointer">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="m8 11 2 2 4-4"/></svg></div>
+          <h3 class="card__title service-card__title">SEO</h3>
+          <p class="card__description service-card__description">Rise through the ranks on Google so you can turn searches into sales.</p>
+          <a href="service-single.html?service=seo" class="card__link">Learn More <span>→</span></a>
+        </div>
+        <div class="card service-card" data-cursor="pointer">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <h3 class="card__title service-card__title">Advertising</h3>
+          <p class="card__description service-card__description">Convert more cold prospects into paying customers with top-to-bottom advertising campaigns.</p>
+          <a href="service-single.html?service=advertising" class="card__link">Learn More <span>→</span></a>
+        </div>
+        <div class="card service-card" data-cursor="pointer">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <h3 class="card__title service-card__title">Marketing Consulting</h3>
+          <p class="card__description service-card__description">Receive a clear, action-oriented marketing plan that aligns with what actually drives growth.</p>
+          <a href="service-single.html?service=marketing-consulting" class="card__link">Learn More <span>→</span></a>
+        </div>
+        <div class="card service-card" data-cursor="pointer">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <h3 class="card__title service-card__title">Web Design</h3>
+          <p class="card__description service-card__description">Make your brand unforgettable with a custom-built website optimized for visibility, engagement, and conversions.</p>
+          <a href="service-single.html?service=web-design" class="card__link">Learn More <span>→</span></a>
+        </div>
+        <div class="card service-card" data-cursor="pointer">
+          <div class="card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+          <h3 class="card__title service-card__title">Branding</h3>
+          <p class="card__description service-card__description">Develop a sweet branding strategy that will attract the right customers and make them stick.</p>
+          <a href="service-single.html?service=branding" class="card__link">Learn More <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE 2 ===== -->
+  <section class="marquee">
+    <div class="marquee__track" style="animation-direction: reverse;">
+      <span class="marquee__item">Grow</span>
+      <span class="marquee__item marquee__item--outline">Smarter.</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item">Stronger.</span>
+      <span class="marquee__item marquee__item--outline">Better.</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item">Faster.</span>
+      <span class="marquee__item marquee__item--outline">Greater.</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item">Grow</span>
+      <span class="marquee__item marquee__item--outline">Smarter.</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item">Stronger.</span>
+      <span class="marquee__item marquee__item--outline">Better.</span>
+      <span class="marquee__dot"></span>
+      <span class="marquee__item">Faster.</span>
+      <span class="marquee__item marquee__item--outline">Greater.</span>
+      <span class="marquee__dot"></span>
+    </div>
+  </section>
+
+  <!-- ===== BENEFITS ===== -->
+  <section class="section section--dark" id="benefits" data-section-visibility="benefits">
+    <div class="container">
+      <div class="split split--reverse">
+        <div class="split__content" data-reveal="fade-right">
+          <span class="section__tag">Your Digital Marketing Partner</span>
+          <h2 class="section__title benefits-title">Here's how we'll make your sweet brand irresistible</h2>
+          <p class="section__description benefits-description">We custom design your marketing plan, but our consulting fee will always stay the same.</p>
+        </div>
+        <div data-reveal="fade-left" data-reveal-stagger>
+          <div class="benefit">
+            <div class="benefit__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div>
+              <h4 class="benefit__title benefit-1-title">Fixed Monthly Price</h4>
+              <p class="benefit__description benefit-1-description">We custom design your marketing plan, but our consulting fee will always stay the same.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <div class="benefit__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div>
+              <h4 class="benefit__title benefit-2-title">Unlimited Tasks</h4>
+              <p class="benefit__description benefit-2-description">We'll revise until it's right. With unlimited revisions, you're guaranteed to get designs that align perfectly with your vision and goals.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <div class="benefit__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <h4 class="benefit__title benefit-3-title">Quick Turnaround</h4>
+              <p class="benefit__description benefit-3-description">Expect rapid delivery without compromising quality.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <div class="benefit__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <h4 class="benefit__title benefit-4-title">Expert Designers</h4>
+              <p class="benefit__description benefit-4-description">Work with a team of skilled, experienced designers dedicated to delivering high-quality results.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <div class="benefit__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div>
+              <h4 class="benefit__title benefit-5-title">Seamless Communication</h4>
+              <p class="benefit__description benefit-5-description">Stay in sync with your design team through seamless communication.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section section--surface" id="faq" data-section-visibility="faq">
+    <div class="container container--narrow">
+      <div class="section__header" data-reveal="fade-up">
+        <span class="section__tag">FAQ</span>
+        <h2 class="section__title faq-section-title">FAQs: Digital Marketing Agencies in Arkansas</h2>
+        <p class="section__description faq-section-description">You have questions; we have answers.</p>
+      </div>
+      <div id="faqList" data-reveal="fade-up">
+        <div class="faq-item">
+          <button class="faq-item__question">
+            <span class="faq-question-text">How do you determine the right marketing strategy for my business?</span>
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner faq-answer-text">We handle everything from content creation and scheduling to community engagement and performance tracking across all major platforms. We build out the package you need, not the package that fits our needs.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__question">
+            <span class="faq-question-text">What does your marketing agency do?</span>
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner faq-answer-text">Not all marketing needs are the same, and you should not have to fit in a predetermined box. We listen to your needs and find the solutions that match your goals.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__question">
+            <span class="faq-question-text">What industries do you specialize in?</span>
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner faq-answer-text">With eight years of work across thousands of accounts, we do not specialize in one industry. We focus on SMBs that need help with marketing or coaching.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-item__question">
+            <span class="faq-question-text">How long before I see results?</span>
+            <span class="faq-item__icon"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner faq-answer-text">Results will vary because the marketing and advertising industry has gone through significant changes in recent years, and we are here to help you stay up to date.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section section--dark" id="cta" data-section-visibility="cta">
+    <div class="container">
+      <div class="cta-section" data-reveal="scale">
+        <div class="cta-section__glow" data-parallax="-0.1"></div>
+        <h2 class="cta-section__title cta-title">Just one more step to make your perfect choice.</h2>
+        <div class="cta-section__buttons">
+          <a href="contact.html" class="btn btn--primary btn--lg magnetic cta-btn1-link"><span class="cta-btn1-text">Book a Call</span></a>
+          <a href="contact.html" class="btn btn--outline btn--lg magnetic cta-btn2-link"><span class="cta-btn2-text">Get Started Today</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="nav__logo site-logo" style="margin-bottom: var(--space-md);">
+          <p class="footer__brand-description footer-description">We deliver no-fluff marketing services based on your goals, not vanity metrics.</p>
+        </div>
+        <div class="footer__links-group">
+          <h4>Quick Links</h4>
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="services.html" class="footer-link">Services</a>
+          <a href="work.html" class="footer-link">Work</a>
+          <a href="blog.html" class="footer-link">Blog</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+        <div class="footer__links-group">
+          <h4>Contact</h4>
+          <a href="mailto:info@thesweetbrand.co" class="footer-email">info@thesweetbrand.co</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; <span id="currentYear"></span> <span class="footer-copyright-text">The Sweet Brand. All rights reserved.</span></p>
+        <div class="footer__legal">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms.html" style="margin-left: var(--space-lg);">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <!-- Scripts -->
+  <script src="js/content-loader.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/animations.js"></script>
+  <meta name="body-custom-code">
+</body>
+</html>

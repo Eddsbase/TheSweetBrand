@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sweet Brand - Admin Panel</title>
+    <link rel="stylesheet" href="editor.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127856;</text></svg>">
+</head>
+<body>
+
+    <!-- ============ LOGIN SCREEN ============ -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <div class="login-logo">
+                <h1>The Sweet Brand</h1>
+                <p>Admin Panel</p>
+            </div>
+            <form id="loginForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="admin@thesweetbrand.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Sign In</button>
+                <p id="loginError" class="login-error" style="display:none;"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ ADMIN SHELL ============ -->
+    <div id="adminShell" class="admin-shell" style="display:none;">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-brand">The Sweet Brand</h2>
+                <button id="sidebarClose" class="sidebar-close" aria-label="Close sidebar">&times;</button>
+            </div>
+            <div class="sidebar-user">
+                <span id="userDisplay"></span>
+                <span id="userRole" class="badge"></span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" data-panel="dashboard" class="nav-link active"><span class="nav-icon">&#9634;</span> Dashboard</a></li>
+                    <li><a href="#" data-panel="siteSettings" class="nav-link"><span class="nav-icon">&#9881;</span> Site Settings</a></li>
+                    <li class="nav-divider">Sections</li>
+                    <li><a href="#" data-panel="hero" class="nav-link"><span class="nav-icon">&#9733;</span> Hero</a></li>
+                    <li><a href="#" data-panel="services" class="nav-link"><span class="nav-icon">&#9874;</span> Services</a></li>
+                    <li><a href="#" data-panel="projects" class="nav-link"><span class="nav-icon">&#9744;</span> Projects / Work</a></li>
+                    <li><a href="#" data-panel="about" class="nav-link"><span class="nav-icon">&#9432;</span> About</a></li>
+                    <li><a href="#" data-panel="blog" class="nav-link"><span class="nav-icon">&#9998;</span> Blog</a></li>
+                    <li><a href="#" data-panel="faq" class="nav-link"><span class="nav-icon">&#10067;</span> FAQ</a></li>
+                    <li><a href="#" data-panel="contact" class="nav-link"><span class="nav-icon">&#9993;</span> Contact</a></li>
+                    <li><a href="#" data-panel="cta" class="nav-link"><span class="nav-icon">&#10148;</span> CTA Section</a></li>
+                    <li><a href="#" data-panel="marquee" class="nav-link"><span class="nav-icon">&#8646;</span> Marquee</a></li>
+                    <li><a href="#" data-panel="newsletter" class="nav-link"><span class="nav-icon">&#9993;</span> Newsletter</a></li>
+                    <li><a href="#" data-panel="gallery" class="nav-link"><span class="nav-icon">&#9635;</span> Gallery</a></li>
+                    <li><a href="#" data-panel="testimonials" class="nav-link"><span class="nav-icon">&#10077;</span> Testimonials</a></li>
+                    <li><a href="#" data-panel="pricing" class="nav-link"><span class="nav-icon">&#36;</span> Pricing</a></li>
+                    <li><a href="#" data-panel="team" class="nav-link"><span class="nav-icon">&#9775;</span> Team</a></li>
+                    <li><a href="#" data-panel="process" class="nav-link"><span class="nav-icon">&#8634;</span> Process</a></li>
+                    <li><a href="#" data-panel="partners" class="nav-link"><span class="nav-icon">&#9822;</span> Partners</a></li>
+                    <li class="nav-divider">Advanced</li>
+                    <li><a href="#" data-panel="seo" class="nav-link"><span class="nav-icon">&#128270;</span> SEO</a></li>
+                    <li><a href="#" data-panel="integrations" class="nav-link"><span class="nav-icon">&#128268;</span> Integrations</a></li>
+                    <li><a href="#" data-panel="customCode" class="nav-link"><span class="nav-icon">&#60;/&#62;</span> Custom Code</a></li>
+                    <li><a href="#" data-panel="mediaLibrary" class="nav-link"><span class="nav-icon">&#128247;</span> Media Library</a></li>
+                    <li class="nav-divider">System</li>
+                    <li id="navUserMgmt" style="display:none;"><a href="#" data-panel="userManagement" class="nav-link"><span class="nav-icon">&#128101;</span> User Management</a></li>
+                    <li><a href="#" data-panel="domainSettings" class="nav-link"><span class="nav-icon">&#127760;</span> Domain Settings</a></li>
+                    <li><a href="#" data-panel="accountSettings" class="nav-link"><span class="nav-icon">&#9881;</span> Account Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-outline btn-sm btn-block">Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- MAIN AREA -->
+        <div class="main-wrapper">
+            <!-- TOP BAR -->
+            <header class="topbar">
+                <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+                <h3 id="panelTitle" class="topbar-title">Dashboard</h3>
+                <div class="topbar-actions">
+                    <span id="dirtyIndicator" class="dirty-indicator" style="display:none;">Unsaved changes</span>
+                    <button id="revertBtn" class="btn btn-outline btn-sm" style="display:none;">Revert Changes</button>
+                    <button id="saveBtn" class="btn btn-primary btn-sm">Save Changes</button>
+                </div>
+            </header>
+
+            <!-- CONTENT -->
+            <main id="mainContent" class="main-content">
+                <!-- Panels rendered here by editor.js -->
+            </main>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- SCRIPTS -->
+    <script src="github-api.js"></script>
+    <script src="editor.js"></script>
+</body>
+</html>
