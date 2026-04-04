@@ -10,117 +10,94 @@
      1. CUSTOM CURSOR
      ----------------------------------------------------------------------- */
   const initCursor = () => {
-    // Bail on touch devices
-    const isTouch =
-      'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (isTouch) return;
 
-    const dot = document.querySelector('.cursor__dot');
-    const circle = document.querySelector('.cursor__circle');
-    if (!dot || !circle) return;
+    const cursor = document.getElementById('cursor');
+    const cursorDot = document.getElementById('cursorDot');
+    if (!cursor || !cursorDot) return;
 
-    // State
-    const mouse = { x: 0, y: 0 };
-    const pos = { x: 0, y: 0 };       // circle lerp position
-    const LERP = 0.15;
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+    let dotX = 0, dotY = 0;
+    const RING_LERP = 0.12;
+    const DOT_LERP = 0.35;
 
-    // Sizes
-    const DOT_DEFAULT = 8;
-    const CIRCLE_DEFAULT = 40;
-    const CIRCLE_HOVER = 60;
-    const CIRCLE_TEXT = 80;
+    // Trail particles
+    const TRAIL_COUNT = 8;
+    const trails = [];
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const t = document.createElement('div');
+      t.className = 'cursor-trail';
+      const size = 6 + (TRAIL_COUNT - i) * 1.5;
+      t.style.width = size + 'px';
+      t.style.height = size + 'px';
+      t.style.opacity = (0.35 - i * 0.04).toString();
+      document.body.appendChild(t);
+      trails.push({ el: t, x: 0, y: 0 });
+    }
 
-    let currentCircleSize = CIRCLE_DEFAULT;
-    let targetCircleSize = CIRCLE_DEFAULT;
-    let dotScale = 1;
-    let targetDotScale = 1;
-    let isHovering = false;
-    let scrollTimer = null;
-
-    // Track mouse
     document.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
 
-    // Hover targets
-    const interactiveSelector =
-      'a, button, [data-cursor], input[type="submit"], .btn';
-    const textSelector = 'h1, h2, h3, h4, h5, h6';
-
+    // Hover detection
+    const interactive = 'a, button, [data-cursor], input[type="submit"], .btn, .card, .faq-item__question';
     document.addEventListener('mouseover', (e) => {
-      const target = e.target.closest(interactiveSelector);
-      const textTarget = e.target.closest(textSelector);
-
-      if (target) {
-        targetCircleSize = CIRCLE_HOVER;
-        targetDotScale = 0;
-        circle.classList.add('cursor__circle--active');
-        isHovering = true;
-      } else if (textTarget) {
-        targetCircleSize = CIRCLE_TEXT;
-        targetDotScale = 0;
-        circle.classList.add('cursor__circle--text');
-        isHovering = true;
-      }
+      if (e.target.closest(interactive)) cursor.classList.add('cursor--hover');
     });
-
     document.addEventListener('mouseout', (e) => {
-      const target = e.target.closest(interactiveSelector);
-      const textTarget = e.target.closest(textSelector);
-
-      if (target || textTarget) {
-        targetCircleSize = CIRCLE_DEFAULT;
-        targetDotScale = 1;
-        circle.classList.remove('cursor__circle--active', 'cursor__circle--text');
-        isHovering = false;
-      }
+      if (e.target.closest(interactive)) cursor.classList.remove('cursor--hover');
     });
 
-    // Keep cursor visible during scroll (no hide)
-
-    // Magnetic effect
+    // Magnetic effect on .magnetic elements
     const magneticEls = document.querySelectorAll('.magnetic');
-    const MAGNETIC_RADIUS = 100;
-
-    const applyMagnetic = () => {
+    function applyMagnetic() {
       magneticEls.forEach((el) => {
         const rect = el.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const dx = mouse.x - cx;
-        const dy = mouse.y - cy;
+        const dx = mouseX - cx;
+        const dy = mouseY - cy;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < MAGNETIC_RADIUS) {
-          const pull = (MAGNETIC_RADIUS - dist) / MAGNETIC_RADIUS;
-          el.style.transform = `translate(${dx * pull * 0.3}px, ${dy * pull * 0.3}px)`;
+        if (dist < 100) {
+          const pull = (100 - dist) / 100;
+          el.style.transform = 'translate(' + (dx * pull * 0.25) + 'px,' + (dy * pull * 0.25) + 'px)';
         } else {
           el.style.transform = '';
         }
       });
-    };
+    }
 
     // Animation loop
-    const lerp = (a, b, t) => a + (b - a) * t;
+    function animate() {
+      // Ring follows with smooth lerp
+      ringX += (mouseX - ringX) * RING_LERP;
+      ringY += (mouseY - ringY) * RING_LERP;
+      cursor.style.left = ringX + 'px';
+      cursor.style.top = ringY + 'px';
 
-    const tick = () => {
-      pos.x = lerp(pos.x, mouse.x, LERP);
-      pos.y = lerp(pos.y, mouse.y, LERP);
+      // Dot follows faster (closer to instant)
+      dotX += (mouseX - dotX) * DOT_LERP;
+      dotY += (mouseY - dotY) * DOT_LERP;
+      cursorDot.style.left = dotX + 'px';
+      cursorDot.style.top = dotY + 'px';
 
-      currentCircleSize = lerp(currentCircleSize, targetCircleSize, LERP);
-      dotScale = lerp(dotScale, targetDotScale, LERP);
-
-      dot.style.transform = `translate(${mouse.x - DOT_DEFAULT / 2}px, ${mouse.y - DOT_DEFAULT / 2}px) scale(${dotScale})`;
-      circle.style.transform = `translate(${pos.x - currentCircleSize / 2}px, ${pos.y - currentCircleSize / 2}px)`;
-      circle.style.width = `${currentCircleSize}px`;
-      circle.style.height = `${currentCircleSize}px`;
+      // Trail particles — each follows the one before it
+      for (let i = 0; i < trails.length; i++) {
+        const target = i === 0 ? { x: ringX, y: ringY } : trails[i - 1];
+        const t = trails[i];
+        t.x += (target.x - t.x) * (0.2 - i * 0.015);
+        t.y += (target.y - t.y) * (0.2 - i * 0.015);
+        t.el.style.left = t.x + 'px';
+        t.el.style.top = t.y + 'px';
+      }
 
       applyMagnetic();
-      requestAnimationFrame(tick);
-    };
-
-    requestAnimationFrame(tick);
+      requestAnimationFrame(animate);
+    }
+    animate();
   };
 
   /* -----------------------------------------------------------------------

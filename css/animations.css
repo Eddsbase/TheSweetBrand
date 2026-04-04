@@ -2,69 +2,54 @@
    ANIMATIONS — Scroll Reveal, Parallax, Cursor
    ============================================ */
 
-/* ---- Custom Cursor ---- */
+/* ---- Custom Cursor — Glow Ring + Dot + Trail ---- */
 .cursor {
   position: fixed;
-  top: 0;
-  left: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(232, 26, 107, 0.7);
   pointer-events: none;
   z-index: var(--z-cursor);
-  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease-out),
+              height 0.3s var(--ease-out),
+              border-color 0.3s,
+              background 0.3s,
+              box-shadow 0.3s;
+  box-shadow: 0 0 12px rgba(232, 26, 107, 0.15);
 }
-.cursor__dot {
-  width: 4px;
-  height: 4px;
+.cursor--hover {
+  width: 50px;
+  height: 50px;
+  background: rgba(232, 26, 107, 0.1);
+  border-color: #ff2d7f;
+  box-shadow: 0 0 24px rgba(232, 26, 107, 0.3);
+}
+.cursor-dot {
+  position: fixed;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #ff2d7f;
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  box-shadow: 0 0 6px #e81a6b, 0 0 12px rgba(232, 26, 107, 0.6);
-  transition: transform 0.05s linear, opacity 0.15s;
-  z-index: 2;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px #e81a6b, 0 0 16px rgba(232, 26, 107, 0.5);
 }
-.cursor__circle {
-  width: 20px;
-  height: 20px;
+.cursor-trail {
+  position: fixed;
   border-radius: 50%;
-  border: 1.5px solid #e81a6b;
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  opacity: 0.75;
-  background: rgba(232, 26, 107, 0.08);
-  box-shadow: 0 0 14px rgba(232, 26, 107, 0.2);
-  transition: width 0.2s var(--ease-out), height 0.2s var(--ease-out), top 0.2s var(--ease-out), left 0.2s var(--ease-out), opacity 0.2s, background 0.2s, border-color 0.2s;
-}
-
-/* Cursor hover states */
-.cursor--hover .cursor__dot {
-  transform: scale(0.8);
-  opacity: 1;
-}
-.cursor--hover .cursor__circle {
-  width: 34px;
-  height: 34px;
-  top: -17px;
-  left: -17px;
-  opacity: 0.9;
-  border-color: #e81a6b;
-  background: rgba(232, 26, 107, 0.15);
-  box-shadow: 0 0 24px rgba(232, 26, 107, 0.35);
-}
-.cursor--text .cursor__circle {
-  width: 40px;
-  height: 40px;
-  top: -20px;
-  left: -20px;
-  opacity: 0.5;
-  border-color: #ff2d7f;
-  background: rgba(232, 26, 107, 0.08);
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) - 1);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(232, 26, 107, 0.4) 0%, transparent 70%);
+  transition: opacity 0.5s ease;
 }
 
 /* Hide custom cursor on touch devices */
 @media (hover: none) and (pointer: coarse) {
-  .cursor { display: none; }
+  .cursor, .cursor-dot { display: none; }
   body, a, button { cursor: auto !important; }
 }
 
