@@ -12,54 +12,54 @@
   mix-blend-mode: difference;
 }
 .cursor__dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: #e81a6b;
   position: absolute;
-  top: -3px;
-  left: -3px;
-  box-shadow: 0 0 8px var(--color-accent);
-  transition: transform 0.1s var(--ease-out), opacity 0.2s;
+  top: -2.5px;
+  left: -2.5px;
+  box-shadow: 0 0 10px #e81a6b, 0 0 20px rgba(232, 26, 107, 0.5);
+  transition: transform 0.08s linear, opacity 0.15s;
 }
 .cursor__circle {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 1.5px solid var(--color-accent);
+  border: 1.5px solid #e81a6b;
   position: absolute;
-  top: -14px;
-  left: -14px;
-  opacity: 0.6;
-  background: rgba(255, 58, 92, 0.04);
-  transition: transform 0.2s var(--ease-out), opacity 0.2s, width 0.2s, height 0.2s, top 0.2s, left 0.2s, border-color 0.2s, background 0.2s;
+  top: -10px;
+  left: -10px;
+  opacity: 0.75;
+  background: rgba(232, 26, 107, 0.08);
+  box-shadow: 0 0 14px rgba(232, 26, 107, 0.2);
+  transition: width 0.2s var(--ease-out), height 0.2s var(--ease-out), top 0.2s var(--ease-out), left 0.2s var(--ease-out), opacity 0.2s, background 0.2s, border-color 0.2s;
 }
 
 /* Cursor hover states */
 .cursor--hover .cursor__dot {
-  transform: scale(0);
+  transform: scale(0.5);
+  opacity: 0.5;
 }
 .cursor--hover .cursor__circle {
-  width: 44px;
-  height: 44px;
-  top: -22px;
-  left: -22px;
-  opacity: 0.85;
-  border-color: var(--color-accent);
-  background: rgba(255, 58, 92, 0.12);
-  box-shadow: 0 0 20px rgba(255, 58, 92, 0.2);
+  width: 34px;
+  height: 34px;
+  top: -17px;
+  left: -17px;
+  opacity: 0.9;
+  border-color: #e81a6b;
+  background: rgba(232, 26, 107, 0.15);
+  box-shadow: 0 0 24px rgba(232, 26, 107, 0.35);
 }
 .cursor--text .cursor__circle {
-  width: 56px;
-  height: 56px;
-  top: -28px;
-  left: -28px;
-  opacity: 0.4;
-  border-color: var(--color-accent);
-  background: rgba(255, 58, 92, 0.06);
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: -20px;
+  opacity: 0.5;
+  border-color: #ff2d7f;
+  background: rgba(232, 26, 107, 0.08);
 }
-.cursor--hidden .cursor__dot,
-.cursor--hidden .cursor__circle { opacity: 0; }
 
 /* Hide custom cursor on touch devices */
 @media (hover: none) and (pointer: coarse) {
@@ -121,39 +121,66 @@
   50% { transform: translateY(-20px); }
 }
 
-/* ---- Decorative Shapes (Floating) ---- */
+/* ---- Decorative Shapes (Floating — Red Shades) ---- */
 .deco-shape {
   position: absolute;
   pointer-events: none;
   border-radius: 50%;
-  opacity: 0.06;
 }
 .deco-shape--coral {
-  background: var(--color-accent);
+  background: #e81a6b;
+  opacity: 0.08;
 }
 .deco-shape--gradient {
-  background: var(--gradient-accent);
+  background: radial-gradient(circle, #e81a6b 0%, #a01048 60%, transparent 100%);
+  opacity: 0.09;
+}
+.deco-shape--deep {
+  background: #6b0f38;
+  opacity: 0.14;
+}
+.deco-shape--glow {
+  background: radial-gradient(circle, rgba(232,26,107,0.3) 0%, rgba(255,45,127,0.1) 40%, transparent 70%);
+  opacity: 1;
+}
+.deco-shape--muted {
+  background: #c4155a;
+  opacity: 0.06;
 }
 .deco-shape--1 {
-  width: 300px;
-  height: 300px;
-  top: 10%;
-  right: -100px;
+  width: 350px;
+  height: 350px;
+  top: 8%;
+  right: -120px;
   animation: float 8s ease-in-out infinite;
 }
 .deco-shape--2 {
-  width: 200px;
-  height: 200px;
-  bottom: 15%;
-  left: -80px;
+  width: 250px;
+  height: 250px;
+  bottom: 12%;
+  left: -100px;
   animation: float 10s ease-in-out infinite reverse;
 }
 .deco-shape--3 {
-  width: 150px;
-  height: 150px;
-  top: 40%;
-  right: 15%;
+  width: 180px;
+  height: 180px;
+  top: 45%;
+  right: 12%;
   animation: float 7s ease-in-out infinite 1s;
+}
+.deco-shape--4 {
+  width: 120px;
+  height: 120px;
+  top: 25%;
+  left: 8%;
+  animation: float 9s ease-in-out infinite 0.5s;
+}
+.deco-shape--5 {
+  width: 200px;
+  height: 200px;
+  bottom: 30%;
+  right: 5%;
+  animation: float 11s ease-in-out infinite 2s;
 }
 
 /* ---- Text Reveal (word-by-word / line-by-line) ---- */

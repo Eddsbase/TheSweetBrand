@@ -77,20 +77,7 @@
       }
     });
 
-    // Hide during scroll
-    window.addEventListener(
-      'scroll',
-      () => {
-        dot.style.opacity = '0';
-        circle.style.opacity = '0';
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
-          dot.style.opacity = '1';
-          circle.style.opacity = '1';
-        }, 150);
-      },
-      { passive: true }
-    );
+    // Keep cursor visible during scroll (no hide)
 
     // Magnetic effect
     const magneticEls = document.querySelectorAll('.magnetic');

@@ -70,7 +70,7 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: var(--space-md) 0;
-  border-bottom: 1px solid rgba(255, 58, 92, 0.12);
+  border-bottom: 1px solid rgba(232, 26, 107, 0.12);
 }
 .nav__inner {
   display: flex;
