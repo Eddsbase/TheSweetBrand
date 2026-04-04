@@ -10,8 +10,7 @@
      1. CUSTOM CURSOR
      ----------------------------------------------------------------------- */
   const initCursor = () => {
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouch) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
     const cursor = document.getElementById('cursor');
     const cursorDot = document.getElementById('cursorDot');
