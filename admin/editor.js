@@ -423,9 +423,9 @@
             ${fieldText('Section Title', b.sectionTitle, 'benefits.sectionTitle')}
             ${fieldTextarea('Section Description', b.sectionDescription, 'benefits.sectionDescription')}
             ${repeaterSection('Benefit', items, 'benefits.items', (item, idx) => `
-                ${fieldText('Title', item.title, \`benefits.items.\${idx}.title\`)}
-                ${fieldTextarea('Description', item.description, \`benefits.items.\${idx}.description\`)}
-                ${fieldText('Icon', item.icon, \`benefits.items.\${idx}.icon\`)}
+                ${fieldText('Title', item.title, 'benefits.items.' + idx + '.title')}
+                ${fieldTextarea('Description', item.description, 'benefits.items.' + idx + '.description')}
+                ${fieldText('Icon', item.icon, 'benefits.items.' + idx + '.icon')}
             `)}
             ${fieldToggle('Show Section', b.visible !== false, 'benefits.visible')}
         `, 'benefits');
