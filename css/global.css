@@ -66,11 +66,11 @@
   background: transparent;
 }
 .nav--scrolled {
-  background: rgba(15, 15, 26, 0.92);
+  background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(255, 58, 92, 0.12);
 }
 .nav__inner {
   display: flex;
@@ -81,10 +81,10 @@
   padding: 0 var(--container-padding);
 }
 .nav__logo {
-  height: 64px;
+  height: 100px;
   width: auto;
   transition: transform var(--duration-normal) var(--ease-out);
-  mix-blend-mode: screen;
+  filter: brightness(0) invert(1);
 }
 .nav__logo:hover { transform: scale(1.05); }
 
