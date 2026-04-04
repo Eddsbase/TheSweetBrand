@@ -19,23 +19,6 @@
 
     let mouseX = 0, mouseY = 0;
     let ringX = 0, ringY = 0;
-    let dotX = 0, dotY = 0;
-    const RING_LERP = 0.12;
-    const DOT_LERP = 0.35;
-
-    // Trail particles
-    const TRAIL_COUNT = 8;
-    const trails = [];
-    for (let i = 0; i < TRAIL_COUNT; i++) {
-      const t = document.createElement('div');
-      t.className = 'cursor-trail';
-      const size = 6 + (TRAIL_COUNT - i) * 1.5;
-      t.style.width = size + 'px';
-      t.style.height = size + 'px';
-      t.style.opacity = (0.35 - i * 0.04).toString();
-      document.body.appendChild(t);
-      trails.push({ el: t, x: 0, y: 0 });
-    }
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
@@ -51,7 +34,7 @@
       if (e.target.closest(interactive)) cursor.classList.remove('cursor--hover');
     });
 
-    // Magnetic effect on .magnetic elements
+    // Magnetic effect
     const magneticEls = document.querySelectorAll('.magnetic');
     function applyMagnetic() {
       magneticEls.forEach((el) => {
@@ -70,29 +53,15 @@
       });
     }
 
-    // Animation loop
+    // Animation loop — ring lerps, dot sticks to mouse
     function animate() {
-      // Ring follows with smooth lerp
-      ringX += (mouseX - ringX) * RING_LERP;
-      ringY += (mouseY - ringY) * RING_LERP;
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
       cursor.style.left = ringX + 'px';
       cursor.style.top = ringY + 'px';
 
-      // Dot follows faster (closer to instant)
-      dotX += (mouseX - dotX) * DOT_LERP;
-      dotY += (mouseY - dotY) * DOT_LERP;
-      cursorDot.style.left = dotX + 'px';
-      cursorDot.style.top = dotY + 'px';
-
-      // Trail particles — each follows the one before it
-      for (let i = 0; i < trails.length; i++) {
-        const target = i === 0 ? { x: ringX, y: ringY } : trails[i - 1];
-        const t = trails[i];
-        t.x += (target.x - t.x) * (0.2 - i * 0.015);
-        t.y += (target.y - t.y) * (0.2 - i * 0.015);
-        t.el.style.left = t.x + 'px';
-        t.el.style.top = t.y + 'px';
-      }
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top = mouseY + 'px';
 
       applyMagnetic();
       requestAnimationFrame(animate);

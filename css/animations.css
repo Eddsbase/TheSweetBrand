@@ -2,49 +2,44 @@
    ANIMATIONS — Scroll Reveal, Parallax, Cursor
    ============================================ */
 
-/* ---- Custom Cursor — Glow Ring + Dot + Trail ---- */
+/* ---- Custom Cursor — White Dot + Pink Ring + Glow ---- */
 .cursor {
   position: fixed;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1.5px solid rgba(232, 26, 107, 0.7);
+  border: 2px solid #e81a6b;
   pointer-events: none;
   z-index: var(--z-cursor);
   transform: translate(-50%, -50%);
-  transition: width 0.3s var(--ease-out),
-              height 0.3s var(--ease-out),
-              border-color 0.3s,
-              background 0.3s,
-              box-shadow 0.3s;
-  box-shadow: 0 0 12px rgba(232, 26, 107, 0.15);
+  transition: width 0.25s var(--ease-out),
+              height 0.25s var(--ease-out),
+              border-color 0.25s,
+              background 0.25s,
+              box-shadow 0.25s,
+              opacity 0.25s;
+  box-shadow: 0 0 10px rgba(232, 26, 107, 0.35),
+              0 0 20px rgba(232, 26, 107, 0.15);
 }
 .cursor--hover {
-  width: 50px;
-  height: 50px;
-  background: rgba(232, 26, 107, 0.1);
+  width: 52px;
+  height: 52px;
+  background: rgba(232, 26, 107, 0.08);
   border-color: #ff2d7f;
-  box-shadow: 0 0 24px rgba(232, 26, 107, 0.3);
+  box-shadow: 0 0 16px rgba(232, 26, 107, 0.5),
+              0 0 32px rgba(232, 26, 107, 0.2);
 }
 .cursor-dot {
   position: fixed;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #ff2d7f;
+  background: #ffffff;
   pointer-events: none;
-  z-index: var(--z-cursor);
+  z-index: calc(var(--z-cursor) + 1);
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 8px #e81a6b, 0 0 16px rgba(232, 26, 107, 0.5);
-}
-.cursor-trail {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: calc(var(--z-cursor) - 1);
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(232, 26, 107, 0.4) 0%, transparent 70%);
-  transition: opacity 0.5s ease;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8),
+              0 0 8px rgba(232, 26, 107, 0.4);
 }
 
 /* Hide custom cursor on touch devices */
