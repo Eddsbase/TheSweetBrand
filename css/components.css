@@ -18,7 +18,7 @@
   position: relative;
   overflow: hidden;
   white-space: nowrap;
-  cursor: none;
+  cursor: pointer;
 }
 .btn::before {
   content: '';
@@ -233,7 +233,7 @@
   color: var(--color-text-primary);
   text-align: left;
   padding: 0;
-  cursor: none;
+  cursor: pointer;
   transition: color var(--duration-fast);
 }
 .faq-item__question:hover { color: var(--color-accent); }

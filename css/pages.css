@@ -55,12 +55,16 @@
   margin-bottom: var(--space-xl);
 }
 .hero__title {
-  font-size: var(--fs-display);
+  font-size: clamp(2.5rem, 8vw, 7rem);
   font-weight: var(--fw-bold);
   line-height: var(--lh-tight);
   letter-spacing: var(--ls-tight);
   margin-top: var(--space-3xl);
   margin-bottom: var(--space-xl);
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .hero__title { white-space: normal; font-size: clamp(2rem, 10vw, 4rem); }
 }
 .hero__title-line { display: block; }
 .hero__title-accent {
@@ -323,7 +327,7 @@
 }
 
 /* ---- Blog Cards ---- */
-.blog-card { cursor: none; }
+.blog-card { cursor: pointer; }
 .blog-card__image {
   width: 100%;
   aspect-ratio: 16/10;
@@ -367,7 +371,7 @@
   position: relative;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  cursor: none;
+  cursor: pointer;
 }
 .work-card__image {
   width: 100%;

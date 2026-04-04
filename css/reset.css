@@ -22,7 +22,12 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
   overflow-x: hidden;
-  cursor: none;
+}
+body.cursor-active,
+body.cursor-active a,
+body.cursor-active button,
+body.cursor-active [data-cursor] {
+  cursor: none !important;
 }
 
 img, picture, video, canvas, svg {
@@ -42,13 +47,12 @@ p, h1, h2, h3, h4, h5, h6 {
 a {
   color: inherit;
   text-decoration: none;
-  cursor: none;
 }
 
 button {
   background: none;
   border: none;
-  cursor: none;
+  cursor: pointer;
 }
 
 ul, ol { list-style: none; }

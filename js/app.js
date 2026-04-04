@@ -19,10 +19,23 @@
 
     let mouseX = 0, mouseY = 0;
     let ringX = 0, ringY = 0;
+    let hasMoved = false;
+
+    // Hide until first mouse move
+    cursor.style.opacity = '0';
+    cursorDot.style.opacity = '0';
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (!hasMoved) {
+        hasMoved = true;
+        ringX = mouseX;
+        ringY = mouseY;
+        cursor.style.opacity = '1';
+        cursorDot.style.opacity = '1';
+        document.body.classList.add('cursor-active');
+      }
     }, { passive: true });
 
     // Hover detection
