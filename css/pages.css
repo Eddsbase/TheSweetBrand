@@ -375,8 +375,9 @@
 }
 .work-card__image {
   width: 100%;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/10;
   object-fit: cover;
+  object-position: top center;
   transition: transform var(--duration-slow) var(--ease-out);
 }
 .work-card:hover .work-card__image { transform: scale(1.05); }
