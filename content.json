@@ -677,5 +677,16 @@
     "customDomain": "thesweetbrand.co",
     "forceHttps": true,
     "wwwRedirect": false
+  },
+  "growth": {
+    "visible": true,
+    "tag": "Digital Marketing Arkansas",
+    "title": "Has your business growth stalled out?",
+    "description": "It's not your product. It's not your people. It's not even your pricing. It's your visibility. Get noticed by your next customers through full-funnel marketing services that increase brand awareness, engagement, and conversions.",
+    "ctaText": "Book a Call",
+    "ctaLink": "contact.html",
+    "videoWebm": "videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-transcode.webm",
+    "videoMp4": "videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-transcode.mp4",
+    "videoPoster": "videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-poster-00001.jpg"
   }
 }

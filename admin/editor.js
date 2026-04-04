@@ -367,26 +367,15 @@
 
     // Site Settings
     panelRenderers.siteSettings = function () {
-        const s = ensureObj(contentData, 'siteSettings', {});
+        const s = ensureObj(contentData, 'site', {});
         return sectionCard('Site Settings', `
             ${fieldText('Site Name', s.siteName, 'siteSettings.siteName')}
-            ${fieldText('Tagline', s.tagline, 'siteSettings.tagline')}
-            ${fieldTextarea('Description', s.description, 'siteSettings.description')}
-            ${fieldImage('Logo', s.logo, 'siteSettings.logo')}
-            ${fieldImage('Favicon', s.favicon, 'siteSettings.favicon')}
-            ${fieldColor('Primary Color', s.primaryColor, 'siteSettings.primaryColor')}
-            ${fieldColor('Secondary Color', s.secondaryColor, 'siteSettings.secondaryColor')}
-            ${fieldText('Phone', s.phone, 'siteSettings.phone')}
-            ${fieldText('Email', s.email, 'siteSettings.email')}
-            ${fieldText('Address', s.address, 'siteSettings.address')}
-            ${fieldText('Copyright Text', s.copyright, 'siteSettings.copyright')}
-            <h4 style="margin-top:1rem;">Social Links</h4>
-            ${fieldText('Facebook', (s.social || {}).facebook, 'siteSettings.social.facebook')}
-            ${fieldText('Instagram', (s.social || {}).instagram, 'siteSettings.social.instagram')}
-            ${fieldText('Twitter / X', (s.social || {}).twitter, 'siteSettings.social.twitter')}
-            ${fieldText('LinkedIn', (s.social || {}).linkedin, 'siteSettings.social.linkedin')}
-            ${fieldText('YouTube', (s.social || {}).youtube, 'siteSettings.social.youtube')}
-            ${fieldText('TikTok', (s.social || {}).tiktok, 'siteSettings.social.tiktok')}
+            ${fieldText('Site Title', s.title, 'site.title')}
+            ${fieldTextarea('Site Description', s.description, 'site.description')}
+            ${fieldImage('Logo', s.logo, 'site.logo')}
+            ${fieldImage('Favicon', s.favicon, 'site.favicon')}
+            ${fieldText('Nav CTA Text', s.navCtaText, 'site.navCtaText')}
+            ${fieldText('Nav CTA Link', s.navCtaLink, 'site.navCtaLink')}
         `);
     };
 
@@ -394,18 +383,18 @@
     panelRenderers.hero = function () {
         const h = ensureObj(contentData, 'hero', {});
         return sectionCard('Hero Section', `
-            ${fieldText('Headline', h.headline, 'hero.headline')}
-            ${fieldText('Subheadline', h.subheadline, 'hero.subheadline')}
+            ${fieldText('Tag', h.tag, 'hero.tag')}
+            ${fieldText('Title Line 1', h.titleLine1, 'hero.titleLine1')}
+            ${fieldText('Title Line 2', h.titleLine2, 'hero.titleLine2')}
+            ${fieldText('Subtitle', h.subtitle, 'hero.subtitle')}
             ${fieldTextarea('Description', h.description, 'hero.description')}
-            ${fieldText('Button Text', h.buttonText, 'hero.buttonText')}
-            ${fieldText('Button Link', h.buttonLink, 'hero.buttonLink')}
-            ${fieldText('Secondary Button Text', h.secondaryButtonText, 'hero.secondaryButtonText')}
-            ${fieldText('Secondary Button Link', h.secondaryButtonLink, 'hero.secondaryButtonLink')}
+            ${fieldText('CTA 1 Text', h.cta1Text, 'hero.cta1Text')}
+            ${fieldText('CTA 1 Link', h.cta1Link, 'hero.cta1Link')}
+            ${fieldText('CTA 2 Text', h.cta2Text, 'hero.cta2Text')}
+            ${fieldText('CTA 2 Link', h.cta2Link, 'hero.cta2Link')}
             ${fieldImage('Background Image', h.backgroundImage, 'hero.backgroundImage')}
-            ${fieldImage('Hero Image', h.image, 'hero.image')}
-            ${fieldVideo('Hero Video', h.video, 'hero.video')}
-            ${fieldSelect('Layout', h.layout, 'hero.layout', ['centered', 'left-aligned', 'split', 'fullscreen'])}
-            ${fieldToggle('Show overlay', h.overlay, 'hero.overlay')}
+            ${fieldImage('Hero Image', h.heroImage, 'hero.heroImage')}
+            ${fieldToggle('Show Hero', h.visible, 'hero.visible')}
         `, 'hero');
     };
 
@@ -418,10 +407,28 @@
             ${fieldTextarea('Description', g.description, 'growth.description')}
             ${fieldText('CTA Text', g.ctaText, 'growth.ctaText')}
             ${fieldText('CTA Link', g.ctaLink, 'growth.ctaLink')}
-            ${fieldVideo('Section Video', g.video, 'growth.video')}
+            ${fieldVideo('Section Video (WebM)', g.videoWebm, 'growth.videoWebm')}
+            ${fieldVideo('Section Video (MP4)', g.videoMp4, 'growth.videoMp4')}
             ${fieldImage('Video Poster', g.videoPoster, 'growth.videoPoster')}
             ${fieldToggle('Show Section', g.visible !== false, 'growth.visible')}
         `, 'growth');
+    };
+
+    // Benefits
+    panelRenderers.benefits = function () {
+        const b = ensureObj(contentData, 'benefits', {});
+        const items = ensureArr(b, 'items');
+        return sectionCard('Benefits', `
+            ${fieldText('Section Tag', b.sectionTag, 'benefits.sectionTag')}
+            ${fieldText('Section Title', b.sectionTitle, 'benefits.sectionTitle')}
+            ${fieldTextarea('Section Description', b.sectionDescription, 'benefits.sectionDescription')}
+            ${repeaterSection('Benefit', items, 'benefits.items', (item, idx) => `
+                ${fieldText('Title', item.title, \`benefits.items.\${idx}.title\`)}
+                ${fieldTextarea('Description', item.description, \`benefits.items.\${idx}.description\`)}
+                ${fieldText('Icon', item.icon, \`benefits.items.\${idx}.icon\`)}
+            `)}
+            ${fieldToggle('Show Section', b.visible !== false, 'benefits.visible')}
+        `, 'benefits');
     };
 
     // Services
@@ -429,8 +436,10 @@
         const sec = ensureObj(contentData, 'services', {});
         const items = ensureArr(sec, 'items');
         return sectionCard('Services', `
-            ${fieldText('Section Title', sec.title, 'services.title')}
-            ${fieldText('Subtitle', sec.subtitle, 'services.subtitle')}
+            ${fieldText('Section Tag', sec.sectionTag, 'services.sectionTag')}
+            ${fieldText('Section Title', sec.sectionTitle, 'services.sectionTitle')}
+            ${fieldTextarea('Section Description', sec.sectionDescription, 'services.sectionDescription')}
+            ${fieldToggle('Show Section', sec.visible, 'services.visible')}
             ${repeaterSection('Service', items, 'services.items', (item, idx) => `
                 ${fieldText('Title', item.title, `services.items.${idx}.title`)}
                 ${fieldText('Slug', item.slug, `services.items.${idx}.slug`)}
@@ -448,8 +457,10 @@
         const sec = ensureObj(contentData, 'projects', {});
         const items = ensureArr(sec, 'items');
         return sectionCard('Projects / Work', `
-            ${fieldText('Section Title', sec.title, 'projects.title')}
-            ${fieldText('Subtitle', sec.subtitle, 'projects.subtitle')}
+            ${fieldText('Section Tag', sec.sectionTag, 'projects.sectionTag')}
+            ${fieldText('Section Title', sec.sectionTitle, 'projects.sectionTitle')}
+            ${fieldTextarea('Section Description', sec.sectionDescription, 'projects.sectionDescription')}
+            ${fieldToggle('Show Section', sec.visible, 'projects.visible')}
             ${repeaterSection('Project', items, 'projects.items', (item, idx) => `
                 ${fieldText('Title', item.title, `projects.items.${idx}.title`)}
                 ${fieldText('Slug', item.slug, `projects.items.${idx}.slug`)}
@@ -466,20 +477,21 @@
     // About
     panelRenderers.about = function () {
         const a = ensureObj(contentData, 'about', {});
+        const wwd = a.whatwedo || {};
+        const mis = a.mission || {};
         return sectionCard('About', `
-            ${fieldText('Title', a.title, 'about.title')}
-            ${fieldText('Subtitle', a.subtitle, 'about.subtitle')}
-            ${fieldTextarea('Content', a.content, 'about.content', { rows: 8 })}
-            ${fieldImage('Image', a.image, 'about.image')}
-            ${fieldText('Mission Statement', a.mission, 'about.mission')}
-            ${fieldText('Vision Statement', a.vision, 'about.vision')}
-            <h4 style="margin-top:1rem;">Stats</h4>
-            ${fieldText('Stat 1 Number', (a.stats || [])[0]?.value, 'about.stats.0.value')}
-            ${fieldText('Stat 1 Label', (a.stats || [])[0]?.label, 'about.stats.0.label')}
-            ${fieldText('Stat 2 Number', (a.stats || [])[1]?.value, 'about.stats.1.value')}
-            ${fieldText('Stat 2 Label', (a.stats || [])[1]?.label, 'about.stats.1.label')}
-            ${fieldText('Stat 3 Number', (a.stats || [])[2]?.value, 'about.stats.2.value')}
-            ${fieldText('Stat 3 Label', (a.stats || [])[2]?.label, 'about.stats.2.label')}
+            ${fieldText('Section Tag', a.sectionTag, 'about.sectionTag')}
+            ${fieldText('Section Title', a.sectionTitle, 'about.sectionTitle')}
+            ${fieldImage('About Image', a.image, 'about.image')}
+            <h4 style="margin-top:1rem;">What We Do</h4>
+            ${fieldText('What We Do Title', wwd.title, 'about.whatwedo.title')}
+            ${fieldTextarea('What We Do Description', wwd.description, 'about.whatwedo.description', { rows: 4 })}
+            <h4 style="margin-top:1rem;">Vision</h4>
+            ${fieldTextarea('Vision Statement', a.vision, 'about.vision', { rows: 3 })}
+            <h4 style="margin-top:1rem;">Mission</h4>
+            ${fieldText('Mission Title', mis.title, 'about.mission.title')}
+            ${fieldTextarea('Mission Description', mis.description, 'about.mission.description', { rows: 3 })}
+            ${fieldToggle('Show Section', a.visible, 'about.visible')}
         `, 'about');
     };
 
@@ -488,9 +500,10 @@
         const sec = ensureObj(contentData, 'blog', {});
         const posts = ensureArr(sec, 'posts');
         return sectionCard('Blog', `
-            ${fieldText('Section Title', sec.title, 'blog.title')}
-            ${fieldText('Subtitle', sec.subtitle, 'blog.subtitle')}
-            ${fieldText('Posts Per Page', sec.postsPerPage, 'blog.postsPerPage')}
+            ${fieldText('Section Tag', sec.sectionTag, 'blog.sectionTag')}
+            ${fieldText('Section Title', sec.sectionTitle, 'blog.sectionTitle')}
+            ${fieldTextarea('Section Description', sec.sectionDescription, 'blog.sectionDescription')}
+            ${fieldToggle('Show Section', sec.visible, 'blog.visible')}
             ${repeaterSection('Post', posts, 'blog.posts', (item, idx) => `
                 ${fieldText('Title', item.title, `blog.posts.${idx}.title`)}
                 ${fieldText('Slug', item.slug, `blog.posts.${idx}.slug`)}
@@ -511,8 +524,10 @@
         const sec = ensureObj(contentData, 'faq', {});
         const items = ensureArr(sec, 'items');
         return sectionCard('FAQ', `
-            ${fieldText('Section Title', sec.title, 'faq.title')}
-            ${fieldText('Subtitle', sec.subtitle, 'faq.subtitle')}
+            ${fieldText('Section Tag', sec.sectionTag, 'faq.sectionTag')}
+            ${fieldText('Section Title', sec.sectionTitle, 'faq.sectionTitle')}
+            ${fieldTextarea('Section Description', sec.sectionDescription, 'faq.sectionDescription')}
+            ${fieldToggle('Show Section', sec.visible, 'faq.visible')}
             ${repeaterSection('FAQ Item', items, 'faq.items', (item, idx) => `
                 ${fieldText('Question', item.question, `faq.items.${idx}.question`)}
                 ${fieldTextarea('Answer', item.answer, `faq.items.${idx}.answer`, { rows: 3 })}
@@ -524,20 +539,15 @@
     panelRenderers.contact = function () {
         const c = ensureObj(contentData, 'contact', {});
         return sectionCard('Contact', `
-            ${fieldText('Section Title', c.title, 'contact.title')}
-            ${fieldText('Subtitle', c.subtitle, 'contact.subtitle')}
-            ${fieldTextarea('Description', c.description, 'contact.description')}
+            ${fieldText('Section Tag', c.sectionTag, 'contact.sectionTag')}
+            ${fieldText('Section Title', c.sectionTitle, 'contact.sectionTitle')}
+            ${fieldTextarea('Section Description', c.sectionDescription, 'contact.sectionDescription')}
             ${fieldText('Email', c.email, 'contact.email')}
             ${fieldText('Phone', c.phone, 'contact.phone')}
             ${fieldText('Address', c.address, 'contact.address')}
-            ${fieldText('Map Embed URL', c.mapUrl, 'contact.mapUrl')}
-            ${fieldText('Form Action URL', c.formAction, 'contact.formAction')}
-            ${fieldToggle('Show Map', c.showMap, 'contact.showMap')}
-            ${fieldToggle('Show Form', c.showForm !== false, 'contact.showForm')}
-            <h4 style="margin-top:1rem;">Business Hours</h4>
-            ${fieldText('Hours Line 1', (c.hours || [])[0], 'contact.hours.0')}
-            ${fieldText('Hours Line 2', (c.hours || [])[1], 'contact.hours.1')}
-            ${fieldText('Hours Line 3', (c.hours || [])[2], 'contact.hours.2')}
+            ${fieldText('Form Action URL (Formspree)', c.formAction, 'contact.formAction')}
+            ${fieldText('Submit Button Text', c.submitText, 'contact.submitText')}
+            ${fieldToggle('Show Section', c.visible, 'contact.visible')}
         `, 'contact');
     };
 
@@ -545,12 +555,13 @@
     panelRenderers.cta = function () {
         const c = ensureObj(contentData, 'cta', {});
         return sectionCard('CTA Section', `
-            ${fieldText('Headline', c.headline, 'cta.headline')}
+            ${fieldText('Title', c.title, 'cta.title')}
             ${fieldTextarea('Description', c.description, 'cta.description')}
-            ${fieldText('Button Text', c.buttonText, 'cta.buttonText')}
-            ${fieldText('Button Link', c.buttonLink, 'cta.buttonLink')}
-            ${fieldImage('Background Image', c.backgroundImage, 'cta.backgroundImage')}
-            ${fieldSelect('Style', c.style, 'cta.style', ['default', 'banner', 'centered', 'split'])}
+            ${fieldText('Button 1 Text', c.btn1Text, 'cta.btn1Text')}
+            ${fieldText('Button 1 Link', c.btn1Link, 'cta.btn1Link')}
+            ${fieldText('Button 2 Text', c.btn2Text, 'cta.btn2Text')}
+            ${fieldText('Button 2 Link', c.btn2Link, 'cta.btn2Link')}
+            ${fieldToggle('Show Section', c.visible, 'cta.visible')}
         `, 'cta');
     };
 
