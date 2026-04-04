@@ -66,9 +66,18 @@ const server = http.createServer((req, res) => {
     req.on('data', chunk => { body += chunk; });
     req.on('end', () => {
       try {
-        const content = JSON.parse(body);
+        const parsed = JSON.parse(body);
+        // Handle wrapped format from github-api.js: { path, content, message }
+        let contentToWrite;
+        if (parsed.content && parsed.path) {
+          // content field is the actual JSON string or object
+          contentToWrite = typeof parsed.content === 'string' ? parsed.content : JSON.stringify(parsed.content, null, 2);
+        } else {
+          // Direct content object
+          contentToWrite = JSON.stringify(parsed, null, 2);
+        }
         const contentPath = path.join(ROOT, 'content.json');
-        fs.writeFileSync(contentPath, JSON.stringify(content, null, 2), 'utf8');
+        fs.writeFileSync(contentPath, contentToWrite, 'utf8');
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ success: true }));
       } catch (err) {
