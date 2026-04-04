@@ -78,9 +78,10 @@
 }
 .hero__ctas {
   display: flex;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: var(--space-5xl);
 }
 .hero__scroll-indicator {
   position: absolute;

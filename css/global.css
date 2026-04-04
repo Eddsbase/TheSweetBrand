@@ -81,7 +81,7 @@
   padding: 0 var(--container-padding);
 }
 .nav__logo {
-  height: 100px;
+  height: 120px;
   width: auto;
   transition: transform var(--duration-normal) var(--ease-out);
   filter: brightness(0) invert(1);
