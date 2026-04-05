@@ -80,11 +80,11 @@
        Token management
     -------------------------------------------------- */
     function setToken(token) {
-        sessionStorage.setItem(TOKEN_KEY, token);
+        localStorage.setItem(TOKEN_KEY, token);
     }
 
     function getStoredToken() {
-        return sessionStorage.getItem(TOKEN_KEY);
+        return localStorage.getItem(TOKEN_KEY);
     }
 
     function saveApiToken(token) {
@@ -173,7 +173,10 @@
 
         if (found.githubToken) {
             setToken(found.githubToken);
+        } else if (users.apiToken) {
+            setToken(users.apiToken);
         }
+        // If token already in localStorage from previous session, keep it
 
         return session;
     }
