@@ -143,7 +143,7 @@
         "slug": "pictures-by-paige-olivia",
         "category": "Web Design",
         "description": "A premium photography portfolio site with custom cursor effects, smooth animations, and a full CMS admin panel.",
-        "image": "images/project-paige.png",
+        "image": "",
         "client": "Paige Olivia",
         "date": "2026",
         "link": "https://eddsbase.github.io/PicturesByPaigeOlivia/",
@@ -154,7 +154,7 @@
         "slug": "missouri-mow",
         "category": "Web Design",
         "description": "A professional lawn care service website with service booking, pricing pages, and responsive design built for Missouri Mow.",
-        "image": "images/project-momow.png",
+        "image": "",
         "client": "Missouri Mow",
         "date": "2026",
         "link": "https://eddsbase.github.io/MissouriMow/",
@@ -165,7 +165,7 @@
         "slug": "fatsmith",
         "category": "Web Design",
         "description": "Custom-built website for FatSmith with modern design, engaging user experience, and full content management.",
-        "image": "images/project-fatsmith.png",
+        "image": "",
         "client": "FatSmith",
         "date": "2026",
         "link": "https://fatsmith.com",
@@ -175,8 +175,8 @@
         "title": "Dark Forest Chandlery",
         "slug": "dark-forest-chandlery",
         "category": "Branding & Web Design",
-        "description": "A dark, atmospheric e-commerce site for artisan candles with immersive branding and product showcase.",
-        "image": "images/project-darkforest.png",
+        "description": "A dark, atmospheric e-commerce site for artisan soaps and beauty products with immersive branding and product showcase.",
+        "image": "",
         "client": "Dark Forest Chandlery",
         "date": "2026",
         "link": "https://darkforestchandlery.com",
@@ -688,5 +688,8 @@
     "videoWebm": "videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-transcode.webm",
     "videoMp4": "videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-transcode.mp4",
     "videoPoster": "videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-poster-00001.jpg"
+  },
+  "sectionVisibility": {
+    "projects": true
   }
 }
