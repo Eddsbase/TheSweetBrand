@@ -336,9 +336,9 @@
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
-  .nav__links { display: none; }
-  .nav__cta { display: none; }
-  .nav__toggle { display: flex; }
+  .nav__links { display: none !important; }
+  .nav__cta { display: none !important; }
+  .nav__toggle { display: flex !important; }
   .footer__inner { flex-direction: column; }
 }
 @media (max-width: 768px) {
