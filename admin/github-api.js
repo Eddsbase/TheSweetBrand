@@ -199,7 +199,16 @@
 
     async function writeFileGitHub(path, content, message, sha) {
         const url = `${API_BASE}/repos/${OWNER}/${REPO}/contents/${path}`;
-        const fileSha = sha || shaCache[path];
+
+        // Always fetch fresh SHA to avoid conflicts
+        let fileSha = null;
+        try {
+            const freshResp = await ghFetch(`${API_BASE}/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}&t=${Date.now()}`);
+            const freshData = await freshResp.json();
+            fileSha = freshData.sha;
+        } catch (e) {
+            // File may not exist yet
+        }
 
         const body = {
             message: message || `Update ${path}`,
@@ -217,24 +226,22 @@
         });
 
         const data = await resp.json();
-        shaCache[path] = data.content.sha;
+        if (data.content) shaCache[path] = data.content.sha;
         return data;
     }
 
     async function uploadImageGitHub(path, base64data, message) {
         const url = `${API_BASE}/repos/${OWNER}/${REPO}/contents/${path}`;
-        let fileSha = shaCache[path];
+        let fileSha = null;
 
-        // Check if file exists to get SHA
-        if (!fileSha) {
-            try {
-                const checkUrl = `${API_BASE}/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`;
-                const checkResp = await ghFetch(checkUrl);
-                const checkData = await checkResp.json();
-                fileSha = checkData.sha;
-            } catch {
-                // File doesn't exist, that's fine
-            }
+        // Always fetch fresh SHA
+        try {
+            const checkUrl = `${API_BASE}/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}&t=${Date.now()}`;
+            const checkResp = await ghFetch(checkUrl);
+            const checkData = await checkResp.json();
+            fileSha = checkData.sha;
+        } catch {
+            // File doesn't exist yet, that's fine
         }
 
         const body = {
