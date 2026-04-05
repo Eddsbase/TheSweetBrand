@@ -90,45 +90,50 @@
         "slug": "seo",
         "description": "Rise through the ranks on Google so you can turn searches into sales.",
         "icon": "",
-        "image": "images/Service-SEO.webp",
+        "image": "",
         "link": "services/seo.html",
-        "features": []
+        "features": [],
+        "body": ""
       },
       {
         "title": "Advertising",
         "slug": "advertising",
         "description": "Convert more cold prospects into paying customers with top-to-bottom advertising campaigns.",
         "icon": "",
-        "image": "images/Service-Advertising.webp",
+        "image": "",
         "link": "services/advertising.html",
-        "features": []
+        "features": [],
+        "body": ""
       },
       {
         "title": "Marketing Consulting",
         "slug": "marketing-consulting",
         "description": "Receive a clear, action-oriented marketing plan that aligns with what actually drives growth.",
         "icon": "",
-        "image": "images/Service-Consulting.webp",
+        "image": "",
         "link": "services/marketing-consulting.html",
-        "features": []
+        "features": [],
+        "body": ""
       },
       {
         "title": "Web Design",
         "slug": "web-design",
         "description": "Make your brand unforgettable with a custom-built website optimized for visibility, engagement, and conversions.",
         "icon": "",
-        "image": "images/Service-WebDesign.webp",
+        "image": "",
         "link": "services/web-design.html",
-        "features": []
+        "features": [],
+        "body": ""
       },
       {
         "title": "Branding",
         "slug": "branding",
         "description": "Develop a sweet branding strategy that will attract the right customers and make them stick.",
         "icon": "",
-        "image": "images/Service-Branding.webp",
+        "image": "",
         "link": "services/branding.html",
-        "features": []
+        "features": [],
+        "body": ""
       }
     ]
   },
@@ -690,6 +695,7 @@
     "videoPoster": "videos/freepik__dynamic-overhead-shot-a-diverse-group-of-colleague__14469-poster-00001.jpg"
   },
   "sectionVisibility": {
-    "projects": true
+    "projects": true,
+    "services": true
   }
 }
