@@ -241,15 +241,20 @@ test('AEO hero: bigger Anton label, large gap, two-line desktop headline, white 
   assert.match(aeo, /class="aeo-eyebrow">AI Visibility \/ AEO</);
 });
 
-test('homepage hero title: one line, near top, large gap below (CSS only)', () => {
+test('homepage hero matches Sweet Data left-aligned layout (CSS only)', () => {
   const css = read('css/hero-video.css');
-  const tail = css.slice(css.indexOf('/* Homepage hero: one-line title'));
-  assert.match(tail, /\.hero \{ align-items: flex-start; padding-top: clamp\(/);
-  assert.match(tail, /\.hero \.hero__title \{ white-space: nowrap; font-size: clamp\([^;]*\); margin-top: 0; margin-bottom: clamp\(7rem/);
-  assert.match(tail, /\.hero \.hero__title \.hero__title-line \{ display: inline; \}/);
-  assert.match(tail, /@media \(max-width: 768px\) \{\s*\.hero \.hero__title \{ white-space: nowrap; font-size: clamp\(1\.6rem/);
-  const idx = read('index.html');
-  assert.match(idx, /hero-title-line1">DIGITAL<\/span>\s*<span[^>]*hero-title-line2">MARKETING<\/span>/);
+  const tail = css.slice(css.indexOf('/* Homepage hero layout matched to sweetdata.co'));
+  assert.ok(!css.includes('one-line title near the top'), 'old centered/gap overrides removed');
+  assert.match(tail, /\.hero \{ align-items: flex-end; padding: calc\(100px \+ 3rem\) 0 6rem; \}/);
+  assert.match(tail, /\.hero \.hero__content \{ max-width: 1180px;[^}]*padding-inline: clamp\(1\.25rem, 4vw, 2\.5rem\);[^}]*text-align: left; \}/);
+  assert.match(tail, /\.hero \.hero__title \{ font-size: clamp\(2\.6rem, 1\.5rem \+ 4\.2vw, 5\.6rem\); line-height: \.98;/);
+  assert.match(tail, /\.hero \.hero__description \{ max-width: 56ch;/);
+  assert.match(tail, /\.hero \.hero__ctas \{ justify-content: flex-start; margin-top: 2\.25rem;/);
+  assert.match(tail, /@media \(max-width: 600px\) \{\s*\.hero \.hero__title \{ white-space: normal; \}/);
+  const sels = tail.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+(?=\{)/g).map(s => s.trim()).filter(s => s && !s.startsWith('@'));
+  for (const sel of sels) assert.match(sel, /^\.hero\b/, sel);
+  assert.ok(!aeo.includes('class="hero '));
+  assert.match(read('index.html'), /hero-title-line1">DIGITAL<\/span>\s*<span[^>]*hero-title-line2">MARKETING<\/span>/);
 });
 
 const MOBILE_LOGO = `
