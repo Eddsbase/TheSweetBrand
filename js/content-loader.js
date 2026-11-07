@@ -106,7 +106,7 @@
           const src = scripts[0].getAttribute('src');
           basePath = src.replace(/js\/content-loader\.js.*$/, '');
         }
-        const resp = await fetch(basePath + 'content.json');
+        const resp = await fetch(basePath + 'content.json', { cache: 'no-cache' }); // revalidate: Pages serves max-age=600
         if (!resp.ok) throw new Error('content.json not found (' + resp.status + ')');
         data = await resp.json();
       } catch (err) {

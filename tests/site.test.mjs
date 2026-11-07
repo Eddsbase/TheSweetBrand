@@ -181,7 +181,9 @@ const stripHero = h => h
   .replace(/\n\s*<script src="js\/hero-video\.js\?v=\d+"><\/script>/, '');
 
 test('homepage outside the hero is byte-identical to master', () => {
-  assert.equal(stripHero(read('index.html')), stripHero(atBase('index.html')));
+  // Allowed exceptions outside the hero: experience card title (t107u) and content-loader cache version.
+  const allow = h => h.replace('<h3 class="card__title pillar-1-title">Ten Years of Battle-Tested Experience</h3>', '<h3 class="card__title pillar-1-title">Get Discovered</h3>').replace('js/content-loader.js?v=3', 'js/content-loader.js?v=2');
+  assert.equal(allow(stripHero(read('index.html'))), stripHero(atBase('index.html')));
   assert.ok(!read('index.html').includes('aeo.html'));
 });
 
@@ -193,7 +195,7 @@ test('homepage hero text unchanged; only video/overlay added inside hero', () =>
 
 test('content.json, content-loader and global CSS/JS unchanged from master', () => {
   const changed = git('diff', '--name-only', BASE, '--').split('\n').filter(Boolean); // working tree vs base
-  for (const f of ['js/content-loader.js', 'js/app.js', 'js/components.js', 'js/animations.js',
+  for (const f of ['js/app.js', 'js/components.js', 'js/animations.js',
     'css/tokens.css', 'css/reset.css', 'css/components.css', 'css/pages.css', 'css/animations.css'])
     assert.ok(!changed.includes(f), f);
 });
@@ -254,7 +256,7 @@ test('shared left-aligned hero: homepage and AEO use nav container edge and Swee
   assert.ok(!/align-items: center; text-align: center/.test(ac), 'old centered AEO column removed');
   assert.match(ac, /rgba\(10,10,10,\.85\) 0%, rgba\(10,10,10,\.65\) 50%, rgba\(10,10,10,\.20\) 100%/);
   assert.match(aeo, /<span class="aeo-h1-line">Does AI recommend<\/span> <span class="aeo-h1-line">your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span>/);
-  assert.match(aeo, /hero-video\.css\?v=7/); assert.match(aeo, /aeo\.css\?v=8/); assert.match(read('index.html'), /hero-video\.css\?v=8/);
+  assert.match(aeo, /hero-video\.css\?v=7/); assert.match(aeo, /aeo\.css\?v=8/); assert.match(read('index.html'), /hero-video\.css\?v=9/);
   const tail = hv.slice(hv.indexOf('/* Homepage hero layout matched'));
   for (const sel of tail.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+(?=\{)/g).map(s => s.trim()).filter(s => s && !s.startsWith('@'))) assert.match(sel, /^\.hero\b/, sel);
 });
@@ -275,9 +277,9 @@ test('homepage hero CTAs share identical box dimensions and centering, desktop a
   const mob = css.slice(css.lastIndexOf('@media (max-width: 600px)'));
   assert.match(mob, /\.hero \.hero__ctas \{ flex-direction: column; align-items: flex-start;/);
   assert.match(mob, /\.hero \.hero__ctas \.btn \{ width: min\(100%, 18rem\); \}/);
-  assert.doesNotMatch(css, /\.hero \.hero__ctas \.btn--(outline|lg)\s*\{/);
+  assert.doesNotMatch(css, /\.hero \.hero__ctas \.btn--lg\s*\{/);
   const idx = read('index.html');
-  assert.match(idx, /css\/hero-video.css\?v=8/);
+  assert.match(idx, /css\/hero-video.css\?v=9/);
   assert.match(idx, /<a href="contact.html" class="btn btn--primary btn--lg magnetic hero-cta1-link"><span class="hero-cta1-text">Book a Call<\/span><\/a>/);
   assert.match(idx, /<a href="services.html" class="btn btn--outline btn--lg magnetic hero-cta2-link"><span class="hero-cta2-text">Our Services<\/span><\/a>/);
   assert.doesNotMatch(read('aeo.html'), /hero__ctas/);
@@ -295,4 +297,27 @@ test('blog shows Coming soon with no sample posts', () => {
   base.stats.items[0] = { value: '10', label: 'Ten Years of Battle-Tested Experience' };
   assert.deepEqual(d, base, 'content.json differs from original only in blog fields and the experience stat');
   assert.ok(!read('content.json').includes('Years Experience'));
+});
+
+test('content-loader revalidates content.json so stale cached copies (old blog posts, old stat) are not used', async () => {
+  const vm = await import('node:vm');
+  const calls = [];
+  const document = { readyState: 'complete', querySelectorAll: () => [], getElementById: () => null, querySelector: () => null, addEventListener() {} };
+  const ctx = { document, console: { warn() {} }, location: { pathname: '/blog.html' },
+    fetch: (url, init) => { calls.push({ url, init }); return Promise.resolve({ ok: false, status: 500 }); } };
+  ctx.window = ctx;
+  vm.runInNewContext(read('js/content-loader.js'), ctx);
+  await new Promise(r => setTimeout(r, 10));
+  assert.equal(calls.length, 1);
+  assert.match(calls[0].url, /content\.json$/);
+  assert.equal(calls[0].init && calls[0].init.cache, 'no-cache', 'must bypass the 10 minute HTTP cache');
+  for (const f of ['index.html', 'about.html', 'aeo.html', 'blog.html', 'blog-single.html', 'contact.html', 'services.html', 'service-single.html', 'work.html', 'work-single.html'])
+    { const h = read(f); if (h.includes('content-loader.js')) assert.match(h, /js\/content-loader\.js\?v=3/, f); }
+});
+
+test('Our Services hero pill keeps a visible 2px outline (not overridden to transparent)', () => {
+  const css = read('css/hero-video.css');
+  assert.match(css, /\.hero \.hero__ctas \.btn--outline \{ border-color: #ffffff; \}/);
+  assert.ok(css.indexOf('.hero .hero__ctas .btn--outline') > css.indexOf('border: 2px solid transparent'));
+  assert.match(read('index.html'), /<h3 class="card__title pillar-1-title">Ten Years of Battle-Tested Experience<\/h3>/);
 });
