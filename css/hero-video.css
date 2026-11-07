@@ -18,3 +18,5 @@
 @media (max-width: 768px) {
   .hero .hero__title { white-space: normal; font-size: clamp(2.6rem, 13vw, 4.5rem); }
 }
+/* Homepage hero uses the magenta/cyan video; subject is centered. */
+.hero .hero__video { object-position: center center; background-image: url("../videos/aeo-hero-v2-poster.jpg"); background-position: center center; }

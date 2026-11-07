@@ -47,3 +47,13 @@
 .aeo-light .step__num { color: var(--color-accent); }
 .aeo-hero .hero__video { object-position: center center; background-image: url("../videos/aeo-hero-v2-poster.jpg"); background-position: center center; }
 .aeo-hero .hero__video-overlay { background: linear-gradient(180deg, rgba(10,10,10,.85) 0%, rgba(10,10,10,.65) 50%, rgba(10,10,10,.20) 100%); }
+
+/* Hero refinements: bigger label, more gap, two-line headline, white lead. */
+.aeo-hero > .container { max-width: 1120px; }
+.aeo-hero .aeo-eyebrow { font-family: 'Anton', 'Bebas Neue', Impact, 'Arial Narrow', sans-serif; font-weight: 400; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem); letter-spacing: .04em; line-height: 1.1; margin: 0 0 clamp(5rem, 3rem + 8vw, 11rem); }
+.aeo-hero .page-hero__title { font-size: clamp(2rem, 1.1rem + 2.6vw, 3.6rem); max-width: none; }
+.aeo-hero .aeo-h1-line { display: inline; }
+@media (min-width: 900px) {
+  .aeo-hero .aeo-h1-line { display: block; white-space: nowrap; }
+}
+.aeo-hero .page-hero__title + .aeo-prose, .aeo-hero p.aeo-prose { color: #ffffff; }
