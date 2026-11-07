@@ -194,7 +194,7 @@ test('homepage hero text unchanged; only video/overlay added inside hero', () =>
 test('content.json, content-loader and global CSS/JS unchanged from master', () => {
   const changed = git('diff', '--name-only', BASE, '--').split('\n').filter(Boolean); // working tree vs base
   for (const f of ['content.json', 'js/content-loader.js', 'js/app.js', 'js/components.js', 'js/animations.js',
-    'css/tokens.css', 'css/reset.css', 'css/global.css', 'css/components.css', 'css/pages.css', 'css/animations.css'])
+    'css/tokens.css', 'css/reset.css', 'css/components.css', 'css/pages.css', 'css/animations.css'])
     assert.ok(!changed.includes(f), f);
 });
 
@@ -250,4 +250,16 @@ test('homepage hero title: one line, near top, large gap below (CSS only)', () =
   assert.match(tail, /@media \(max-width: 768px\) \{\s*\.hero \.hero__title \{ white-space: nowrap; font-size: clamp\(1\.6rem/);
   const idx = read('index.html');
   assert.match(idx, /hero-title-line1">DIGITAL<\/span>\s*<span[^>]*hero-title-line2">MARKETING<\/span>/);
+});
+
+const MOBILE_LOGO = `
+/* Mobile header logo: compact size (desktop unchanged). Footer logo is not inside .nav. */
+@media (max-width: 768px) {
+  .nav .nav__logo { height: 40px; width: auto; max-width: 45vw; object-fit: contain; }
+  .nav .nav__logo-link { display: inline-flex; align-items: center; min-height: 44px; }
+}
+`;
+test('global.css differs from original only by the mobile header logo rule', () => {
+  assert.equal(read('css/global.css'), atBase('css/global.css') + MOBILE_LOGO);
+  assert.match(atBase('css/global.css'), /\.nav__logo \{\n  height: 120px;/);
 });

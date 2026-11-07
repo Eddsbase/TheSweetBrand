@@ -344,3 +344,9 @@
 @media (max-width: 768px) {
   .footer__bottom { flex-direction: column; gap: var(--space-md); text-align: center; }
 }
+
+/* Mobile header logo: compact size (desktop unchanged). Footer logo is not inside .nav. */
+@media (max-width: 768px) {
+  .nav .nav__logo { height: 40px; width: auto; max-width: 45vw; object-fit: contain; }
+  .nav .nav__logo-link { display: inline-flex; align-items: center; min-height: 44px; }
+}
