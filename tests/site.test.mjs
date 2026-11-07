@@ -193,7 +193,7 @@ test('homepage hero text unchanged; only video/overlay added inside hero', () =>
 
 test('content.json, content-loader and global CSS/JS unchanged from master', () => {
   const changed = git('diff', '--name-only', BASE, '--').split('\n').filter(Boolean); // working tree vs base
-  for (const f of ['content.json', 'js/content-loader.js', 'js/app.js', 'js/components.js', 'js/animations.js',
+  for (const f of ['js/content-loader.js', 'js/app.js', 'js/components.js', 'js/animations.js',
     'css/tokens.css', 'css/reset.css', 'css/components.css', 'css/pages.css', 'css/animations.css'])
     assert.ok(!changed.includes(f), f);
 });
@@ -281,4 +281,16 @@ test('homepage hero CTAs share identical box dimensions and centering, desktop a
   assert.match(idx, /<a href="contact.html" class="btn btn--primary btn--lg magnetic hero-cta1-link"><span class="hero-cta1-text">Book a Call<\/span><\/a>/);
   assert.match(idx, /<a href="services.html" class="btn btn--outline btn--lg magnetic hero-cta2-link"><span class="hero-cta2-text">Our Services<\/span><\/a>/);
   assert.doesNotMatch(read('aeo.html'), /hero__ctas/);
+});
+
+test('blog shows Coming soon with no sample posts', () => {
+  const b = read('blog.html'); const d = JSON.parse(read('content.json'));
+  assert.match(b, /<h1 class="page-hero__title blog-hero-title">Coming soon<\/h1>/);
+  assert.match(b, /<p class="blog-coming-soon">Coming soon\.<\/p>/);
+  assert.deepEqual(d.blog.posts, []);
+  assert.equal(d.pages.blog.hero.title, 'Coming soon');
+  const base = JSON.parse(git('show', BASE + ':content.json'));
+  base.blog.posts = []; base.pages.blog.hero.title = 'Coming soon';
+  base.pages.blog.hero.subtitle = 'No posts have been published yet. Check back soon.';
+  assert.deepEqual(d, base, 'content.json differs from original only in blog fields');
 });
