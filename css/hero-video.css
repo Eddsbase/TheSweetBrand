@@ -20,3 +20,10 @@
 }
 /* Homepage hero uses the magenta/cyan video; subject is centered. */
 .hero .hero__video { object-position: center center; background-image: url("../videos/aeo-hero-v2-poster.jpg"); background-position: center center; }
+/* Homepage hero: one-line title near the top, big gap below so the video subject shows. */
+.hero { align-items: flex-start; padding-top: clamp(110px, 9rem + 4vh, 200px); }
+.hero .hero__title { white-space: nowrap; font-size: clamp(1.9rem, .6rem + 6.4vw, 5rem); margin-top: 0; margin-bottom: clamp(7rem, 4rem + 14vh, 16rem); }
+.hero .hero__title .hero__title-line { display: inline; }
+@media (max-width: 768px) {
+  .hero .hero__title { white-space: nowrap; font-size: clamp(1.6rem, .5rem + 6.4vw, 3rem); margin-bottom: clamp(5rem, 3rem + 10vh, 9rem); }
+}
