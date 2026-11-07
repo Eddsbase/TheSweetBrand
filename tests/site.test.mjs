@@ -171,7 +171,7 @@ test('overlay layered above video and below text', () => {
 
 // ---- Homepage scope guard: only the hero may differ from master ----
 const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8' });
-const BASE = git('merge-base', 'HEAD', 'origin/master').trim();
+const BASE = '944df54'; // original site before the hero/AEO work
 const atBase = f => git('show', `${BASE}:${f}`);
 const stripHero = h => h
   .replace(/<section class="hero section--dark" id="hero">[\s\S]*?<\/section>/, '<!--HERO-->')
@@ -194,4 +194,13 @@ test('content.json, content-loader and global CSS/JS unchanged from master', () 
   for (const f of ['content.json', 'js/content-loader.js', 'js/app.js', 'js/components.js', 'js/animations.js',
     'css/tokens.css', 'css/reset.css', 'css/global.css', 'css/components.css', 'css/pages.css', 'css/animations.css'])
     assert.ok(!changed.includes(f), f);
+});
+
+test('AEO hero is one centered column with gutters and balanced headline', () => {
+  const css = read('css/aeo.css');
+  assert.match(css, /\.aeo-hero > \.container \{[^}]*margin-inline: auto[^}]*padding-inline: clamp\([^}]*align-items: center[^}]*text-align: center/);
+  assert.match(css, /\.aeo-hero \.aeo-prose \{[^}]*margin-inline: auto/);
+  assert.match(css, /\.aeo-hero \.page-hero__title \{[^}]*font-size: clamp\([^}]*max-width: 16ch/);
+  assert.match(css, /\.aeo-hero \{ padding: clamp\(/);
+  assert.match(aeo, /<link rel="stylesheet" href="css\/hero-video\.css[^"]*"><link rel="stylesheet" href="css\/aeo\.css/);
 });
