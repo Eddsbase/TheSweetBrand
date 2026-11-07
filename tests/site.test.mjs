@@ -71,17 +71,13 @@ test('with endpoint: success only on OK, error on failure', async () => {
 // Pre-existing on master, unrelated to this change; tracked, not hidden.
 const KNOWN_MISSING = new Set(['about.html images/Working-Image.webp']);
 
-test('all local links and assets resolve; family links on every footer', () => {
+test('all local links and assets resolve', () => {
   for (const p of pages) {
     const html = read(p);
     for (const [, u] of html.matchAll(/(?:href|src)="([^"#?]+)[^"]*"/g)) {
       if (/^(https?:|mailto:|tel:|\/\/|data:)/.test(u)) continue;
       if (KNOWN_MISSING.has(`${p} ${u}`)) continue;
       assert.ok(existsSync(root + u.replace(/^\//, '')), `${p}: missing ${u}`);
-    }
-    if (html.includes('<footer')) {
-      assert.ok(html.includes('href="https://sweetsuite.co"'), p);
-      assert.ok(html.includes('href="https://sweetdata.co"'), p);
     }
   }
 });
@@ -93,16 +89,14 @@ test('homepage AEO card + content.json item link to aeo.html', () => {
   assert.match(read('js/content-loader.js'), /service\.href \?/);
 });
 
-test('typography: Anton + Inter loaded, existing color tokens unchanged', () => {
-  const t = read('css/tokens.css');
-  assert.match(t, /family=Anton&family=Inter/);
-  assert.match(t, /--font-primary: 'Inter'/);
-  assert.match(t, /--font-display: 'Anton'/);
-  for (const c of ['--color-bg-primary: #0a0a0a', '--color-accent: #e81a6b', '--color-accent-hover: #ff2d7f']) assert.ok(t.includes(c));
+test('global typography and tokens untouched; no family footer added', () => {
+  for (const f of ['css/tokens.css','css/pages.css','css/global.css']) assert.ok(!/Anton|family-links/.test(read(f)), f);
+  for (const p of pages) assert.ok(!read(p).includes('family-links'), p);
+  assert.match(aeo, /css\/aeo.css/);
 });
 
 test('mobile-safe: steps grid uses min() and form inputs are max-width 100%', () => {
-  const css = read('css/pages.css');
+  const css = read('css/aeo.css');
   assert.match(css, /minmax\(min\(100%, 240px\), 1fr\)/);
   assert.match(css, /\.aeo-form \.form__input \{[^}]*max-width: 100%/);
 });
