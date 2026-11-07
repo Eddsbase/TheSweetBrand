@@ -110,8 +110,10 @@ test('JS and JSON parse', () => {
 const HERO_VIDEO = /<video class="hero__video js-hero-video"[^>]*poster="videos\/hero-poster.jpg" muted loop playsinline preload="none"[^>]*>\s*<source src="videos\/hero.mp4" type="video\/mp4">/;
 
 test('both heroes use the same video background, no autoplay attribute', () => {
+  assert.match(read('index.html'), HERO_VIDEO);
+  assert.match(aeo, /<video class="hero__video js-hero-video"[^>]*poster="videos\/aeo-hero-v2-poster.jpg" muted loop playsinline preload="none"[^>]*>\s*<source src="videos\/aeo-hero-v2.mp4\?v=1" type="video\/mp4">/);
+  for (const f of ['videos/aeo-hero-v2.mp4', 'videos/aeo-hero-v2-poster.jpg']) assert.ok(existsSync(root + f), f);
   for (const [f, html] of [['index.html', read('index.html')], ['aeo.html', aeo]]) {
-    assert.match(html, HERO_VIDEO, f);
     assert.doesNotMatch(html.match(/<video class="hero__video[^>]*>/)[0], /autoplay/, f);
     assert.equal((html.match(/js-hero-video/g) || []).length, 1, f);
     assert.match(html, /hero__video-overlay/, f);

@@ -45,3 +45,4 @@
 .aeo-light .aeo-compare__col:last-child { border-color: var(--color-accent); border-top-width: 4px; }
 .aeo-light .step { border-top: 4px solid var(--color-accent); }
 .aeo-light .step__num { color: var(--color-accent); }
+.aeo-hero .hero__video { object-position: center center; background-image: url("../videos/aeo-hero-v2-poster.jpg"); background-position: center center; }
