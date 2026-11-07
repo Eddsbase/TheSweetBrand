@@ -219,3 +219,12 @@ test('two white bands (SEO vs AEO, steps) with dark text and pink accents; other
   const text = aeo.replace(/<[^>]+>/g, ' ');
   assert.doesNotMatch(text, /—|\d+\s?%/);
 });
+
+test('AEO-only overlay fades from darkest top to lightest bottom; homepage gradient unchanged', () => {
+  const rule = read('css/aeo.css').match(/\.aeo-hero \.hero__video-overlay \{[^}]*\}/)[0];
+  const a = [...rule.matchAll(/rgba\(10,10,10,(\.\d+)\)/g)].map(m => +m[1]);
+  assert.deepEqual(a, [0.85, 0.65, 0.2]);
+  assert.ok(a[0] > a[1] && a[1] > a[2]);
+  assert.match(read('css/hero-video.css'), /rgba\(10,10,10,\.65\) 0%, rgba\(10,10,10,\.75\) 55%, rgba\(10,10,10,\.90\) 100%/);
+  assert.equal(git('diff', '--name-only', 'origin/master', '--', 'index.html', 'css/hero-video.css', 'videos/hero.mp4', 'videos/hero-poster.jpg').trim(), '');
+});
