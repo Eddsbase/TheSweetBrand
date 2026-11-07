@@ -292,5 +292,7 @@ test('blog shows Coming soon with no sample posts', () => {
   const base = JSON.parse(git('show', BASE + ':content.json'));
   base.blog.posts = []; base.pages.blog.hero.title = 'Coming soon';
   base.pages.blog.hero.subtitle = 'No posts have been published yet. Check back soon.';
-  assert.deepEqual(d, base, 'content.json differs from original only in blog fields');
+  base.stats.items[0] = { value: '10', label: 'Ten Years of Battle-Tested Experience' };
+  assert.deepEqual(d, base, 'content.json differs from original only in blog fields and the experience stat');
+  assert.ok(!read('content.json').includes('Years Experience'));
 });
