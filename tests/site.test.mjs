@@ -111,3 +111,25 @@ test('JS and JSON parse', () => {
   JSON.parse(read('content.json'));
   for (const f of readdirSync(root + 'js')) new Function(read('js/' + f).replace(/^\s*import .*$/gm, ''));
 });
+
+test('homepage hero video: markup, poster, assets, overlay', () => {
+  const idx = read('index.html');
+  assert.match(idx, /<video class="hero__video" id="heroVideo" poster="videos\/hero-poster.jpg" muted loop playsinline preload="none"/);
+  assert.doesNotMatch(idx.match(/<video class="hero__video"[^>]*>/)[0], /autoplay/);
+  assert.match(idx, /<source src="videos\/hero.mp4" type="video\/mp4">/);
+  for (const f of ['videos/hero.mp4', 'videos/hero-poster.jpg', 'css/hero-video.css', 'js/hero-video.js']) assert.ok(existsSync(root + f), f);
+  assert.match(read('css/hero-video.css'), /object-position: center 30%[\s\S]*rgba\(10,10,10,\.20\)[\s\S]*rgba\(10,10,10,\.85\)/);
+  for (const t of ['DIGITAL', 'MARKETING', 'that helps sweet brands stand out.']) assert.ok(idx.includes(t));
+  assert.ok(!/—/.test(read('css/hero-video.css') + read('js/hero-video.js')));
+});
+
+test('hero video respects reduced motion', () => {
+  const { init } = require(root + 'js/hero-video.js');
+  const mk = () => { const v = { muted: false, autoplay: false, preload: 'none', played: 0, play() { this.played++; return Promise.resolve(); } }; return { v, doc: { getElementById: () => v } }; };
+  let a = mk();
+  assert.equal(init(a.doc, () => ({ matches: true })), 'poster');
+  assert.equal(a.v.played, 0); assert.equal(a.v.autoplay, false); assert.equal(a.v.preload, 'none');
+  a = mk();
+  assert.equal(init(a.doc, () => ({ matches: false })), 'playing');
+  assert.equal(a.v.played, 1); assert.equal(a.v.muted, true); assert.equal(a.v.autoplay, true);
+});
