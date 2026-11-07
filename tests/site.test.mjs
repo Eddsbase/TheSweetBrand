@@ -240,3 +240,14 @@ test('AEO hero: bigger Anton label, large gap, two-line desktop headline, white 
   assert.match(css, /\.aeo-hero p\.aeo-prose \{ color: #ffffff; \}/);
   assert.match(aeo, /class="aeo-eyebrow">AI Visibility \/ AEO</);
 });
+
+test('homepage hero title: one line, near top, large gap below (CSS only)', () => {
+  const css = read('css/hero-video.css');
+  const tail = css.slice(css.indexOf('/* Homepage hero: one-line title'));
+  assert.match(tail, /\.hero \{ align-items: flex-start; padding-top: clamp\(/);
+  assert.match(tail, /\.hero \.hero__title \{ white-space: nowrap; font-size: clamp\([^;]*\); margin-top: 0; margin-bottom: clamp\(7rem/);
+  assert.match(tail, /\.hero \.hero__title \.hero__title-line \{ display: inline; \}/);
+  assert.match(tail, /@media \(max-width: 768px\) \{\s*\.hero \.hero__title \{ white-space: nowrap; font-size: clamp\(1\.6rem/);
+  const idx = read('index.html');
+  assert.match(idx, /hero-title-line1">DIGITAL<\/span>\s*<span[^>]*hero-title-line2">MARKETING<\/span>/);
+});
