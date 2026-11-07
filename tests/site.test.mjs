@@ -255,3 +255,11 @@ test('shared left-aligned hero: homepage and AEO use nav container edge and Swee
   const tail = hv.slice(hv.indexOf('/* Homepage hero layout matched'));
   for (const sel of tail.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+(?=\{)/g).map(s => s.trim()).filter(s => s && !s.startsWith('@'))) assert.match(sel, /^\.hero\b/, sel);
 });
+
+test('privacy policy covers both sites and makes no unsupported claims', () => {
+  const p = read('privacy-policy.html'), text = p.replace(/<[^>]+>/g, ' ');
+  for (const s of ['thesweetbrand.co', 'aeo.thesweetbrand.co', 'GitHub Pages', 'Vercel', 'info@thesweetbrand.co', 'do not currently send information', 'November 7, 2026']) assert.ok(text.includes(s), s);
+  assert.doesNotMatch(text, /newsletter|appropriate security measures|third-party analytics and marketing tools|—/i);
+  for (const f of pages.filter(f => read(f).includes('<footer'))) assert.match(read(f), /href="privacy-policy\.html"/, f);
+  assert.match(aeo, /href="privacy-policy\.html"/);
+});
