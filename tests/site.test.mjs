@@ -204,3 +204,16 @@ test('AEO hero is one centered column with gutters and balanced headline', () =>
   assert.match(css, /\.aeo-hero \{ padding: clamp\(/);
   assert.match(aeo, /<link rel="stylesheet" href="css\/hero-video\.css[^"]*"><link rel="stylesheet" href="css\/aeo\.css/);
 });
+
+test('two white bands (SEO vs AEO, steps) with dark text and pink accents; others stay dark', () => {
+  assert.match(aeo, /<section class="section aeo-section aeo-light" id="what">/);
+  assert.match(aeo, /<section class="section aeo-section aeo-light" id="how">/);
+  assert.equal((aeo.match(/aeo-light/g) || []).length, 2);
+  for (const id of ['levers', 'faq', 'snapshot']) assert.doesNotMatch(aeo.match(new RegExp(`<section[^>]*id="${id}"`))[0], /aeo-light/);
+  const css = read('css/aeo.css');
+  assert.match(css, /\.aeo-light \{ background: #ffffff; color: #0a0a0a; \}/);
+  assert.match(css, /\.aeo-light \.section__title, \.aeo-light h3 \{ color: #0a0a0a; \}/);
+  assert.match(css, /\.aeo-light \.section__tag \{ color: var\(--color-accent-dark\); \}/);
+  const text = aeo.replace(/<[^>]+>/g, ' ');
+  assert.doesNotMatch(text, /—|\d+\s?%/);
+});
