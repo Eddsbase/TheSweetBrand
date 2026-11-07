@@ -11,7 +11,7 @@ const pages = readdirSync(root).filter(f => f.endsWith('.html'));
 const aeo = read('aeo.html');
 
 test('aeo.html has required structure', () => {
-  assert.match(aeo, /<h1[^>]*>Does AI recommend your brand, or your competitors\?<\/h1>/);
+  assert.match(aeo, /<h1 class="page-hero__title"><span class="aeo-h1-line">Does AI recommend your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span><\/h1>/);
   assert.equal((aeo.match(/<h1/g) || []).length, 1);
   for (const n of ['01', '02', '03']) assert.ok(aeo.includes(`step__num">${n}`));
   for (const s of ['Snapshot', 'Plan', 'Monthly tracking']) assert.ok(aeo.includes(`step__title">${s}<`));
@@ -110,8 +110,10 @@ test('JS and JSON parse', () => {
 const HERO_VIDEO = /<video class="hero__video js-hero-video"[^>]*poster="videos\/hero-poster.jpg" muted loop playsinline preload="none"[^>]*>\s*<source src="videos\/hero.mp4" type="video\/mp4">/;
 
 test('both heroes use the same video background, no autoplay attribute', () => {
+  assert.match(read('index.html'), /<video class="hero__video js-hero-video" id="heroVideo" poster="videos\/aeo-hero-v2-poster.jpg" muted loop playsinline preload="none"[^>]*>\s*<source src="videos\/aeo-hero-v2.mp4\?v=1" type="video\/mp4">/);
+  assert.match(aeo, /<video class="hero__video js-hero-video"[^>]*poster="videos\/aeo-hero-v2-poster.jpg" muted loop playsinline preload="none"[^>]*>\s*<source src="videos\/aeo-hero-v2.mp4\?v=1" type="video\/mp4">/);
+  for (const f of ['videos/aeo-hero-v2.mp4', 'videos/aeo-hero-v2-poster.jpg']) assert.ok(existsSync(root + f), f);
   for (const [f, html] of [['index.html', read('index.html')], ['aeo.html', aeo]]) {
-    assert.match(html, HERO_VIDEO, f);
     assert.doesNotMatch(html.match(/<video class="hero__video[^>]*>/)[0], /autoplay/, f);
     assert.equal((html.match(/js-hero-video/g) || []).length, 1, f);
     assert.match(html, /hero__video-overlay/, f);
@@ -171,7 +173,7 @@ test('overlay layered above video and below text', () => {
 
 // ---- Homepage scope guard: only the hero may differ from master ----
 const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8' });
-const BASE = git('merge-base', 'HEAD', 'origin/master').trim();
+const BASE = '944df54'; // original site before the hero/AEO work
 const atBase = f => git('show', `${BASE}:${f}`);
 const stripHero = h => h
   .replace(/<section class="hero section--dark" id="hero">[\s\S]*?<\/section>/, '<!--HERO-->')
@@ -194,4 +196,47 @@ test('content.json, content-loader and global CSS/JS unchanged from master', () 
   for (const f of ['content.json', 'js/content-loader.js', 'js/app.js', 'js/components.js', 'js/animations.js',
     'css/tokens.css', 'css/reset.css', 'css/global.css', 'css/components.css', 'css/pages.css', 'css/animations.css'])
     assert.ok(!changed.includes(f), f);
+});
+
+test('AEO hero is one centered column with gutters and balanced headline', () => {
+  const css = read('css/aeo.css');
+  assert.match(css, /\.aeo-hero > \.container \{[^}]*margin-inline: auto[^}]*padding-inline: clamp\([^}]*align-items: center[^}]*text-align: center/);
+  assert.match(css, /\.aeo-hero \.aeo-prose \{[^}]*margin-inline: auto/);
+  assert.match(css, /\.aeo-hero \.page-hero__title \{[^}]*font-size: clamp\([^}]*max-width: 16ch/);
+  assert.match(css, /\.aeo-hero \{ padding: clamp\(/);
+  assert.match(aeo, /<link rel="stylesheet" href="css\/hero-video\.css[^"]*"><link rel="stylesheet" href="css\/aeo\.css/);
+});
+
+test('two white bands (SEO vs AEO, steps) with dark text and pink accents; others stay dark', () => {
+  assert.match(aeo, /<section class="section aeo-section aeo-light" id="what">/);
+  assert.match(aeo, /<section class="section aeo-section aeo-light" id="how">/);
+  assert.equal((aeo.match(/aeo-light/g) || []).length, 2);
+  for (const id of ['levers', 'faq', 'snapshot']) assert.doesNotMatch(aeo.match(new RegExp(`<section[^>]*id="${id}"`))[0], /aeo-light/);
+  const css = read('css/aeo.css');
+  assert.match(css, /\.aeo-light \{ background: #ffffff; color: #0a0a0a; \}/);
+  assert.match(css, /\.aeo-light \.section__title, \.aeo-light h3 \{ color: #0a0a0a; \}/);
+  assert.match(css, /\.aeo-light \.section__tag \{ color: var\(--color-accent-dark\); \}/);
+  const text = aeo.replace(/<[^>]+>/g, ' ');
+  assert.doesNotMatch(text, /—|\d+\s?%/);
+});
+
+test('AEO-only overlay fades from darkest top to lightest bottom; homepage gradient unchanged', () => {
+  const rule = read('css/aeo.css').match(/\.aeo-hero \.hero__video-overlay \{[^}]*\}/)[0];
+  const a = [...rule.matchAll(/rgba\(10,10,10,(\.\d+)\)/g)].map(m => +m[1]);
+  assert.deepEqual(a, [0.85, 0.65, 0.2]);
+  assert.ok(a[0] > a[1] && a[1] > a[2]);
+  assert.match(read('css/hero-video.css'), /rgba\(10,10,10,\.65\) 0%, rgba\(10,10,10,\.75\) 55%, rgba\(10,10,10,\.90\) 100%/);
+  assert.match(read('css/hero-video.css'), /\.hero \.hero__video \{ object-position: center center; background-image: url\("..\/videos\/aeo-hero-v2-poster.jpg"\)/);
+});
+
+test('AEO hero: bigger Anton label, large gap, two-line desktop headline, white lead', () => {
+  const css = read('css/aeo.css');
+  const last = sel => { const m = [...css.matchAll(new RegExp(sel.replace(/[.>]/g, c => '\\' + c) + ' \\{([^}]*)\\}', 'g'))]; return m[m.length - 1][1]; };
+  const eb = last('.aeo-hero .aeo-eyebrow');
+  assert.match(eb, /font-family: 'Anton'/); assert.match(eb, /font-size: clamp\(1\.6rem/); assert.match(eb, /margin: 0 0 clamp\(5rem/);
+  assert.match(last('.aeo-hero .page-hero__title'), /font-size: clamp\(2rem, 1\.1rem \+ 2\.6vw, 3\.6rem\); max-width: none/);
+  assert.match(css, /@media \(min-width: 900px\) \{\s*\.aeo-hero \.aeo-h1-line \{ display: block; white-space: nowrap; \}/);
+  assert.match(css, /\.aeo-hero \.aeo-h1-line \{ display: inline; \}/);
+  assert.match(css, /\.aeo-hero p\.aeo-prose \{ color: #ffffff; \}/);
+  assert.match(aeo, /class="aeo-eyebrow">AI Visibility \/ AEO</);
 });
