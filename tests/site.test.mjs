@@ -10,13 +10,19 @@ const pages = readdirSync(root).filter(f => f.endsWith('.html'));
 const aeo = read('aeo.html');
 
 test('aeo.html has required structure', () => {
-  assert.match(aeo, /<h1[^>]*>Does AI recommend your brand—or your competitors\?<\/h1>/);
+  assert.match(aeo, /<h1[^>]*>Does AI recommend your brand, or your competitors\?<\/h1>/);
   assert.equal((aeo.match(/<h1/g) || []).length, 1);
   for (const n of ['01', '02', '03']) assert.ok(aeo.includes(`step__num">${n}`));
   for (const s of ['Snapshot', 'Plan', 'Monthly tracking']) assert.ok(aeo.includes(`step__title">${s}<`));
   assert.ok((aeo.match(/<details>/g) || []).length >= 3, 'FAQ');
   assert.match(aeo, /<meta name="viewport" content="width=device-width, initial-scale=1.0">/);
   assert.match(aeo, /<html lang="en">/);
+});
+
+test('no em dashes in AEO page or homepage hero/card copy', () => {
+  assert.ok(!/—|&mdash;|&#8212;/.test(aeo));
+  assert.match(aeo, /class="aeo-eyebrow">AI Visibility \/ AEO</);
+  assert.match(read('css/aeo.css'), /\.aeo-eyebrow \{[^}]*font-weight: var\(--fw-bold\)/);
 });
 
 test('form fields: required name/work email/website, optional competitor', () => {
