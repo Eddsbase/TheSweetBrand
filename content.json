@@ -8,7 +8,7 @@
   },
   "site": {
     "visible": true,
-    "title": "Sweet Brand — Digital Marketing That Helps Sweet Brands Stand Out",
+    "title": "Sweet Brand | Digital Marketing That Helps Sweet Brands Stand Out",
     "description": "We deliver no-fluff marketing services based on your goals, not vanity metrics.",
     "logo": "images/sweet-brand-logo.png",
     "logoAlt": "The Sweet Brand Logo",
@@ -207,7 +207,7 @@
     "values": [
       {
         "title": "Transparency",
-        "description": "No hidden agendas, no vanity metrics — just honest marketing."
+        "description": "No hidden agendas, no vanity metrics, just honest marketing."
       },
       {
         "title": "Results-Driven",
@@ -293,7 +293,7 @@
       },
       {
         "question": "What industries do you specialize in?",
-        "answer": "With eight years of work across thousands of accounts, we have deep experience in e-commerce, food and beverage, health and wellness, professional services, and lifestyle brands. That said, great marketing principles are universal — we adapt our expertise to any industry."
+        "answer": "With eight years of work across thousands of accounts, we have deep experience in e-commerce, food and beverage, health and wellness, professional services, and lifestyle brands. That said, great marketing principles are universal, and we adapt our expertise to any industry."
       },
       {
         "question": "How long before I see results?",
@@ -579,16 +579,16 @@
     },
     "pages": {
       "index": {
-        "title": "Sweet Brand — Digital Marketing That Helps Sweet Brands Stand Out",
+        "title": "Sweet Brand | Digital Marketing That Helps Sweet Brands Stand Out",
         "description": "We deliver no-fluff marketing services based on your goals, not vanity metrics. SEO, advertising, branding, web design, and consulting.",
         "keywords": "digital marketing, SEO, advertising, branding, web design, marketing consulting",
-        "ogTitle": "Sweet Brand — Digital Marketing That Helps Sweet Brands Stand Out",
+        "ogTitle": "Sweet Brand | Digital Marketing That Helps Sweet Brands Stand Out",
         "ogDescription": "We deliver no-fluff marketing services based on your goals, not vanity metrics.",
         "ogImage": "images/og-image.webp"
       },
       "about": {
         "title": "About Us | The Sweet Brand",
-        "description": "Learn about The Sweet Brand — a digital marketing agency that harnesses creativity to drive growth and success for businesses.",
+        "description": "Learn about The Sweet Brand, a digital marketing agency that harnesses creativity to drive growth and success for businesses.",
         "keywords": "about, digital marketing agency, creative agency, marketing team",
         "ogTitle": "About Us | The Sweet Brand",
         "ogDescription": "We harness the transformative power of creativity to drive growth and success for businesses.",

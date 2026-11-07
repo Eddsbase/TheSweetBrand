@@ -182,8 +182,8 @@ const stripHero = h => h
 
 test('homepage outside the hero is byte-identical to master', () => {
   // Allowed exceptions outside the hero: experience card title (t107u) and content-loader cache version.
-  const allow = h => h.replace('<h3 class="card__title pillar-1-title">Ten Years of Battle-Tested Experience</h3>', '<h3 class="card__title pillar-1-title">Get Discovered</h3>').replace('js/content-loader.js?v=3', 'js/content-loader.js?v=2');
-  assert.equal(allow(stripHero(read('index.html'))), stripHero(atBase('index.html')));
+  const allow = h => h.replace('<h3 class="card__title pillar-1-title">Ten Years of Battle-Tested Experience</h3>', '<h3 class="card__title pillar-1-title">Get Discovered</h3>').replace('js/content-loader.js?v=4', 'js/content-loader.js?v=2');
+  assert.equal(allow(stripHero(read('index.html'))), noDash(stripHero(atBase('index.html'))));
   assert.ok(!read('index.html').includes('aeo.html'));
 });
 
@@ -291,7 +291,7 @@ test('blog shows Coming soon with no sample posts', () => {
   assert.match(b, /<p class="blog-coming-soon">Coming soon\.<\/p>/);
   assert.deepEqual(d.blog.posts, []);
   assert.equal(d.pages.blog.hero.title, 'Coming soon');
-  const base = JSON.parse(git('show', BASE + ':content.json'));
+  const base = JSON.parse(noDash(git('show', BASE + ':content.json')));
   base.blog.posts = []; base.pages.blog.hero.title = 'Coming soon';
   base.pages.blog.hero.subtitle = 'No posts have been published yet. Check back soon.';
   base.stats.items[0] = { value: '10', label: 'Ten Years of Battle-Tested Experience' };
@@ -312,7 +312,7 @@ test('content-loader revalidates content.json so stale cached copies (old blog p
   assert.match(calls[0].url, /content\.json$/);
   assert.equal(calls[0].init && calls[0].init.cache, 'no-cache', 'must bypass the 10 minute HTTP cache');
   for (const f of ['index.html', 'about.html', 'aeo.html', 'blog.html', 'blog-single.html', 'contact.html', 'services.html', 'service-single.html', 'work.html', 'work-single.html'])
-    { const h = read(f); if (h.includes('content-loader.js')) assert.match(h, /js\/content-loader\.js\?v=3/, f); }
+    { const h = read(f); if (h.includes('content-loader.js')) assert.match(h, /js\/content-loader\.js\?v=4/, f); }
 });
 
 test('Our Services hero pill keeps a visible 2px outline (not overridden to transparent)', () => {
@@ -320,4 +320,13 @@ test('Our Services hero pill keeps a visible 2px outline (not overridden to tran
   assert.match(css, /\.hero \.hero__ctas \.btn--outline \{ border-color: var\(--color-accent\); \}/);
   assert.ok(css.indexOf('.hero .hero__ctas .btn--outline') > css.indexOf('border: 2px solid transparent'));
   assert.match(read('index.html'), /<h3 class="card__title pillar-1-title">Ten Years of Battle-Tested Experience<\/h3>/);
+});
+
+function noDash(s) { for (const [a, b] of [['work — not just', 'work, not just'], ['metrics — just', 'metrics, just'], ['universal — we adapt', 'universal, and we adapt'], ['The Sweet Brand — a digital', 'The Sweet Brand, a digital'], [' — ', ' | ']]) s = s.split(a).join(b); return s; }
+
+test('no em dashes in user-visible site content (HTML, content.json, generated titles), any encoding', () => {
+  const EM = /\u2014|&mdash;|&#8212;|&#x2014;/i;
+  for (const f of readdirSync(root).filter(f => f.endsWith('.html')).concat(['content.json'])) assert.doesNotMatch(read(f), EM, f);
+  assert.doesNotMatch(read('js/content-loader.js'), /'[^'\n]*\u2014[^'\n]*'/, 'string literals in loader');
+  assert.doesNotMatch(read('css/hero-video.css') + read('css/aeo.css'), /content:\s*['"][^'"]*\u2014/);
 });

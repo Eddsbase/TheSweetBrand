@@ -457,7 +457,7 @@
 
     // Update page title
     if (service.title) {
-      document.title = service.title + ' — ' + (get(data, 'site.title', 'The Sweet Brand'));
+      document.title = service.title + ' | ' + (get(data, 'site.title', 'The Sweet Brand'));
     }
   }
 
@@ -511,7 +511,7 @@
 
     // Update page title
     if (project.title) {
-      document.title = project.title + ' — ' + (get(data, 'site.title', 'The Sweet Brand'));
+      document.title = project.title + ' | ' + (get(data, 'site.title', 'The Sweet Brand'));
     }
   }
 
@@ -562,7 +562,7 @@
 
     // Update page title & meta
     if (post.title) {
-      document.title = post.title + ' — ' + (get(data, 'site.title', 'The Sweet Brand'));
+      document.title = post.title + ' | ' + (get(data, 'site.title', 'The Sweet Brand'));
     }
     if (post.description) {
       setAttr('meta[name="description"]', 'content', post.description);
