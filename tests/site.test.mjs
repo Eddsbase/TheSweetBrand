@@ -11,7 +11,7 @@ const pages = readdirSync(root).filter(f => f.endsWith('.html'));
 const aeo = read('aeo.html');
 
 test('aeo.html has required structure', () => {
-  assert.match(aeo, /<h1 class="page-hero__title"><span class="aeo-h1-line">Does AI recommend your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span><\/h1>/);
+  assert.match(aeo, /<h1 class="page-hero__title"><span class="aeo-h1-line">Does AI recommend<\/span> <span class="aeo-h1-line">your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span><\/h1>/);
   assert.equal((aeo.match(/<h1/g) || []).length, 1);
   for (const n of ['01', '02', '03']) assert.ok(aeo.includes(`step__num">${n}`));
   for (const s of ['Snapshot', 'Plan', 'Monthly tracking']) assert.ok(aeo.includes(`step__title">${s}<`));
@@ -244,14 +244,14 @@ test('shared left-aligned hero: homepage and AEO use nav container edge and Swee
   assert.match(hv, /\.hero \.hero__ctas \{ justify-content: flex-start; margin-top: 2\.25rem;/);
   assert.match(ac, /\.aeo-hero > \.container \{ max-width: var\(--container-wide\);[^}]*padding-inline: var\(--container-padding\);[^}]*text-align: left; \}/);
   assert.match(ac, /\.aeo-hero \.page-hero__title \{ font-size: clamp\(2\.6rem, 1\.5rem \+ 4\.2vw, 4\.6rem\); line-height: \.98;[^}]*text-align: left; \}/);
-  assert.match(ac, /@media \(min-width: 1200px\) \{\s*\.aeo-hero \.aeo-h1-line \{ display: block; white-space: nowrap; \}/);
-  assert.match(ac, /\.aeo-hero \.aeo-h1-line \{ display: inline; \}/);
+  assert.match(ac, /\.aeo-hero \.aeo-h1-line \{ display: block; \}/);
+  assert.ok(!/aeo-h1-line[^}]*nowrap/.test(ac), 'no forced nowrap, so narrow screens wrap instead of clipping');
   assert.match(ac, /\.aeo-hero \.aeo-eyebrow \{[^}]*font-family: 'Anton'[^}]*font-size: clamp\(1\.4rem/);
   assert.match(ac, /\.aeo-hero p\.aeo-prose \{ color: #ffffff; max-width: 56ch;/);
   assert.ok(!/align-items: center; text-align: center/.test(ac), 'old centered AEO column removed');
   assert.match(ac, /rgba\(10,10,10,\.85\) 0%, rgba\(10,10,10,\.65\) 50%, rgba\(10,10,10,\.20\) 100%/);
-  assert.match(aeo, /<span class="aeo-h1-line">Does AI recommend your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span>/);
-  assert.match(aeo, /hero-video\.css\?v=7/); assert.match(aeo, /aeo\.css\?v=7/); assert.match(read('index.html'), /hero-video\.css\?v=7/);
+  assert.match(aeo, /<span class="aeo-h1-line">Does AI recommend<\/span> <span class="aeo-h1-line">your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span>/);
+  assert.match(aeo, /hero-video\.css\?v=7/); assert.match(aeo, /aeo\.css\?v=8/); assert.match(read('index.html'), /hero-video\.css\?v=7/);
   const tail = hv.slice(hv.indexOf('/* Homepage hero layout matched'));
   for (const sel of tail.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+(?=\{)/g).map(s => s.trim()).filter(s => s && !s.startsWith('@'))) assert.match(sel, /^\.hero\b/, sel);
 });
