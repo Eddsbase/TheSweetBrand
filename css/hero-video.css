@@ -17,10 +17,12 @@
 /* Homepage hero uses the magenta/cyan video; subject is centered. */
 .hero .hero__video { object-position: center center; background-image: url("../videos/aeo-hero-v2-poster.jpg"); background-position: center center; }
 /* Homepage hero layout matched to sweetdata.co .sd-hero (left aligned):
-   container 1180px, gutter clamp(1.25rem, 4vw, 2.5rem), title clamp(2.6rem, 1.5rem + 4.2vw, 5.6rem) / .98,
+   content edge matches nav (max 1440px, var(--container-padding)), title clamp(2.6rem, 1.5rem + 4.2vw, 5.6rem) / .98,
    lead max 56ch with 1.75rem top margin, buttons 2.25rem below, content sits low in the hero. */
-.hero { align-items: flex-end; padding: calc(100px + 3rem) 0 6rem; }
-.hero .hero__content { max-width: 1180px; width: 100%; margin: 0 auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); box-sizing: border-box; text-align: left; }
+.hero { align-items: flex-end; padding: calc(100px + 3rem) 0 9rem; }
+/* Keep the scroll cue clear of the buttons. */
+.hero .hero__scroll-indicator { bottom: 1.5rem; }
+.hero .hero__content { max-width: var(--container-wide); width: 100%; margin: 0 auto; padding-inline: var(--container-padding); box-sizing: border-box; text-align: left; }
 .hero .hero__title { font-size: clamp(2.6rem, 1.5rem + 4.2vw, 5.6rem); line-height: .98; margin: 0; white-space: nowrap; }
 .hero .hero__title .hero__title-line { display: inline; }
 .hero .hero__subtitle { margin-top: 1.75rem; }

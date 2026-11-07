@@ -198,14 +198,6 @@ test('content.json, content-loader and global CSS/JS unchanged from master', () 
     assert.ok(!changed.includes(f), f);
 });
 
-test('AEO hero is one centered column with gutters and balanced headline', () => {
-  const css = read('css/aeo.css');
-  assert.match(css, /\.aeo-hero > \.container \{[^}]*margin-inline: auto[^}]*padding-inline: clamp\([^}]*align-items: center[^}]*text-align: center/);
-  assert.match(css, /\.aeo-hero \.aeo-prose \{[^}]*margin-inline: auto/);
-  assert.match(css, /\.aeo-hero \.page-hero__title \{[^}]*font-size: clamp\([^}]*max-width: 16ch/);
-  assert.match(css, /\.aeo-hero \{ padding: clamp\(/);
-  assert.match(aeo, /<link rel="stylesheet" href="css\/hero-video\.css[^"]*"><link rel="stylesheet" href="css\/aeo\.css/);
-});
 
 test('two white bands (SEO vs AEO, steps) with dark text and pink accents; others stay dark', () => {
   assert.match(aeo, /<section class="section aeo-section aeo-light" id="what">/);
@@ -229,33 +221,7 @@ test('AEO-only overlay fades from darkest top to lightest bottom; homepage gradi
   assert.match(read('css/hero-video.css'), /\.hero \.hero__video \{ object-position: center center; background-image: url\("..\/videos\/aeo-hero-v2-poster.jpg"\)/);
 });
 
-test('AEO hero: bigger Anton label, large gap, two-line desktop headline, white lead', () => {
-  const css = read('css/aeo.css');
-  const last = sel => { const m = [...css.matchAll(new RegExp(sel.replace(/[.>]/g, c => '\\' + c) + ' \\{([^}]*)\\}', 'g'))]; return m[m.length - 1][1]; };
-  const eb = last('.aeo-hero .aeo-eyebrow');
-  assert.match(eb, /font-family: 'Anton'/); assert.match(eb, /font-size: clamp\(1\.6rem/); assert.match(eb, /margin: 0 0 clamp\(5rem/);
-  assert.match(last('.aeo-hero .page-hero__title'), /font-size: clamp\(2rem, 1\.1rem \+ 2\.6vw, 3\.6rem\); max-width: none/);
-  assert.match(css, /@media \(min-width: 900px\) \{\s*\.aeo-hero \.aeo-h1-line \{ display: block; white-space: nowrap; \}/);
-  assert.match(css, /\.aeo-hero \.aeo-h1-line \{ display: inline; \}/);
-  assert.match(css, /\.aeo-hero p\.aeo-prose \{ color: #ffffff; \}/);
-  assert.match(aeo, /class="aeo-eyebrow">AI Visibility \/ AEO</);
-});
 
-test('homepage hero matches Sweet Data left-aligned layout (CSS only)', () => {
-  const css = read('css/hero-video.css');
-  const tail = css.slice(css.indexOf('/* Homepage hero layout matched to sweetdata.co'));
-  assert.ok(!css.includes('one-line title near the top'), 'old centered/gap overrides removed');
-  assert.match(tail, /\.hero \{ align-items: flex-end; padding: calc\(100px \+ 3rem\) 0 6rem; \}/);
-  assert.match(tail, /\.hero \.hero__content \{ max-width: 1180px;[^}]*padding-inline: clamp\(1\.25rem, 4vw, 2\.5rem\);[^}]*text-align: left; \}/);
-  assert.match(tail, /\.hero \.hero__title \{ font-size: clamp\(2\.6rem, 1\.5rem \+ 4\.2vw, 5\.6rem\); line-height: \.98;/);
-  assert.match(tail, /\.hero \.hero__description \{ max-width: 56ch;/);
-  assert.match(tail, /\.hero \.hero__ctas \{ justify-content: flex-start; margin-top: 2\.25rem;/);
-  assert.match(tail, /@media \(max-width: 600px\) \{\s*\.hero \.hero__title \{ white-space: normal; \}/);
-  const sels = tail.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+(?=\{)/g).map(s => s.trim()).filter(s => s && !s.startsWith('@'));
-  for (const sel of sels) assert.match(sel, /^\.hero\b/, sel);
-  assert.ok(!aeo.includes('class="hero '));
-  assert.match(read('index.html'), /hero-title-line1">DIGITAL<\/span>\s*<span[^>]*hero-title-line2">MARKETING<\/span>/);
-});
 
 const MOBILE_LOGO = `
 /* Mobile header logo: compact size (desktop unchanged). Footer logo is not inside .nav. */
@@ -267,4 +233,25 @@ const MOBILE_LOGO = `
 test('global.css differs from original only by the mobile header logo rule', () => {
   assert.equal(read('css/global.css'), atBase('css/global.css') + MOBILE_LOGO);
   assert.match(atBase('css/global.css'), /\.nav__logo \{\n  height: 120px;/);
+});
+
+test('shared left-aligned hero: homepage and AEO use nav container edge and Sweet Data scale', () => {
+  const hv = read('css/hero-video.css'), ac = read('css/aeo.css');
+  assert.match(hv, /\.hero \.hero__content \{ max-width: var\(--container-wide\);[^}]*padding-inline: var\(--container-padding\);[^}]*text-align: left; \}/);
+  assert.match(hv, /\.hero \{ align-items: flex-end; padding: calc\(100px \+ 3rem\) 0 9rem; \}/);
+  assert.match(hv, /\.hero \.hero__scroll-indicator \{ bottom: 1\.5rem; \}/);
+  assert.match(hv, /\.hero \.hero__title \{ font-size: clamp\(2\.6rem, 1\.5rem \+ 4\.2vw, 5\.6rem\); line-height: \.98;/);
+  assert.match(hv, /\.hero \.hero__ctas \{ justify-content: flex-start; margin-top: 2\.25rem;/);
+  assert.match(ac, /\.aeo-hero > \.container \{ max-width: var\(--container-wide\);[^}]*padding-inline: var\(--container-padding\);[^}]*text-align: left; \}/);
+  assert.match(ac, /\.aeo-hero \.page-hero__title \{ font-size: clamp\(2\.6rem, 1\.5rem \+ 4\.2vw, 4\.6rem\); line-height: \.98;[^}]*text-align: left; \}/);
+  assert.match(ac, /@media \(min-width: 1200px\) \{\s*\.aeo-hero \.aeo-h1-line \{ display: block; white-space: nowrap; \}/);
+  assert.match(ac, /\.aeo-hero \.aeo-h1-line \{ display: inline; \}/);
+  assert.match(ac, /\.aeo-hero \.aeo-eyebrow \{[^}]*font-family: 'Anton'[^}]*font-size: clamp\(1\.4rem/);
+  assert.match(ac, /\.aeo-hero p\.aeo-prose \{ color: #ffffff; max-width: 56ch;/);
+  assert.ok(!/align-items: center; text-align: center/.test(ac), 'old centered AEO column removed');
+  assert.match(ac, /rgba\(10,10,10,\.85\) 0%, rgba\(10,10,10,\.65\) 50%, rgba\(10,10,10,\.20\) 100%/);
+  assert.match(aeo, /<span class="aeo-h1-line">Does AI recommend your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span>/);
+  assert.match(aeo, /hero-video\.css\?v=7/); assert.match(aeo, /aeo\.css\?v=7/); assert.match(read('index.html'), /hero-video\.css\?v=7/);
+  const tail = hv.slice(hv.indexOf('/* Homepage hero layout matched'));
+  for (const sel of tail.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+(?=\{)/g).map(s => s.trim()).filter(s => s && !s.startsWith('@'))) assert.match(sel, /^\.hero\b/, sel);
 });

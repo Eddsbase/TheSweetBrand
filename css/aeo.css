@@ -24,13 +24,6 @@
 .aeo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1.25rem; }
 .aeo-note { margin-bottom: 1.5rem; }
 
-/* AEO hero layout: one centered column with consistent axis and spacing. */
-.aeo-hero { padding: clamp(8rem, 6rem + 8vw, 12rem) 0 clamp(4.5rem, 3rem + 5vw, 8rem); }
-.aeo-hero > .container { max-width: 980px; margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 3rem); display: flex; flex-direction: column; align-items: center; text-align: center; }
-.aeo-hero .aeo-eyebrow { margin: 0 0 clamp(1.25rem, 2vw, 1.75rem); }
-.aeo-hero .page-hero__title { font-size: clamp(2.4rem, 1.4rem + 3.6vw, 4.75rem); line-height: 1.04; max-width: 16ch; margin: 0 auto clamp(1.5rem, 2.5vw, 2.25rem); }
-.aeo-hero .aeo-prose { max-width: 40rem; margin-inline: auto; line-height: 1.6; }
-.aeo-hero .aeo-hero-cta { margin-top: clamp(2rem, 3vw, 2.75rem); }
 
 /* Light bands: white background, black text, pink accents. */
 .aeo-list { margin: 1rem 0 0; padding-left: 1.1rem; color: var(--color-text-secondary); }
@@ -48,12 +41,15 @@
 .aeo-hero .hero__video { object-position: center center; background-image: url("../videos/aeo-hero-v2-poster.jpg"); background-position: center center; }
 .aeo-hero .hero__video-overlay { background: linear-gradient(180deg, rgba(10,10,10,.85) 0%, rgba(10,10,10,.65) 50%, rgba(10,10,10,.20) 100%); }
 
-/* Hero refinements: bigger label, more gap, two-line headline, white lead. */
-.aeo-hero > .container { max-width: 1120px; }
-.aeo-hero .aeo-eyebrow { font-family: 'Anton', 'Bebas Neue', Impact, 'Arial Narrow', sans-serif; font-weight: 400; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.5rem); letter-spacing: .04em; line-height: 1.1; margin: 0 0 clamp(5rem, 3rem + 8vw, 11rem); }
-.aeo-hero .page-hero__title { font-size: clamp(2rem, 1.1rem + 2.6vw, 3.6rem); max-width: none; }
+/* AEO hero: same left-aligned layout as the homepage hero (Sweet Data pattern).
+   Content edge matches the nav: max 1440px, gutter var(--container-padding). */
+.aeo-hero { padding: calc(100px + 3rem) 0 clamp(4.5rem, 3rem + 5vw, 7rem); text-align: left; }
+.aeo-hero > .container { max-width: var(--container-wide); width: 100%; margin-inline: auto; padding-inline: var(--container-padding); box-sizing: border-box; display: block; text-align: left; }
+.aeo-hero .aeo-eyebrow { font-family: 'Anton', 'Bebas Neue', Impact, 'Arial Narrow', sans-serif; font-weight: 400; font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.2rem); letter-spacing: .04em; line-height: 1.1; margin: 0 0 clamp(3rem, 2rem + 5vw, 7rem); }
+.aeo-hero .page-hero__title { font-size: clamp(2.6rem, 1.5rem + 4.2vw, 4.6rem); line-height: .98; max-width: none; margin: 0; text-align: left; }
 .aeo-hero .aeo-h1-line { display: inline; }
-@media (min-width: 900px) {
+@media (min-width: 1200px) {
   .aeo-hero .aeo-h1-line { display: block; white-space: nowrap; }
 }
-.aeo-hero .page-hero__title + .aeo-prose, .aeo-hero p.aeo-prose { color: #ffffff; }
+.aeo-hero p.aeo-prose { color: #ffffff; max-width: 56ch; margin: 1.75rem 0 0; line-height: 1.6; }
+.aeo-hero .aeo-hero-cta { margin-top: 2.25rem; }
