@@ -96,7 +96,7 @@ test('homepage AEO card + content.json item link to aeo.html', () => {
 });
 
 test('global typography and tokens untouched; no family footer added', () => {
-  for (const f of ['css/tokens.css','css/pages.css','css/global.css']) assert.ok(!/Anton|family-links/.test(read(f)), f);
+  for (const f of ['css/tokens.css','css/pages.css','css/global.css','css/components.css']) assert.ok(!/Anton|family-links/.test(read(f)), f);
   for (const p of pages) assert.ok(!read(p).includes('family-links'), p);
   assert.match(aeo, /css\/aeo.css/);
 });
@@ -139,7 +139,7 @@ test('overlay is balanced (dimmed, not obscured) and no em dashes', () => {
   const css = read('css/hero-video.css');
   assert.match(css, /object-position: center 30%/);
   const alphas = [...css.match(/\.hero__video-overlay \{[^}]*\}/)[0].matchAll(/rgba\(10,10,10,(\.\d+)\)/g)].map(m => +m[1]);
-  assert.ok(alphas.length >= 2 && Math.max(...alphas) <= 0.85 && Math.min(...alphas) >= 0.2, String(alphas));
+  assert.deepEqual(alphas, [0.65, 0.75, 0.9]);
   assert.ok(!/—/.test(css + read('js/hero-video.js') + aeo));
 });
 
@@ -153,4 +153,23 @@ test('hero videos respect reduced motion (multiple videos)', () => {
   assert.equal(init(a.doc, () => ({ matches: false })), 'playing');
   for (const v of a.vs) { assert.equal(v.played, 1); assert.equal(v.muted, true); assert.equal(v.autoplay, true); }
   assert.equal(init({ querySelectorAll: () => [] }, () => ({ matches: false })), 'none');
+});
+
+test('Anton display headline scoped to the two heroes only', () => {
+  const css = read('css/hero-video.css');
+  assert.ok(existsSync(root + 'fonts/Anton-Regular.ttf'));
+  const rule = css.match(/\.hero \.hero__title, \.aeo-hero \.page-hero__title \{[^}]*\}/)[0];
+  assert.match(rule, /font-family: 'Anton'/); assert.match(rule, /text-transform: uppercase/);
+  assert.equal((css.match(/font-family: 'Anton', /g) || []).length, 1);
+  assert.match(css, /\.hero \.hero__title \{ font-size: clamp\(/);
+  assert.match(css, /\.aeo-hero \.page-hero__title \{ font-size: clamp\(/);
+  for (const p of readdirSync(root).filter(f => f.endsWith('.html'))) assert.equal(read(p).includes('hero-video.css'), ['index.html', 'aeo.html'].includes(p), p);
+});
+
+test('overlay layered above video and below text', () => {
+  const css = read('css/hero-video.css');
+  const z = sel => +css.match(new RegExp(sel.replace(/[.>]/g, m => '\\' + m) + ' \\{[^}]*z-index: (\\d+)'))[1];
+  assert.ok(z('.hero__video') < z('.hero__video-overlay'));
+  assert.ok(z('.hero__video-overlay') < z('.hero__content'));
+  assert.ok(z('.hero__video-overlay') < z('.aeo-hero > .container'));
 });
