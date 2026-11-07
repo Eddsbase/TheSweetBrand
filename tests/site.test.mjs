@@ -254,7 +254,7 @@ test('shared left-aligned hero: homepage and AEO use nav container edge and Swee
   assert.ok(!/align-items: center; text-align: center/.test(ac), 'old centered AEO column removed');
   assert.match(ac, /rgba\(10,10,10,\.85\) 0%, rgba\(10,10,10,\.65\) 50%, rgba\(10,10,10,\.20\) 100%/);
   assert.match(aeo, /<span class="aeo-h1-line">Does AI recommend<\/span> <span class="aeo-h1-line">your brand,<\/span> <span class="aeo-h1-line">or your competitors\?<\/span>/);
-  assert.match(aeo, /hero-video\.css\?v=7/); assert.match(aeo, /aeo\.css\?v=8/); assert.match(read('index.html'), /hero-video\.css\?v=7/);
+  assert.match(aeo, /hero-video\.css\?v=7/); assert.match(aeo, /aeo\.css\?v=8/); assert.match(read('index.html'), /hero-video\.css\?v=8/);
   const tail = hv.slice(hv.indexOf('/* Homepage hero layout matched'));
   for (const sel of tail.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+(?=\{)/g).map(s => s.trim()).filter(s => s && !s.startsWith('@'))) assert.match(sel, /^\.hero\b/, sel);
 });
@@ -265,4 +265,20 @@ test('privacy policy covers both sites and makes no unsupported claims', () => {
   assert.doesNotMatch(text, /newsletter|appropriate security measures|third-party analytics and marketing tools|do not sell|have not added|—/i);
   for (const f of pages.filter(f => read(f).includes('<footer'))) assert.match(read(f), /href="privacy-policy\.html"/, f);
   assert.match(aeo, /href="privacy-policy\.html"/);
+});
+
+test('homepage hero CTAs share identical box dimensions and centering, desktop and mobile', () => {
+  const css = read('css/hero-video.css');
+  const rule = css.match(/\.hero \.hero__ctas \.btn \{([^}]*)\}/)[1];
+  for (const d of ['box-sizing: border-box', 'display: inline-flex', 'align-items: center', 'justify-content: center', 'text-align: center', 'width: 15rem', 'height: 3.75rem', 'padding: 0 1rem', 'border: 2px solid transparent']) assert.ok(rule.includes(d), d);
+  assert.match(css, /\.hero \.hero__ctas \.btn--primary \{ border-color: var\(--color-accent\); \}/);
+  const mob = css.slice(css.lastIndexOf('@media (max-width: 600px)'));
+  assert.match(mob, /\.hero \.hero__ctas \{ flex-direction: column; align-items: flex-start;/);
+  assert.match(mob, /\.hero \.hero__ctas \.btn \{ width: min\(100%, 18rem\); \}/);
+  assert.doesNotMatch(css, /\.hero \.hero__ctas \.btn--(outline|lg)\s*\{/);
+  const idx = read('index.html');
+  assert.match(idx, /css\/hero-video.css\?v=8/);
+  assert.match(idx, /<a href="contact.html" class="btn btn--primary btn--lg magnetic hero-cta1-link"><span class="hero-cta1-text">Book a Call<\/span><\/a>/);
+  assert.match(idx, /<a href="services.html" class="btn btn--outline btn--lg magnetic hero-cta2-link"><span class="hero-cta2-text">Our Services<\/span><\/a>/);
+  assert.doesNotMatch(read('aeo.html'), /hero__ctas/);
 });

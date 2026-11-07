@@ -31,3 +31,12 @@
 @media (max-width: 600px) {
   .hero .hero__title { white-space: normal; }
 }
+
+/* Homepage hero CTAs: identical pill boxes with centered labels. */
+.hero .hero__ctas .btn { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; text-align: center; width: 15rem; height: 3.75rem; padding: 0 1rem; border: 2px solid transparent; line-height: 1; white-space: nowrap; }
+.hero .hero__ctas .btn--primary { border-color: var(--color-accent); }
+.hero .hero__ctas .btn > span { display: block; line-height: 1; }
+@media (max-width: 600px) {
+  .hero .hero__ctas { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .hero .hero__ctas .btn { width: min(100%, 18rem); }
+}
