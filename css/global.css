@@ -350,3 +350,6 @@
   .nav .nav__logo { height: 40px; width: auto; max-width: 45vw; object-fit: contain; }
   .nav .nav__logo-link { display: inline-flex; align-items: center; min-height: 44px; }
 }
+
+/* Footer policy links: small print. */
+.footer__legal a { font-size: .75rem; display: inline-block; padding-block: .5rem; }
