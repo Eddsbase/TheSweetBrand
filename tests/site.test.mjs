@@ -112,24 +112,45 @@ test('JS and JSON parse', () => {
   for (const f of readdirSync(root + 'js')) new Function(read('js/' + f).replace(/^\s*import .*$/gm, ''));
 });
 
-test('homepage hero video: markup, poster, assets, overlay', () => {
+const HERO_VIDEO = /<video class="hero__video js-hero-video"[^>]*poster="videos\/hero-poster.jpg" muted loop playsinline preload="none"[^>]*>\s*<source src="videos\/hero.mp4" type="video\/mp4">/;
+
+test('both heroes use the same video background, no autoplay attribute', () => {
+  for (const [f, html] of [['index.html', read('index.html')], ['aeo.html', aeo]]) {
+    assert.match(html, HERO_VIDEO, f);
+    assert.doesNotMatch(html.match(/<video class="hero__video[^>]*>/)[0], /autoplay/, f);
+    assert.equal((html.match(/js-hero-video/g) || []).length, 1, f);
+    assert.match(html, /hero__video-overlay/, f);
+    assert.match(html, /css\/hero-video.css/, f);
+    assert.match(html, /js\/hero-video.js/, f);
+  }
+  for (const f of ['videos/hero.mp4', 'videos/hero-poster.jpg']) assert.ok(existsSync(root + f), f);
   const idx = read('index.html');
-  assert.match(idx, /<video class="hero__video" id="heroVideo" poster="videos\/hero-poster.jpg" muted loop playsinline preload="none"/);
-  assert.doesNotMatch(idx.match(/<video class="hero__video"[^>]*>/)[0], /autoplay/);
-  assert.match(idx, /<source src="videos\/hero.mp4" type="video\/mp4">/);
-  for (const f of ['videos/hero.mp4', 'videos/hero-poster.jpg', 'css/hero-video.css', 'js/hero-video.js']) assert.ok(existsSync(root + f), f);
-  assert.match(read('css/hero-video.css'), /object-position: center 30%[\s\S]*rgba\(10,10,10,\.20\)[\s\S]*rgba\(10,10,10,\.85\)/);
   for (const t of ['DIGITAL', 'MARKETING', 'that helps sweet brands stand out.']) assert.ok(idx.includes(t));
-  assert.ok(!/—/.test(read('css/hero-video.css') + read('js/hero-video.js')));
 });
 
-test('hero video respects reduced motion', () => {
+test('AEO video stays inside the hero section', () => {
+  const hero = aeo.match(/<section class="page-hero section--dark aeo-hero">[\s\S]*?<\/section>/)[0];
+  assert.match(hero, /js-hero-video/);
+  assert.match(hero, /class="aeo-eyebrow">AI Visibility \/ AEO</);
+  assert.ok(!aeo.slice(aeo.indexOf(hero) + hero.length).includes('hero__video'));
+});
+
+test('overlay is balanced (dimmed, not obscured) and no em dashes', () => {
+  const css = read('css/hero-video.css');
+  assert.match(css, /object-position: center 30%/);
+  const alphas = [...css.match(/\.hero__video-overlay \{[^}]*\}/)[0].matchAll(/rgba\(10,10,10,(\.\d+)\)/g)].map(m => +m[1]);
+  assert.ok(alphas.length >= 2 && Math.max(...alphas) <= 0.85 && Math.min(...alphas) >= 0.2, String(alphas));
+  assert.ok(!/—/.test(css + read('js/hero-video.js') + aeo));
+});
+
+test('hero videos respect reduced motion (multiple videos)', () => {
   const { init } = require(root + 'js/hero-video.js');
-  const mk = () => { const v = { muted: false, autoplay: false, preload: 'none', played: 0, play() { this.played++; return Promise.resolve(); } }; return { v, doc: { getElementById: () => v } }; };
+  const mk = () => { const vs = [0, 1].map(() => ({ muted: false, autoplay: false, preload: 'none', played: 0, play() { this.played++; return Promise.resolve(); } })); return { vs, doc: { querySelectorAll: () => vs } }; };
   let a = mk();
   assert.equal(init(a.doc, () => ({ matches: true })), 'poster');
-  assert.equal(a.v.played, 0); assert.equal(a.v.autoplay, false); assert.equal(a.v.preload, 'none');
+  for (const v of a.vs) { assert.equal(v.played, 0); assert.equal(v.autoplay, false); assert.equal(v.preload, 'none'); }
   a = mk();
   assert.equal(init(a.doc, () => ({ matches: false })), 'playing');
-  assert.equal(a.v.played, 1); assert.equal(a.v.muted, true); assert.equal(a.v.autoplay, true);
+  for (const v of a.vs) { assert.equal(v.played, 1); assert.equal(v.muted, true); assert.equal(v.autoplay, true); }
+  assert.equal(init({ querySelectorAll: () => [] }, () => ({ matches: false })), 'none');
 });
