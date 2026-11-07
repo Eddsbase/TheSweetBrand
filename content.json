@@ -86,6 +86,17 @@
     "sectionDescription": "Comprehensive digital marketing solutions tailored to help sweet brands stand out.",
     "items": [
       {
+        "title": "AEO",
+        "slug": "aeo",
+        "href": "aeo.html",
+        "description": "Help ChatGPT, Perplexity and Google's AI answers understand, mention and recommend your brand.",
+        "icon": "",
+        "image": "",
+        "link": "aeo.html",
+        "features": [],
+        "body": ""
+      },
+      {
         "title": "SEO",
         "slug": "seo",
         "description": "Rise through the ranks on Google so you can turn searches into sales.",

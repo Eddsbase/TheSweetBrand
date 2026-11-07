@@ -761,7 +761,7 @@
           icon +
           '<h3 class="card__title service-card__title">' + esc(service.title) + '</h3>' +
           '<p class="card__description service-card__description">' + esc(service.description) + '</p>' +
-          '<a href="service-single.html?service=' + esc(slug) + '" class="card__link">Learn More <span>&rarr;</span></a>' +
+          '<a href="' + (service.href ? esc(service.href) : 'service-single.html?service=' + esc(slug)) + '" class="card__link">Learn More <span>&rarr;</span></a>' +
         '</div>'
       );
     }).join('');

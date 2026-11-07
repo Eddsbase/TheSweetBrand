@@ -513,3 +513,30 @@
   font-style: italic;
   color: var(--color-text-primary);
 }
+
+/* ===== Sweet family alignment (Anton display headings) ===== */
+h1, h2, .section__title, .hero__title, .page-hero__title { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.01em; }
+
+/* Numbered steps */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--space-lg, 1.5rem); list-style: none; padding: 0; margin: 0; }
+.step { padding: 1.75rem; border: 1px solid var(--color-border-light); border-radius: 12px; background: var(--color-bg-elevated); }
+.step__num { font-family: var(--font-display); font-size: var(--fs-2xl); color: var(--color-accent); line-height: 1; display: block; margin-bottom: .75rem; }
+.step__title { font-size: var(--fs-lg); margin-bottom: .5rem; }
+.step p { color: var(--color-text-secondary); }
+
+/* Family footer links */
+.family-links a { display: block; }
+
+/* AEO page */
+.aeo-section { padding: clamp(3rem, 8vw, 6rem) 0; }
+.aeo-prose { max-width: 720px; color: var(--color-text-secondary); font-size: var(--fs-md); }
+.aeo-prose p + p { margin-top: 1rem; }
+.aeo-faq details { border-bottom: 1px solid var(--color-border-light); padding: 1.25rem 0; }
+.aeo-faq summary { cursor: pointer; font-weight: 600; font-size: var(--fs-md); }
+.aeo-faq details p { margin-top: .75rem; color: var(--color-text-secondary); }
+.aeo-form { max-width: 640px; }
+.aeo-form .form__input { width: 100%; max-width: 100%; box-sizing: border-box; }
+.aeo-notice { margin: 1rem 0; padding: 1rem; border: 1px solid var(--color-border-accent); border-radius: 8px; color: var(--color-text-primary); background: var(--color-accent-glow); }
+.aeo-form button[disabled] { opacity: .5; cursor: not-allowed; }
+img, video { max-width: 100%; }
+.aeo-hero-cta { margin-top: 2rem; }
