@@ -229,6 +229,9 @@ const MOBILE_LOGO = `
   .nav .nav__logo { height: 40px; width: auto; max-width: 45vw; object-fit: contain; }
   .nav .nav__logo-link { display: inline-flex; align-items: center; min-height: 44px; }
 }
+
+/* Footer policy links: small print. */
+.footer__legal a { font-size: .75rem; display: inline-block; padding-block: .5rem; }
 `;
 test('global.css differs from original only by the mobile header logo rule', () => {
   assert.equal(read('css/global.css'), atBase('css/global.css') + MOBILE_LOGO);
@@ -258,8 +261,8 @@ test('shared left-aligned hero: homepage and AEO use nav container edge and Swee
 
 test('privacy policy covers both sites and makes no unsupported claims', () => {
   const p = read('privacy-policy.html'), text = p.replace(/<[^>]+>/g, ' ');
-  for (const s of ['thesweetbrand.co', 'aeo.thesweetbrand.co', 'GitHub Pages', 'Vercel', 'info@thesweetbrand.co', 'do not currently send information', 'November 7, 2026']) assert.ok(text.includes(s), s);
-  assert.doesNotMatch(text, /newsletter|appropriate security measures|third-party analytics and marketing tools|—/i);
+  for (const s of ['thesweetbrand.co', 'aeo.thesweetbrand.co', 'GitHub Pages', 'Vercel', 'info@thesweetbrand.co', 'request form on the AEO page is turned off', 'November 7, 2026']) assert.ok(text.includes(s), s);
+  assert.doesNotMatch(text, /newsletter|appropriate security measures|third-party analytics and marketing tools|do not sell|have not added|—/i);
   for (const f of pages.filter(f => read(f).includes('<footer'))) assert.match(read(f), /href="privacy-policy\.html"/, f);
   assert.match(aeo, /href="privacy-policy\.html"/);
 });
