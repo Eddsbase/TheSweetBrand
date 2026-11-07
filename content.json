@@ -241,42 +241,7 @@
     "sectionTitle": "Latest Insights",
     "sectionDescription": "Stay up to date with the latest in digital marketing, branding, and SEO.",
     "postsPerPage": 6,
-    "posts": [
-      {
-        "title": "5 SEO Strategies That Actually Drive Revenue in 2026",
-        "slug": "seo-strategies-drive-revenue-2026",
-        "excerpt": "Forget vanity metrics. Here are five SEO strategies that connect directly to your bottom line and help sweet brands climb the ranks.",
-        "content": "",
-        "author": "The Sweet Brand",
-        "date": "2026-03-15",
-        "category": "SEO",
-        "tags": [
-          "SEO",
-          "Strategy",
-          "Revenue"
-        ],
-        "image": "images/blog/blog-post-1.webp",
-        "imageAlt": "SEO strategies for 2026",
-        "featured": true
-      },
-      {
-        "title": "Why Your Brand Needs a Clear Marketing Plan Before Spending a Dollar on Ads",
-        "slug": "brand-needs-marketing-plan-before-ads",
-        "excerpt": "Throwing money at ads without a strategy is the fastest way to burn your budget. Here is how to build a plan that actually works.",
-        "content": "",
-        "author": "The Sweet Brand",
-        "date": "2026-03-01",
-        "category": "Marketing",
-        "tags": [
-          "Marketing",
-          "Advertising",
-          "Strategy"
-        ],
-        "image": "images/blog/blog-post-2.webp",
-        "imageAlt": "Marketing plan before advertising",
-        "featured": false
-      }
-    ]
+    "posts": []
   },
   "products": {
     "visible": false,
@@ -592,8 +557,8 @@
     "blog": {
       "hero": {
         "tag": "Our Blog",
-        "title": "Blog",
-        "subtitle": "Insights, tips, and strategies from our marketing experts.",
+        "title": "Coming soon",
+        "subtitle": "No posts have been published yet. Check back soon.",
         "backgroundImage": "images/Blog-Hero.webp"
       }
     },
