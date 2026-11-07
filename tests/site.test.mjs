@@ -2,6 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const root = new URL('..', import.meta.url).pathname;
@@ -19,7 +20,7 @@ test('aeo.html has required structure', () => {
   assert.match(aeo, /<html lang="en">/);
 });
 
-test('no em dashes in AEO page or homepage hero/card copy', () => {
+test('no em dashes in AEO page copy', () => {
   assert.ok(!/—|&mdash;|&#8212;/.test(aeo));
   assert.match(aeo, /class="aeo-eyebrow">AI Visibility \/ AEO</);
   assert.match(read('css/aeo.css'), /\.aeo-eyebrow \{[^}]*font-weight: var\(--fw-bold\)/);
@@ -88,12 +89,6 @@ test('all local links and assets resolve', () => {
   }
 });
 
-test('homepage AEO card + content.json item link to aeo.html', () => {
-  assert.match(read('index.html'), /service-card__title">AEO<\/h3>[\s\S]{0,300}href="aeo.html"/);
-  const items = JSON.parse(read('content.json')).services.items;
-  assert.equal(items.find(i => i.slug === 'aeo').href, 'aeo.html');
-  assert.match(read('js/content-loader.js'), /service\.href \?/);
-});
 
 test('global typography and tokens untouched; no family footer added', () => {
   for (const f of ['css/tokens.css','css/pages.css','css/global.css','css/components.css']) assert.ok(!/Anton|family-links/.test(read(f)), f);
@@ -172,4 +167,31 @@ test('overlay layered above video and below text', () => {
   assert.ok(z('.hero__video') < z('.hero__video-overlay'));
   assert.ok(z('.hero__video-overlay') < z('.hero__content'));
   assert.ok(z('.hero__video-overlay') < z('.aeo-hero > .container'));
+});
+
+// ---- Homepage scope guard: only the hero may differ from master ----
+const git = (...a) => execFileSync('git', a, { cwd: root, encoding: 'utf8' });
+const BASE = git('merge-base', 'HEAD', 'origin/master').trim();
+const atBase = f => git('show', `${BASE}:${f}`);
+const stripHero = h => h
+  .replace(/<section class="hero section--dark" id="hero">[\s\S]*?<\/section>/, '<!--HERO-->')
+  .replace(/\n\s*<link rel="stylesheet" href="css\/hero-video\.css\?v=\d+">/, '')
+  .replace(/\n\s*<script src="js\/hero-video\.js\?v=\d+"><\/script>/, '');
+
+test('homepage outside the hero is byte-identical to master', () => {
+  assert.equal(stripHero(read('index.html')), stripHero(atBase('index.html')));
+  assert.ok(!read('index.html').includes('aeo.html'));
+});
+
+test('homepage hero text unchanged; only video/overlay added inside hero', () => {
+  const hero = h => h.match(/<section class="hero section--dark" id="hero">[\s\S]*?<\/section>/)[0];
+  const cleaned = hero(read('index.html')).replace(/\s*<video class="hero__video[\s\S]*?<\/video>/, '').replace(/\s*<div class="hero__video-overlay"><\/div>/, '');
+  assert.equal(cleaned, hero(atBase('index.html')));
+});
+
+test('content.json, content-loader and global CSS/JS unchanged from master', () => {
+  const changed = git('diff', '--name-only', BASE, '--').split('\n').filter(Boolean); // working tree vs base
+  for (const f of ['content.json', 'js/content-loader.js', 'js/app.js', 'js/components.js', 'js/animations.js',
+    'css/tokens.css', 'css/reset.css', 'css/global.css', 'css/components.css', 'css/pages.css', 'css/animations.css'])
+    assert.ok(!changed.includes(f), f);
 });
