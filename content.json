@@ -134,6 +134,16 @@
         "link": "services/branding.html",
         "features": [],
         "body": ""
+      },
+      {
+        "title": "AEO",
+        "slug": "aeo",
+        "description": "Help buyers find you when they ask AI who to hire and what to buy.",
+        "icon": "",
+        "image": "",
+        "link": "https://aeo.thesweetbrand.co",
+        "features": [],
+        "body": ""
       }
     ]
   },

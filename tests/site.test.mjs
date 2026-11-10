@@ -181,8 +181,23 @@ const stripHero = h => h
   .replace(/\n\s*<script src="js\/hero-video\.js\?v=\d+"><\/script>/, '');
 
 test('homepage outside the hero is byte-identical to master', () => {
-  // Allowed exceptions outside the hero: experience card title (t107u) and content-loader cache version.
-  const allow = h => h.replace('<h3 class="card__title pillar-1-title">Ten Years of Battle-Tested Experience</h3>', '<h3 class="card__title pillar-1-title">Get Discovered</h3>').replace('js/content-loader.js?v=4', 'js/content-loader.js?v=2');
+  // Allowed exceptions outside the hero: experience card title (t107u), content-loader cache version,
+  // the inline SVG loader plus compressed logo <picture> (perf/fast-logo-loader), the AEO nav tab (t240u),
+  // and hiding the Work nav tab (t243u).
+  const allow = h => h
+    .replace('<h3 class="card__title pillar-1-title">Ten Years of Battle-Tested Experience</h3>', '<h3 class="card__title pillar-1-title">Get Discovered</h3>')
+    .replace('js/content-loader.js?v=5', 'js/content-loader.js?v=2')
+    .replace('\n        <a href="https://aeo.thesweetbrand.co" class="nav__link nav-link" data-nav="aeo">AEO</a>', '')
+    .replace('\n    <a href="https://aeo.thesweetbrand.co" class="nav__link nav-link">AEO</a>', '')
+    .replace('<a href="services.html" class="nav__link nav-link" data-nav="services">Services</a>\n        <a href="blog.html" class="nav__link nav-link" data-nav="blog">Blog</a>',
+      '<a href="services.html" class="nav__link nav-link" data-nav="services">Services</a>\n        <a href="work.html" class="nav__link nav-link" data-nav="work">Work</a>\n        <a href="blog.html" class="nav__link nav-link" data-nav="blog">Blog</a>')
+    .replace('<a href="services.html" class="nav__link nav-link">Services</a>\n    <a href="blog.html" class="nav__link nav-link">Blog</a>',
+      '<a href="services.html" class="nav__link nav-link">Services</a>\n    <a href="work.html" class="nav__link nav-link">Work</a>\n    <a href="blog.html" class="nav__link nav-link">Blog</a>')
+    .replace(/<style id="loader-critical">[\s\S]*?<\/style>\n/, '')
+    .replace(/<div class="loader" id="loader"[^>]*>[\s\S]*?<\/div>\s*<script>\(function\(\)\{var l=document\.getElementById\('loader'\)[\s\S]*?<\/script>/,
+      '<div class="loader" id="loader">\n    <img src="images/sweet-brand-logo.png" alt="Loading" class="loader__logo">\n  </div>')
+    .replace(/<picture><source type="image\/webp" srcset="images\/sweet-brand-logo\.webp"><img src="images\/sweet-brand-logo\.png" alt="The Sweet Brand" class="([^"]+)" width="616" height="394"( style="[^"]*")?><\/picture>/g,
+      '<img src="images/sweet-brand-logo.png" alt="The Sweet Brand" class="$1"$2>');
   assert.equal(allow(stripHero(read('index.html'))), noDash(stripHero(atBase('index.html'))));
   assert.ok(!read('index.html').includes('aeo.html'));
 });
@@ -295,7 +310,17 @@ test('blog shows Coming soon with no sample posts', () => {
   base.blog.posts = []; base.pages.blog.hero.title = 'Coming soon';
   base.pages.blog.hero.subtitle = 'No posts have been published yet. Check back soon.';
   base.stats.items[0] = { value: '10', label: 'Ten Years of Battle-Tested Experience' };
-  assert.deepEqual(d, base, 'content.json differs from original only in blog fields and the experience stat');
+  base.services.items.push({
+    title: 'AEO',
+    slug: 'aeo',
+    description: 'Help buyers find you when they ask AI who to hire and what to buy.',
+    icon: '',
+    image: '',
+    link: 'https://aeo.thesweetbrand.co',
+    features: [],
+    body: ''
+  });
+  assert.deepEqual(d, base, 'content.json differs from original only in blog fields, the experience stat, and the AEO service');
   assert.ok(!read('content.json').includes('Years Experience'));
 });
 
@@ -312,7 +337,7 @@ test('content-loader revalidates content.json so stale cached copies (old blog p
   assert.match(calls[0].url, /content\.json$/);
   assert.equal(calls[0].init && calls[0].init.cache, 'no-cache', 'must bypass the 10 minute HTTP cache');
   for (const f of ['index.html', 'about.html', 'aeo.html', 'blog.html', 'blog-single.html', 'contact.html', 'services.html', 'service-single.html', 'work.html', 'work-single.html'])
-    { const h = read(f); if (h.includes('content-loader.js')) assert.match(h, /js\/content-loader\.js\?v=4/, f); }
+    { const h = read(f); if (h.includes('content-loader.js')) assert.match(h, /js\/content-loader\.js\?v=5/, f); }
 });
 
 test('Our Services hero pill keeps a visible 2px outline (not overridden to transparent)', () => {
@@ -329,4 +354,55 @@ test('no em dashes in user-visible site content (HTML, content.json, generated t
   for (const f of readdirSync(root).filter(f => f.endsWith('.html')).concat(['content.json'])) assert.doesNotMatch(read(f), EM, f);
   assert.doesNotMatch(read('js/content-loader.js'), /'[^'\n]*\u2014[^'\n]*'/, 'string literals in loader');
   assert.doesNotMatch(read('css/hero-video.css') + read('css/aeo.css'), /content:\s*['"][^'"]*\u2014/);
+});
+
+test('inline loader is all white with no pink frosting', () => {
+  for (const f of ['index.html', 'about.html', 'services.html', 'aeo.html', 'contact.html']) {
+    const h = read(f);
+    const style = h.match(/<style id="loader-critical">[\s\S]*?<\/style>/)[0];
+    const body = h.match(/<div class="loader" id="loader"[\s\S]*?<\/script>/)[0];
+    assert.match(style, /#loader \.loader__mark\{[^}]*color:#ffffff/);
+    assert.match(style, /#loader \.loader__frosting\{color:#ffffff\}/);
+    assert.doesNotMatch(style + body, /#e81a6b/);
+    assert.match(body, /setTimeout\(hide,1200\)/);
+    assert.match(style, /prefers-reduced-motion:reduce/);
+  }
+});
+
+test('Work tab is hidden from desktop and mobile nav on every page', () => {
+  for (const f of readdirSync(root).filter(x => x.endsWith('.html'))) {
+    const h = read(f);
+    if (!h.includes('class="nav__links"')) continue;
+    const desk = h.match(/<div class="nav__links">([\s\S]*?)<\/div>/)[1];
+    const mob = h.match(/<div class="nav__mobile"[^>]*>([\s\S]*?)<\/div>/)[1];
+    assert.doesNotMatch(desk, /href="[^"]*work\.html"[^>]*>Work</, f + ' desktop');
+    assert.doesNotMatch(mob, /href="[^"]*work\.html"[^>]*>Work</, f + ' mobile');
+  }
+  assert.ok(existsSync(root + 'work.html'), 'work page should remain');
+  assert.ok(existsSync(root + 'work-single.html'), 'work-single page should remain');
+});
+
+test('every page nav (desktop and mobile) includes an AEO tab to aeo.thesweetbrand.co', () => {
+  for (const f of readdirSync(root).filter(x => x.endsWith('.html'))) {
+    const h = read(f);
+    if (!h.includes('class="nav__links"')) continue;
+    const desk = h.match(/<div class="nav__links">([\s\S]*?)<\/div>/)[1];
+    const mob = h.match(/<div class="nav__mobile"[^>]*>([\s\S]*?)<\/div>/)[1];
+    assert.match(desk, /href="https:\/\/aeo\.thesweetbrand\.co"[^>]*>AEO</, f + ' desktop');
+    assert.match(mob, /href="https:\/\/aeo\.thesweetbrand\.co"[^>]*>AEO</, f + ' mobile');
+    const foot = h.match(/<footer[\s\S]*?<\/footer>/);
+    if (foot) assert.doesNotMatch(foot[0], /<a href="https:\/\/aeo\.thesweetbrand\.co"[^>]*>AEO</, f + ' footer');
+  }
+});
+
+test('services include an AEO entry that links to aeo.thesweetbrand.co and names no AI companies', () => {
+  const d = JSON.parse(read('content.json'));
+  const item = d.services.items.find(s => s.slug === 'aeo' || s.title === 'AEO');
+  assert.ok(item, 'AEO service missing');
+  assert.equal(item.title, 'AEO');
+  assert.equal(item.description, 'Help buyers find you when they ask AI who to hire and what to buy.');
+  assert.equal(item.link, 'https://aeo.thesweetbrand.co');
+  assert.doesNotMatch(item.description, /ChatGPT|Perplexity|Gemini|Claude|Copilot|OpenAI/i);
+  const js = read('js/content-loader.js');
+  assert.match(js, /service\.link && \/\^https\?:\\\/\\\//);
 });
