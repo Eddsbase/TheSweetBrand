@@ -38,7 +38,7 @@
     </g>
   </g>
 </svg></div>
-<script>(function(){var l=document.getElementById('loader');if(!l)return;var d=false;function hide(){if(d)return;d=true;l.classList.add('loader--hidden');}if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){l.querySelectorAll('animate,animateTransform').forEach(function(n){n.remove();});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',hide);}else{hide();}setTimeout(hide,1200);})();</script>
+<script>(function(){var l=document.getElementById('loader');if(!l)return;var d=false;function hide(){if(d)return;d=true;l.classList.add('loader--hidden');}var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;var minMs=reduce?600:2000;var maxMs=reduce?600:2500;var t0=Date.now();var origAdd=l.classList.add.bind(l.classList);l.classList.add=function(c){if(c==='loader--hidden'&&Date.now()-t0<minMs)return;return origAdd.apply(this,arguments);};if(reduce){l.querySelectorAll('animate,animateTransform').forEach(function(n){n.remove();});setTimeout(hide,600);return;}var ready=document.readyState!=='loading';function onReady(){ready=true;if(Date.now()-t0>=minMs)hide();}if(!ready)document.addEventListener('DOMContentLoaded',onReady);setTimeout(function(){if(ready)hide();},minMs);setTimeout(hide,maxMs);})();</script>
   <div class="scroll-progress" id="scrollProgress"></div>
   <div class="cursor" id="cursor"></div><div class="cursor-dot" id="cursorDot"></div>
 

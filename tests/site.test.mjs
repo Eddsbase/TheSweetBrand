@@ -364,7 +364,12 @@ test('inline loader is all white with no pink frosting', () => {
     assert.match(style, /#loader \.loader__mark\{[^}]*color:#ffffff/);
     assert.match(style, /#loader \.loader__frosting\{color:#ffffff\}/);
     assert.doesNotMatch(style + body, /#e81a6b/);
-    assert.match(body, /setTimeout\(hide,1200\)/);
+    assert.match(body, /minMs=reduce\?600:2000/);
+    assert.match(body, /maxMs=reduce\?600:2500/);
+    assert.match(body, /Date\.now\(\)-t0<minMs/);
+    assert.match(body, /setTimeout\(hide,600\)/);
+    assert.doesNotMatch(body, /setTimeout\(hide,1200\)/);
+    assert.doesNotMatch(body, /addEventListener\('DOMContentLoaded',hide\)/);
     assert.match(style, /prefers-reduced-motion:reduce/);
   }
 });
