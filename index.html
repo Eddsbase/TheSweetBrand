@@ -40,18 +40,9 @@
         </g>
       </g>
     </g>
-    <g class="loader__drop loader__drop--side" transform="translate(99.5 310.5)">
-      <g>
-        <animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 3;0 10;0 42;0 42;0 0" keyTimes="0;0.20;0.32;0.38;0.58;0.59;1" dur="1.15s" begin="0.52s" repeatCount="indefinite"/>
-        <g transform="scale(0)">
-          <animateTransform attributeName="transform" type="scale" values="0 0;1 1;1 1.18;1 1;0 0;0 0;0 0" keyTimes="0;0.20;0.32;0.38;0.58;0.59;1" dur="1.15s" begin="0.52s" repeatCount="indefinite"/>
-          <path fill="currentColor" d="M0 0C-1.3 2.3-4.6 6-4.6 10.4A4.6 4.6 0 1 0 4.6 10.4C4.6 6 1.3 2.3 0 0Z"/>
-        </g>
-      </g>
-    </g>
   </g>
 </svg></div>
-<script>(function(){var l=document.getElementById('loader');if(!l)return;var d=false;function hide(){if(d)return;d=true;l.classList.add('loader--hidden');}var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;var minMs=reduce?600:1800;var maxMs=reduce?600:2200;var t0=Date.now();var origAdd=l.classList.add.bind(l.classList);l.classList.add=function(c){if(c==='loader--hidden'&&Date.now()-t0<minMs)return;return origAdd.apply(this,arguments);};if(reduce){l.querySelectorAll('animate,animateTransform').forEach(function(n){n.remove();});setTimeout(hide,600);return;}var ready=document.readyState!=='loading';function onReady(){ready=true;if(Date.now()-t0>=minMs)hide();}if(!ready)document.addEventListener('DOMContentLoaded',onReady);setTimeout(function(){if(ready)hide();},minMs);setTimeout(hide,maxMs);})();</script>
+<script>(function(){var l=document.getElementById('loader');if(!l)return;var d=false;function hide(){if(d)return;d=true;l.classList.add('loader--hidden');}var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;var dropEndMs=667;var minMs=reduce?600:dropEndMs;var maxMs=reduce?600:dropEndMs+400;var t0=Date.now();var origAdd=l.classList.add.bind(l.classList);l.classList.add=function(c){if(c==='loader--hidden'&&Date.now()-t0<minMs)return;return origAdd.apply(this,arguments);};if(reduce){l.querySelectorAll('animate,animateTransform').forEach(function(n){n.remove();});setTimeout(hide,600);return;}var ready=document.readyState!=='loading';function onReady(){ready=true;if(Date.now()-t0>=minMs)hide();}if(!ready)document.addEventListener('DOMContentLoaded',onReady);setTimeout(function(){if(ready)hide();},minMs);setTimeout(hide,maxMs);})();</script>
 
   <!-- Scroll Progress -->
   <div class="scroll-progress" id="scrollProgress"></div>
